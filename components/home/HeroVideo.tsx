@@ -1,0 +1,95 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
+
+/** Day hero video */
+export const HERO_DAY_VIDEO = "/videos/Boy_reaching_for_glowing_hand_202606191256.mp4";
+
+/** Night hero video */
+export const HERO_NIGHT_VIDEO =
+  "/videos/Boy_reaching_for_glowing_hand_202606191417.mp4";
+
+export const HERO_FALLBACK_IMAGE =
+  "/videos/Gemini_Generated_Image_8iaulf8iaulf8iau.png";
+
+export const HERO_NIGHT_FALLBACK_IMAGE =
+  "/videos/Gemini_Generated_Image_sr7ukusr7ukusr7u.png";
+
+const DAY_GRADIENT =
+  "linear-gradient(to right, rgba(248, 241, 232, 1) 0%, rgba(248, 241, 232, 1) 12%, rgba(248, 241, 232, 0.92) 28%, rgba(248, 241, 232, 0.55) 48%, rgba(248, 241, 232, 0) 62%)";
+
+const NIGHT_GRADIENT =
+  "linear-gradient(to right, rgba(18, 24, 21, 1) 0%, rgba(18, 24, 21, 1) 12%, rgba(18, 24, 21, 0.92) 28%, rgba(18, 24, 21, 0.55) 48%, rgba(18, 24, 21, 0) 62%)";
+
+function playVideo(video: HTMLVideoElement | null) {
+  if (!video) return;
+  video.play().catch(() => {});
+}
+
+export default function HeroVideo() {
+  const dayVideoRef = useRef<HTMLVideoElement>(null);
+  const nightVideoRef = useRef<HTMLVideoElement>(null);
+  const reducedMotion = useReducedMotion() ?? false;
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    playVideo(dayVideoRef.current);
+    playVideo(nightVideoRef.current);
+  }, [reducedMotion]);
+
+  const fadeClass = reducedMotion ? "" : "hero-theme-fade";
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Fallback images — crossfade tied to data-theme */}
+      <div
+        className={`hero-video-fallback hero-theme-day absolute inset-0 md:block ${fadeClass}`}
+        style={{ backgroundImage: `url('${HERO_FALLBACK_IMAGE}')` }}
+        aria-hidden
+      />
+      <div
+        className={`hero-video-fallback hero-theme-night absolute inset-0 md:block ${fadeClass}`}
+        style={{ backgroundImage: `url('${HERO_NIGHT_FALLBACK_IMAGE}')` }}
+        aria-hidden
+      />
+
+      {!reducedMotion && (
+        <>
+          <video
+            ref={dayVideoRef}
+            src={HERO_DAY_VIDEO}
+            className={`hero-video-cover hero-theme-day hidden md:block ${fadeClass}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden
+          />
+          <video
+            ref={nightVideoRef}
+            src={HERO_NIGHT_VIDEO}
+            className={`hero-video-cover hero-theme-night hidden md:block ${fadeClass}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden
+          />
+        </>
+      )}
+
+      {/* Gradient overlays — crossfade tied to data-theme */}
+      <div
+        className={`hero-theme-day pointer-events-none absolute inset-0 z-[1] hidden md:block ${fadeClass}`}
+        style={{ background: DAY_GRADIENT }}
+        aria-hidden
+      />
+      <div
+        className={`hero-theme-night pointer-events-none absolute inset-0 z-[1] hidden md:block ${fadeClass}`}
+        style={{ background: NIGHT_GRADIENT }}
+        aria-hidden
+      />
+    </div>
+  );
+}

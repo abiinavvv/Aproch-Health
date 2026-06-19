@@ -1,0 +1,21 @@
+<svg width="1200" height="400" viewBox="0 0 1200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="peacehub-line"
+    d="
+      M -50 40
+      C 120 40, 120 340, 260 340
+      C 320 340, 330 220, 430 220
+      C 530 220, 540 340, 620 340
+      L 820 340
+      C 930 340, 980 260, 980 180
+      C 980 90, 860 70, 860 150
+      C 860 250, 1050 250, 1050 170
+      C 1050 80, 1180 80, 1260 120
+    "
+    stroke="#2ECC8B"
+    stroke-width="40"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+</svg>
