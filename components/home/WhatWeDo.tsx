@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import PsychologistPhoto from "@/components/ui/PsychologistPhoto";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
@@ -9,6 +9,7 @@ import SectionTag from "@/components/ui/SectionTag";
 import Button from "@/components/ui/Button";
 import ScrollReveal from "./ScrollReveal";
 import { sessionTypes } from "@/lib/sessions";
+import { psychologist } from "@/lib/psychologist";
 
 const listItems = [
   {
@@ -88,16 +89,11 @@ export default function WhatWeDo() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-            className="relative overflow-hidden rounded-3xl bg-white shadow-md"
+            className="theme-surface relative overflow-hidden rounded-3xl bg-white shadow-md"
           >
             <div className="relative aspect-[4/5] w-full sm:aspect-[5/4]">
-              <Image
-                src="/images/psychologist.svg"
-                alt="Therapy session"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-text/70 via-dark-text/20 to-transparent" />
+              <PsychologistPhoto fill priority className="psychologist-photo px-4 pt-4" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-text/75 via-dark-text/15 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-4 p-6">
                 <div className="text-left">
                   <p className="text-2xl font-semibold text-white">
@@ -107,7 +103,11 @@ export default function WhatWeDo() {
                     {introSession.duration} min · ₹{introSession.price}
                   </p>
                 </div>
-                <Button href="/book" variant="primary" className="!bg-dark-text !border-dark-text hover:!bg-dark-text/90 shrink-0">
+                <Button
+                  href="/book"
+                  variant="primary"
+                  className="what-we-do-cta !bg-dark-text !border-dark-text hover:!bg-dark-text/90 shrink-0"
+                >
                   Get Started →
                 </Button>
               </div>

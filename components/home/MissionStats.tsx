@@ -7,9 +7,9 @@ import HighlightHeading from "./HighlightHeading";
 import ScrollReveal from "./ScrollReveal";
 
 const stats = [
-  { value: 500, suffix: "+", label: "Students Supported" },
-  { value: 98, suffix: "%", label: "Session Satisfaction" },
   { value: 500, suffix: "", label: "Starting Price", prefix: "₹" },
+  { value: 100, suffix: "%", label: "Online Sessions" },
+  { value: 3, suffix: "+", label: "Years Experience" },
 ];
 
 const missionWords = [
@@ -98,7 +98,6 @@ export default function MissionStats() {
           </p>
         </ScrollReveal>
 
-        {/* ⚠️ Aspirational numbers — confirm with Anirudh before going live */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={0.1 * i}>

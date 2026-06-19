@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { ThemeScript } from "@/components/theme/ThemeScript";
+import { rootMetadata } from "@/lib/metadata";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
+const themeInitScript = `(function(){try{var t=localStorage.getItem("hero-video-mode");if(t==="night"){document.documentElement.setAttribute("data-theme","night");document.documentElement.style.colorScheme="dark";}}catch(e){}})();`;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,11 +18,7 @@ const playfair = Playfair_Display({
   weight: ["700", "800"],
 });
 
-export const metadata: Metadata = {
-  title: "Aproch Health — Mental wellness support for young India",
-  description:
-    "Book a session with a verified clinical psychologist. Online. Affordable. Confidential.",
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -38,17 +30,13 @@ export default function RootLayout({
       lang="en"
       data-theme="day"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${inter.variable} ${playfair.variable} h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
-      <head>
-        <ThemeScript />
-      </head>
-      <body className="min-h-full flex flex-col bg-background font-body text-body-text transition-colors duration-[900ms] ease-in-out">
+      <body className="min-h-full flex flex-col bg-background font-body text-body-text transition-colors duration-[1000ms] ease-in-out">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         <ThemeProvider>{children}</ThemeProvider>
-        <Script
-          src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );

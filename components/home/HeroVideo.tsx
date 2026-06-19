@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { useReducedMotion } from "framer-motion";
+import { useTheme } from "@/context/ThemeContext";
 
 /** Day hero video */
 export const HERO_DAY_VIDEO = "/videos/Boy_reaching_for_glowing_hand_202606191256.mp4";
@@ -10,11 +11,25 @@ export const HERO_DAY_VIDEO = "/videos/Boy_reaching_for_glowing_hand_20260619125
 export const HERO_NIGHT_VIDEO =
   "/videos/Boy_reaching_for_glowing_hand_202606191417.mp4";
 
+export const HERO_FALLBACK_WEBP =
+  "/videos/Gemini_Generated_Image_8iaulf8iaulf8iau.webp";
+
 export const HERO_FALLBACK_IMAGE =
   "/videos/Gemini_Generated_Image_8iaulf8iaulf8iau.png";
 
+export const HERO_NIGHT_FALLBACK_WEBP =
+  "/videos/Gemini_Generated_Image_sr7ukusr7ukusr7u.webp";
+
 export const HERO_NIGHT_FALLBACK_IMAGE =
   "/videos/Gemini_Generated_Image_sr7ukusr7ukusr7u.png";
+
+/** Slow crossfade duration for day ↔ night hero videos */
+const VIDEO_FADE_MS = 1000;
+
+/** Prefer WebP with PNG fallback for hero background images */
+export function heroFallbackBackground(webp: string, png: string) {
+  return `image-set(url("${webp}") type("image/webp"), url("${png}") type("image/png"))`;
+}
 
 const DAY_GRADIENT =
   "linear-gradient(to right, rgba(248, 241, 232, 1) 0%, rgba(248, 241, 232, 1) 12%, rgba(248, 241, 232, 0.92) 28%, rgba(248, 241, 232, 0.55) 48%, rgba(248, 241, 232, 0) 62%)";
@@ -27,10 +42,22 @@ function playVideo(video: HTMLVideoElement | null) {
   video.play().catch(() => {});
 }
 
+function videoLayerStyle(visible: boolean, reducedMotion: boolean): CSSProperties {
+  if (reducedMotion) {
+    return { opacity: visible ? 1 : 0 };
+  }
+
+  return {
+    opacity: visible ? 1 : 0,
+    transition: `opacity ${VIDEO_FADE_MS}ms ease-in-out`,
+  };
+}
+
 export default function HeroVideo() {
   const dayVideoRef = useRef<HTMLVideoElement>(null);
   const nightVideoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = useReducedMotion() ?? false;
+  const { isNightMode } = useTheme();
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -45,37 +72,61 @@ export default function HeroVideo() {
       {/* Fallback images — crossfade tied to data-theme */}
       <div
         className={`hero-video-fallback hero-theme-day absolute inset-0 md:block ${fadeClass}`}
-        style={{ backgroundImage: `url('${HERO_FALLBACK_IMAGE}')` }}
+        style={{
+          backgroundImage: heroFallbackBackground(
+            HERO_FALLBACK_WEBP,
+            HERO_FALLBACK_IMAGE
+          ),
+        }}
         aria-hidden
       />
       <div
         className={`hero-video-fallback hero-theme-night absolute inset-0 md:block ${fadeClass}`}
-        style={{ backgroundImage: `url('${HERO_NIGHT_FALLBACK_IMAGE}')` }}
+        style={{
+          backgroundImage: heroFallbackBackground(
+            HERO_NIGHT_FALLBACK_WEBP,
+            HERO_NIGHT_FALLBACK_IMAGE
+          ),
+        }}
         aria-hidden
       />
 
       {!reducedMotion && (
         <>
-          <video
-            ref={dayVideoRef}
-            src={HERO_DAY_VIDEO}
-            className={`hero-video-cover hero-theme-day hidden md:block ${fadeClass}`}
-            autoPlay
-            muted
-            loop
-            playsInline
+          <div
+            className="hero-video-layer hidden md:block"
+            style={videoLayerStyle(!isNightMode, reducedMotion)}
             aria-hidden
-          />
-          <video
-            ref={nightVideoRef}
-            src={HERO_NIGHT_VIDEO}
-            className={`hero-video-cover hero-theme-night hidden md:block ${fadeClass}`}
-            autoPlay
-            muted
-            loop
-            playsInline
+          >
+            <video
+              ref={dayVideoRef}
+              src={HERO_DAY_VIDEO}
+              poster={HERO_FALLBACK_WEBP}
+              className="hero-video-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            />
+          </div>
+          <div
+            className="hero-video-layer hidden md:block"
+            style={videoLayerStyle(isNightMode, reducedMotion)}
             aria-hidden
-          />
+          >
+            <video
+              ref={nightVideoRef}
+              src={HERO_NIGHT_VIDEO}
+              poster={HERO_NIGHT_FALLBACK_WEBP}
+              className="hero-video-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            />
+          </div>
         </>
       )}
 

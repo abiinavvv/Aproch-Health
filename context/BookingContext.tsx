@@ -129,7 +129,7 @@ export function useBooking() {
 }
 
 export function markBookingComplete() {
-  // Used after payment success — stored via sessionStorage for confirmation page
+  // Used after WhatsApp booking — stored via sessionStorage for confirmation page
   if (typeof window !== "undefined") {
     sessionStorage.setItem("bookingComplete", "true");
   }

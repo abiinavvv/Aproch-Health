@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { CalendarCheck, Clock, CreditCard, Check } from "lucide-react";
+import { CalendarCheck, Clock, MessageCircle, Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 const WARM_ACCENT = "#C4622D";
@@ -35,10 +35,10 @@ const steps = [
     description: "Select from available slots that fit your schedule",
   },
   {
-    icon: CreditCard,
+    icon: MessageCircle,
     number: "Step 3",
-    title: "Pay & confirm",
-    description: "UPI, card, or netbanking via Razorpay — instant confirmation",
+    title: "Confirm on WhatsApp",
+    description: "Send your booking details to us — we'll confirm your slot",
   },
 ];
 
@@ -70,7 +70,7 @@ function StepCard({
     >
       <div className="relative">
         <motion.div
-          className="flex h-[72px] w-[72px] items-center justify-center rounded-full border-2"
+          className="flex h-[88px] w-[88px] items-center justify-center rounded-full border-2 lg:h-[96px] lg:w-[96px]"
           animate={
             visible
               ? {
@@ -88,7 +88,7 @@ function StepCard({
             animate={visible ? { color: WARM_ACCENT } : { color: "#B4A99E" }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            <Icon size={28} />
+            <Icon className="h-8 w-8 lg:h-9 lg:w-9" strokeWidth={2} />
           </motion.div>
         </motion.div>
 
@@ -115,10 +115,10 @@ function StepCard({
         {step.number}
       </motion.span>
 
-      <span className="mt-1.5 text-center text-sm font-semibold text-dark-text">
+      <span className="mt-1.5 text-center text-base font-semibold text-dark-text lg:text-lg">
         {step.title}
       </span>
-      <span className="mt-1.5 px-2 text-center text-xs leading-relaxed text-body-text">
+      <span className="mt-1.5 px-2 text-center text-sm leading-relaxed text-body-text lg:text-base">
         {step.description}
       </span>
     </motion.div>
@@ -127,7 +127,7 @@ function StepCard({
 
 function HorizontalConnector({ active }: { active: boolean }) {
   return (
-    <div className="relative mx-2 mt-[36px] h-[2px] min-w-[32px] max-w-[80px] flex-1 overflow-hidden bg-border">
+    <div className="relative mx-2 mt-[44px] h-[2px] min-w-[32px] max-w-[100px] flex-1 overflow-hidden bg-border lg:mt-[48px] lg:max-w-[120px]">
       <motion.div
         className="absolute inset-y-0 left-0 bg-primary"
         initial={{ width: "0%" }}
@@ -140,7 +140,7 @@ function HorizontalConnector({ active }: { active: boolean }) {
 
 function VerticalConnector({ active }: { active: boolean }) {
   return (
-    <div className="relative my-2 h-[40px] w-[2px] overflow-hidden bg-border">
+    <div className="relative my-2 h-[56px] w-[2px] overflow-hidden bg-border">
       <motion.div
         className="absolute inset-x-0 top-0 bg-primary"
         initial={{ height: "0%" }}
@@ -155,6 +155,7 @@ export default function HowItWorksSteps() {
   const shouldReduce = useReducedMotion();
   const sectionRef = useRef<HTMLDivElement>(null);
   const timersRef = useRef<number[]>([]);
+  const hasPlayedRef = useRef(false);
 
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const [doneSteps, setDoneSteps] = useState<number[]>([]);
@@ -166,21 +167,13 @@ export default function HowItWorksSteps() {
     timersRef.current = [];
   }, []);
 
-  const resetSequence = useCallback(() => {
-    clearTimers();
-    setVisibleSteps([]);
-    setDoneSteps([]);
-    setActiveConns([]);
-    setShowCTA(false);
-  }, [clearTimers]);
-
   const schedule = useCallback((fn: () => void, delay: number) => {
     const id = window.setTimeout(fn, delay);
     timersRef.current.push(id);
   }, []);
 
   const runSequence = useCallback(() => {
-    resetSequence();
+    clearTimers();
 
     if (shouldReduce) {
       setVisibleSteps([0, 1, 2]);
@@ -199,7 +192,7 @@ export default function HowItWorksSteps() {
     schedule(() => setVisibleSteps((v) => [...v, 2]), TIMING.step3);
     schedule(() => setDoneSteps((d) => [...d, 2]), TIMING.step3Check);
     schedule(() => setShowCTA(true), TIMING.cta);
-  }, [resetSequence, schedule, shouldReduce]);
+  }, [clearTimers, schedule, shouldReduce]);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -207,13 +200,12 @@ export default function HowItWorksSteps() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !hasPlayedRef.current) {
+          hasPlayedRef.current = true;
           runSequence();
-        } else {
-          resetSequence();
         }
       },
-      { threshold: 0.8 }
+      { threshold: 0.25, rootMargin: "0px 0px -10% 0px" }
     );
 
     observer.observe(node);
@@ -221,16 +213,19 @@ export default function HowItWorksSteps() {
       observer.disconnect();
       clearTimers();
     };
-  }, [runSequence, resetSequence, clearTimers]);
+  }, [runSequence, clearTimers]);
 
   return (
-    <section ref={sectionRef} className="theme-surface bg-white px-4 py-12 lg:px-6 lg:py-20">
+    <section
+      ref={sectionRef}
+      className="theme-surface min-h-[520px] bg-white px-4 py-16 lg:min-h-[480px] lg:px-6 lg:py-28"
+    >
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-3 text-center text-xs font-medium uppercase tracking-widest text-primary">
           Simple process
         </p>
 
-        <h2 className="mb-16 text-center font-display text-3xl font-semibold text-dark-text">
+        <h2 className="mb-12 text-center font-display text-3xl font-semibold text-dark-text lg:mb-20 lg:text-4xl">
           Book your first session in 3 steps
         </h2>
 
@@ -243,7 +238,7 @@ export default function HowItWorksSteps() {
                 visible={visibleSteps.includes(i)}
                 done={doneSteps.includes(i)}
                 motionAxis="y"
-                className="w-[200px]"
+                className="w-[240px] lg:w-[280px]"
               />
               {i < steps.length - 1 && (
                 <HorizontalConnector active={activeConns.includes(i)} />
@@ -271,7 +266,7 @@ export default function HowItWorksSteps() {
         </div>
 
         <motion.div
-          className="mt-12 flex justify-center"
+          className="mt-16 flex justify-center lg:mt-20"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: showCTA ? 1 : 0, y: showCTA ? 0 : 10 }}
           transition={{ duration: 0.5, ease: "easeOut" }}

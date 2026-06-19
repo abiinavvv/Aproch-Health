@@ -8,7 +8,7 @@ import { getSessionById, formatSessionEndTime } from "@/lib/sessions";
 import { formatDisplayDate, buildGoogleCalendarUrl } from "@/lib/calendar";
 
 export default function Step5Confirmation() {
-  const { sessionType, date, timeSlot, sessionMode, email } = useBooking();
+  const { sessionType, date, timeSlot, sessionMode } = useBooking();
   const shouldReduceMotion = useReducedMotion();
 
   const session = sessionType ? getSessionById(sessionType) : null;
@@ -41,10 +41,11 @@ export default function Step5Confirmation() {
       </motion.div>
 
       <h2 className="mt-6 font-display text-2xl font-bold text-dark-text">
-        You&apos;re all set! 🎉
+        You&apos;re all set!
       </h2>
       <p className="mt-2 text-body-text">
-        Your session has been booked successfully.
+        Your booking request was sent on WhatsApp. We&apos;ll confirm your slot
+        shortly.
       </p>
 
       <div className="mt-8 rounded-2xl border border-border bg-white p-6 text-left text-sm">
@@ -73,8 +74,9 @@ export default function Step5Confirmation() {
       </div>
 
       <p className="mt-6 text-sm text-body-text">
-        A confirmation has been sent to {email}. Your Google Meet link will be
-        shared by your psychologist 30 minutes before your session.
+        If you didn&apos;t send the WhatsApp message, you can reach us again from
+        the booking page. Your Google Meet link will be shared about 30 minutes
+        before your session once we confirm.
       </p>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">

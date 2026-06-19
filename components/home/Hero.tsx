@@ -1,20 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Sprout, ArrowRight } from "lucide-react";
 import RealisticFogBackground from "@/components/ui/realistic-fog-background";
 import HeroVideo, {
   HERO_FALLBACK_IMAGE,
+  HERO_FALLBACK_WEBP,
   HERO_NIGHT_FALLBACK_IMAGE,
+  HERO_NIGHT_FALLBACK_WEBP,
+  heroFallbackBackground,
 } from "@/components/home/HeroVideo";
 import HeroFeatureStrip from "./HeroFeatureStrip";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
-  const [showCat, setShowCat] = useState(true);
+  const [showFog, setShowFog] = useState(false);
   const heroMainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setShowFog(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const mobileFadeClass = shouldReduceMotion ? "" : "hero-theme-fade";
 
@@ -34,20 +45,32 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 md:hidden" aria-hidden>
         <div
           className={`hero-mobile-bg hero-theme-day absolute inset-0 bg-cover bg-center ${mobileFadeClass}`}
-          style={{ backgroundImage: `url('${HERO_FALLBACK_IMAGE}')` }}
+          style={{
+            backgroundImage: heroFallbackBackground(
+              HERO_FALLBACK_WEBP,
+              HERO_FALLBACK_IMAGE
+            ),
+          }}
         />
         <div
           className={`hero-mobile-bg hero-theme-night absolute inset-0 bg-cover bg-center ${mobileFadeClass}`}
-          style={{ backgroundImage: `url('${HERO_NIGHT_FALLBACK_IMAGE}')` }}
+          style={{
+            backgroundImage: heroFallbackBackground(
+              HERO_NIGHT_FALLBACK_WEBP,
+              HERO_NIGHT_FALLBACK_IMAGE
+            ),
+          }}
         />
       </div>
 
       <div ref={heroMainRef} className="relative flex min-h-0 flex-1 flex-col md:flex-row">
-        <RealisticFogBackground
-          trackRef={heroMainRef}
-          reducedMotion={shouldReduceMotion ?? false}
-          className="z-[5] hidden md:block"
-        />
+        {showFog && (
+          <RealisticFogBackground
+            trackRef={heroMainRef}
+            reducedMotion={shouldReduceMotion ?? false}
+            className="z-[5]"
+          />
+        )}
 
         {/* Left content zone — 40% */}
         <div className="relative z-10 flex w-full flex-col justify-center px-6 pb-8 pt-24 md:w-[40%] md:max-w-[520px] md:px-12 md:pb-0 md:pt-28 lg:pl-16 lg:pr-8">
@@ -72,18 +95,9 @@ export default function Hero() {
             </p>
 
             <div className="relative mt-9 inline-block w-full md:mt-10 md:w-auto">
-              {/* ⚠️ Replace with real cat PNG at public/images/cat.png before launch */}
-              {showCat && (
-                <img
-                  src="/images/cat.png"
-                  alt=""
-                  className="pointer-events-none absolute -top-14 left-2 z-10 h-16 w-auto object-contain md:-top-16 md:left-4 md:h-20"
-                  onError={() => setShowCat(false)}
-                />
-              )}
               <Link
                 href="/book"
-                className="btn-3d-warm relative inline-flex w-full items-center justify-center rounded-2xl px-10 py-5 text-xl font-semibold md:w-auto"
+                className="btn-3d-warm relative inline-flex w-full items-center justify-center rounded-xl px-6 py-3.5 text-base font-semibold md:w-auto md:rounded-2xl md:px-10 md:py-5 md:text-xl"
               >
                 Book Appointment →
               </Link>

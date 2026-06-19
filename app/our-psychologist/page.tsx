@@ -1,4 +1,4 @@
-import Image from "next/image";
+import PsychologistPhoto from "@/components/ui/PsychologistPhoto";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
@@ -13,13 +13,11 @@ export default function OurPsychologistPage() {
       <main className="flex-1">
         <section className="hero-gradient px-4 py-12 lg:px-6 lg:py-20">
           <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 md:flex-row md:gap-16">
-            <Image
-              src={psychologist.photo}
-              alt={psychologist.name}
+            <PsychologistPhoto
               width={280}
-              height={280}
-              className="rounded-2xl object-cover shadow-md"
+              height={360}
               priority
+              className="psychologist-photo h-[min(360px,50vw)] w-auto max-w-[280px]"
             />
             <div>
               <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-dark-text">
@@ -31,7 +29,9 @@ export default function OurPsychologistPage() {
               <p className="mt-1 text-body-text">{psychologist.credentials}</p>
               <div className="mt-4 flex items-center gap-2">
                 <Badge variant="verified">✓ Verified by RCI</Badge>
-                <span className="text-sm text-muted">{psychologist.rciNumber}</span>
+                {psychologist.rciNumber && (
+                  <span className="text-sm text-muted">{psychologist.rciNumber}</span>
+                )}
               </div>
             </div>
           </div>

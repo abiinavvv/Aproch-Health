@@ -13,9 +13,15 @@ export async function POST(request: Request) {
 
     console.log("Contact form submission:", { name, email, message });
 
-    if (process.env.RESEND_API_KEY) {
-      await sendContactMessage({ name, email, message });
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Contact form: RESEND_API_KEY is not configured");
+      return NextResponse.json(
+        { error: "Email service is not configured. Please contact us via WhatsApp." },
+        { status: 503 }
+      );
     }
+
+    await sendContactMessage({ name, email, message });
 
     return NextResponse.json({ success: true });
   } catch (error) {

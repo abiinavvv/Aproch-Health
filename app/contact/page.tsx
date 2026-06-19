@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 import FAQAccordion from "@/components/home/FAQAccordion";
 import { psychologist } from "@/lib/psychologist";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { allFAQ } from "@/lib/faq";
 
 export default function ContactPage() {
@@ -13,23 +14,33 @@ export default function ContactPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async () => {
     if (!name || !email || !message) return;
     setStatus("loading");
+    setErrorMessage("");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
       });
-      if (!res.ok) throw new Error("Failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(
+          typeof data.error === "string"
+            ? data.error
+            : "Something went wrong. Please try again."
+        );
+      }
       setStatus("success");
       setName("");
       setEmail("");
       setMessage("");
-    } catch {
+    } catch (err) {
       setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong.");
     }
   };
 
@@ -55,7 +66,7 @@ export default function ContactPage() {
                 Get in touch
               </h2>
               <a
-                href={`https://wa.me/${psychologist.whatsappNumber}`}
+                href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-dark transition-colors"
@@ -142,7 +153,9 @@ export default function ContactPage() {
                   <p className="text-sm text-success">Message sent successfully!</p>
                 )}
                 {status === "error" && (
-                  <p className="text-sm text-error">Something went wrong. Please try again.</p>
+                  <p className="text-sm text-error">
+                    {errorMessage || "Something went wrong. Please try again."}
+                  </p>
                 )}
               </div>
             </div>

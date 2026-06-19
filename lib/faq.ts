@@ -22,14 +22,14 @@ export const homeFAQ: FAQItem[] = [
       "Our psychologist is an RCI-registered Consultant Clinical Psychologist with an M.Phil in Clinical Psychology. RCI (Rehabilitation Council of India) registration ensures verified, professional credentials.",
   },
   {
-    question: "How do I pay? Is UPI accepted?",
+    question: "How do I book and pay?",
     answer:
-      "Payment is handled securely through Razorpay. You can pay via UPI, credit/debit card, net banking, or wallets. All major Indian payment methods are supported.",
+      "Complete the booking form on our website, then send your details to us on WhatsApp. We'll confirm your slot and share payment instructions if needed. UPI and other common methods are accepted once your booking is confirmed.",
   },
   {
     question: "What happens after I book?",
     answer:
-      "You'll receive a confirmation email immediately. About 30 minutes before your session, your psychologist will share the Google Meet link. Just click the link when it's time — that's it.",
+      "After you send your booking request on WhatsApp, we'll confirm your slot. About 30 minutes before your session, your psychologist will share the Google Meet link. Just click the link when it's time — that's it.",
   },
   {
     question: "How long is a session?",

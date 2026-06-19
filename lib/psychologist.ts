@@ -1,13 +1,13 @@
 import type { Psychologist } from "@/types";
+import { getRciNumber, getWhatsAppNumber, SITE_EMAIL } from "@/lib/site";
 
-// ⚠️ Replace with real name, RCI number, photo, and WhatsApp before launch
 export const psychologist: Psychologist = {
   name: "Dr. Priya Nair",
   slug: "dr-priya-nair",
   designation: "Consultant Clinical Psychologist",
   credentials: "M.Phil Clinical Psychology",
-  rciNumber: "RCI/CL/2021/XXXXX",
-  photo: "/images/psychologist.svg",
+  rciNumber: getRciNumber(),
+  photo: "/images/psychologist.png",
   languages: ["English", "Hindi"],
   experience: "3+ years",
   sessionHours: "500+",
@@ -23,6 +23,6 @@ export const psychologist: Psychologist = {
   philosophy:
     "Healing isn't linear, and that's okay. My job is to walk with you, not ahead of you.",
   sessionFormat: "Online via Google Meet (video or audio call)",
-  whatsappNumber: "91XXXXXXXXXX",
-  email: "hello@aprochhealth.com",
+  whatsappNumber: getWhatsAppNumber(),
+  email: SITE_EMAIL,
 };

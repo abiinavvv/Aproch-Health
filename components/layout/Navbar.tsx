@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, Leaf, MessageCircle } from "lucide-react";
+import { Menu, X, Leaf, CalendarCheck } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 
@@ -79,11 +79,11 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 lg:flex">
           <ThemeToggle />
           <Link
-            href="/contact"
+            href="/book"
             className="glass-btn-warm inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium"
           >
-            <MessageCircle size={16} aria-hidden />
-            Contact us
+            <CalendarCheck size={16} aria-hidden />
+            Book a Session
           </Link>
         </div>
 
@@ -139,12 +139,12 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/book"
                 className="glass-btn-warm mt-6 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium"
                 onClick={() => setMenuOpen(false)}
               >
-                <MessageCircle size={16} aria-hidden />
-                Contact us
+                <CalendarCheck size={16} aria-hidden />
+                Book a Session
               </Link>
             </motion.div>
           </>

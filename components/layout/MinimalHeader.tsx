@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Leaf } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export default function MinimalHeader() {
   return (
@@ -10,7 +11,7 @@ export default function MinimalHeader() {
           <Leaf size={16} className="text-hero-accent" strokeWidth={2} aria-hidden />
         </Link>
         <a
-          href="https://wa.me/919876543210"
+          href={getWhatsAppUrl()}
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm font-medium text-hero-accent transition-colors hover:text-primary-dark"

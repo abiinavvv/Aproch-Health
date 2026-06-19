@@ -27,7 +27,7 @@
   --glass-bg-hover: rgba(255, 255, 255, 0.58);
   --shadow-soft: rgba(28, 16, 8, 0.06);
   --shadow-medium: rgba(28, 16, 8, 0.1);
-  --theme-duration: 900ms;
+  --theme-duration: 600ms;
   --hero-fade-duration: 1400ms;
   --theme-easing: ease-in-out;
 }
@@ -200,7 +200,15 @@ h3 {
   transform: scale(1.08);
 }
 
-/* Theme crossfade — video, gradient, hero background layers */
+/* Video crossfade wrappers */
+.hero-video-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Theme crossfade — gradient, hero background layers (not video — video uses inline opacity) */
 .hero-theme-fade {
   transition: opacity var(--hero-fade-duration) var(--theme-easing);
 }
@@ -400,4 +408,41 @@ h3 {
   color: var(--dark-text);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+/* Transparent psychologist cutout — blends with section/card background in both themes */
+.psychologist-photo {
+  object-fit: contain;
+  object-position: center bottom;
+  background: transparent;
+  transition: filter var(--theme-duration) var(--theme-easing);
+}
+
+[data-theme="night"] .psychologist-photo {
+  filter: brightness(1.06) contrast(1.04);
+}
+
+[data-theme="night"] .glass-profile-card {
+  background: color-mix(in srgb, var(--surface-elevated) 55%, transparent);
+  border-color: color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+.glass-profile-card {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.glass-profile-avatar .psychologist-photo {
+  object-fit: cover;
+  object-position: center top;
+}
+
+[data-theme="night"] .what-we-do-cta {
+  color: #1c1008 !important;
+}
+
+[data-theme="night"] .what-we-do-cta:hover {
+  color: #1c1008 !important;
 }

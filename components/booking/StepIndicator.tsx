@@ -7,7 +7,7 @@ const steps = [
   { num: 1, label: "Type" },
   { num: 2, label: "Date & Time" },
   { num: 3, label: "Your Details" },
-  { num: 4, label: "Payment" },
+  { num: 4, label: "Review" },
   { num: 5, label: "Done" },
 ];
 

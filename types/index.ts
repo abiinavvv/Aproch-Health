@@ -61,18 +61,6 @@ export interface ContactFormData {
   message: string;
 }
 
-export interface CreateOrderRequest {
-  amount: number;
-  sessionType: string;
-  name: string;
-  email: string;
-}
-
-export interface CreateOrderResponse {
-  orderId: string;
-  amount: number;
-}
-
 export interface SendConfirmationRequest {
   name: string;
   email: string;
@@ -82,27 +70,4 @@ export interface SendConfirmationRequest {
   psychologistName: string;
   sessionMode?: string;
   duration?: number;
-}
-
-export interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  order_id: string;
-  prefill: {
-    name: string;
-    email: string;
-    contact: string;
-  };
-  theme: { color: string };
-  modal: { backdropclose: boolean };
-  handler: (response: RazorpaySuccessResponse) => void;
-}
-
-export interface RazorpaySuccessResponse {
-  razorpay_payment_id: string;
-  razorpay_order_id: string;
-  razorpay_signature: string;
 }

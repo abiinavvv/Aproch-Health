@@ -1,7 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
-import { CalendarCheck, Clock, CreditCard } from "lucide-react";
+import { CalendarCheck, Clock, MessageCircle } from "lucide-react";
 
 const steps = [
   {
@@ -15,14 +15,15 @@ const steps = [
     body: "Browse available dates on our calendar and pick a time that fits your schedule. Slots are updated weekly, and you don't need to create an account. Just choose what works for you.",
   },
   {
-    icon: CreditCard,
-    title: "Step 3: Pay and confirm",
-    body: "Pay securely through Razorpay using UPI, credit/debit card, net banking, or wallets. Once payment is complete, you'll get an instant confirmation email with your session details.",
+    icon: MessageCircle,
+    title: "Step 3: Confirm on WhatsApp",
+    body: "Review your details and send a pre-filled message to us on WhatsApp. We'll confirm your slot and follow up with any next steps, including payment if applicable.",
   },
 ];
 
 const afterBooking = [
-  "Confirmation email sent to your inbox immediately",
+  "Booking request received on WhatsApp",
+  "Slot confirmation from our team",
   "Google Meet link shared by psychologist 30 minutes before session",
   "You don't need to download anything — Google Meet works in browser",
 ];

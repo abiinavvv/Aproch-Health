@@ -26,10 +26,7 @@ function applyThemeToDocument(isNight: boolean) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [isNightMode, setIsNightMode] = useState(() => {
-    if (typeof document === "undefined") return false;
-    return document.documentElement.getAttribute("data-theme") === "night";
-  });
+  const [isNightMode, setIsNightMode] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(THEME_STORAGE_KEY);

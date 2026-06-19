@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Leaf } from "lucide-react";
+import { getInstagramUrl, getLinkedInUrl } from "@/lib/site";
 
 function InstagramIcon() {
   return (
@@ -29,6 +30,9 @@ const footerLinks = [
 ];
 
 export default function Footer() {
+  const instagramUrl = getInstagramUrl();
+  const linkedInUrl = getLinkedInUrl();
+
   return (
     <footer className="theme-surface border-t border-border bg-hero-cream/70 px-4 py-12 lg:px-6 lg:py-16">
       <div className="mx-auto max-w-[1200px]">
@@ -55,17 +59,35 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mb-8 flex gap-4">
-          <a href="#" aria-label="Instagram" className="text-muted transition-colors hover:text-hero-accent">
-            <InstagramIcon />
-          </a>
-          <a href="#" aria-label="LinkedIn" className="text-muted transition-colors hover:text-hero-accent">
-            <LinkedInIcon />
-          </a>
-        </div>
+        {(instagramUrl || linkedInUrl) && (
+          <div className="mb-8 flex gap-4">
+            {instagramUrl && (
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-muted transition-colors hover:text-hero-accent"
+              >
+                <InstagramIcon />
+              </a>
+            )}
+            {linkedInUrl && (
+              <a
+                href={linkedInUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-muted transition-colors hover:text-hero-accent"
+              >
+                <LinkedInIcon />
+              </a>
+            )}
+          </div>
+        )}
 
         <p className="text-sm text-muted">
-          © 2025 Aproch Health. All rights reserved.
+          © {new Date().getFullYear()} Aproch Health. All rights reserved.
         </p>
         <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted">
           Aproch Health does not handle medical or psychological emergencies. If

@@ -6,7 +6,7 @@ import StepIndicator from "@/components/booking/StepIndicator";
 import Step1SessionType from "@/components/booking/Step1SessionType";
 import Step2DateTime from "@/components/booking/Step2DateTime";
 import Step3UserDetails from "@/components/booking/Step3UserDetails";
-import Step4Payment from "@/components/booking/Step4Payment";
+import Step4Review from "@/components/booking/Step4Review";
 import Button from "@/components/ui/Button";
 import { BookingProvider, useBooking } from "@/context/BookingContext";
 
@@ -18,7 +18,7 @@ function BookingContent() {
     <Step1SessionType key="1" />,
     <Step2DateTime key="2" />,
     <Step3UserDetails key="3" />,
-    <Step4Payment key="4" />,
+    <Step4Review key="4" />,
   ];
 
   return (
