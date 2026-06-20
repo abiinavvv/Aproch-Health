@@ -8,7 +8,7 @@ import {
   useBooking,
   saveBookingToSession,
 } from "@/context/BookingContext";
-import { psychologist } from "@/lib/psychologist";
+import { getPsychologistBySlug, getDefaultPsychologist } from "@/lib/psychologists";
 import {
   getSessionById,
   formatSessionEndTime,
@@ -19,6 +19,7 @@ import { buildBookingWhatsAppUrl } from "@/lib/whatsapp";
 export default function Step4Review() {
   const booking = useBooking();
   const {
+    psychologistSlug,
     sessionType,
     date,
     timeSlot,
@@ -38,10 +39,15 @@ export default function Step4Review() {
   const endTime = formatSessionEndTime(timeSlot, session.duration);
   const modeLabel = sessionMode === "video" ? "Video" : "Audio";
 
+  const psychologist =
+    (psychologistSlug && getPsychologistBySlug(psychologistSlug)) ||
+    getDefaultPsychologist();
+
   const handleWhatsAppConfirm = () => {
     if (!agreed) return;
 
     const url = buildBookingWhatsAppUrl({
+      psychologistSlug: booking.psychologistSlug,
       sessionType: booking.sessionType,
       date: booking.date,
       timeSlot: booking.timeSlot,
@@ -57,6 +63,7 @@ export default function Step4Review() {
     window.open(url, "_blank", "noopener,noreferrer");
 
     saveBookingToSession({
+      psychologistSlug: booking.psychologistSlug,
       sessionType: booking.sessionType,
       date: booking.date,
       timeSlot: booking.timeSlot,
@@ -82,7 +89,13 @@ export default function Step4Review() {
         <div className="flex items-start justify-between border-b border-border p-5">
           <div className="flex gap-4">
             <div className="relative h-14 w-14 shrink-0">
-              <PsychologistPhoto fill className="psychologist-photo" />
+              <PsychologistPhoto
+                photo={psychologist.photo}
+                photoWebp={psychologist.photoWebp}
+                alt={psychologist.name}
+                fill
+                className="psychologist-photo"
+              />
             </div>
             <div>
               <p className="font-semibold text-dark-text">{psychologist.name}</p>

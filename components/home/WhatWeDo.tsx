@@ -92,7 +92,14 @@ export default function WhatWeDo() {
             className="theme-surface relative overflow-hidden rounded-3xl bg-white shadow-md"
           >
             <div className="relative aspect-[4/5] w-full sm:aspect-[5/4]">
-              <PsychologistPhoto fill priority className="psychologist-photo px-4 pt-4" />
+              <PsychologistPhoto
+                photo={psychologist.photo}
+                photoWebp={psychologist.photoWebp}
+                alt={psychologist.name}
+                fill
+                priority
+                className="psychologist-photo px-4 pt-4"
+              />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-text/75 via-dark-text/15 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-4 p-6">
                 <div className="text-left">

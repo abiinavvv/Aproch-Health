@@ -9,8 +9,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-
-const THEME_STORAGE_KEY = "hero-video-mode";
+import {
+  isNightBySchedule,
+  readSessionThemeOverride,
+  resolveNightMode,
+  writeSessionThemeOverride,
+} from "@/lib/theme-schedule";
 
 type ThemeContextValue = {
   isNightMode: boolean;
@@ -29,22 +33,30 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [isNightMode, setIsNightMode] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY);
-    const isNight = saved === "night";
-    setIsNightMode(isNight);
-    applyThemeToDocument(isNight);
+    const initialNight = resolveNightMode();
+    setIsNightMode(initialNight);
+    applyThemeToDocument(initialNight);
+
+    const intervalId = window.setInterval(() => {
+      if (readSessionThemeOverride()) return;
+      const nextNight = isNightBySchedule();
+      setIsNightMode(nextNight);
+      applyThemeToDocument(nextNight);
+    }, 60_000);
+
+    return () => window.clearInterval(intervalId);
   }, []);
 
   const setNightMode = useCallback((value: boolean) => {
+    writeSessionThemeOverride(value ? "night" : "day");
     setIsNightMode(value);
-    localStorage.setItem(THEME_STORAGE_KEY, value ? "night" : "day");
     applyThemeToDocument(value);
   }, []);
 
   const toggleNightMode = useCallback(() => {
     setIsNightMode((prev) => {
       const next = !prev;
-      localStorage.setItem(THEME_STORAGE_KEY, next ? "night" : "day");
+      writeSessionThemeOverride(next ? "night" : "day");
       applyThemeToDocument(next);
       return next;
     });

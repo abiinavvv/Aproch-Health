@@ -1,11 +1,9 @@
 import { cn } from "@/lib/utils";
-import { psychologist } from "@/lib/psychologist";
-
-const WEBP = "/images/psychologist.webp";
-const PNG = "/images/psychologist.png";
 
 type PsychologistPhotoProps = {
-  alt?: string;
+  photo: string;
+  photoWebp?: string;
+  alt: string;
   className?: string;
   fill?: boolean;
   priority?: boolean;
@@ -14,7 +12,9 @@ type PsychologistPhotoProps = {
 };
 
 export default function PsychologistPhoto({
-  alt = psychologist.name,
+  photo,
+  photoWebp,
+  alt,
   className,
   fill = false,
   priority = false,
@@ -22,12 +22,13 @@ export default function PsychologistPhoto({
   height,
 }: PsychologistPhotoProps) {
   const imgClassName = cn(fill && "h-full w-full object-cover", className);
+  const webpSrc = photoWebp ?? photo.replace(/\.png$/i, ".webp");
 
   return (
     <picture className={fill ? "absolute inset-0 block h-full w-full" : "block"}>
-      <source srcSet={WEBP} type="image/webp" />
+      <source srcSet={webpSrc} type="image/webp" />
       <img
-        src={PNG}
+        src={photo}
         alt={alt}
         width={width}
         height={height}

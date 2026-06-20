@@ -1,6 +1,9 @@
 import type { BookingState } from "@/types";
 import { formatDisplayDate } from "@/lib/calendar";
-import { psychologist } from "@/lib/psychologist";
+import {
+  getDefaultPsychologist,
+  getPsychologistBySlug,
+} from "@/lib/psychologists";
 import { formatSessionEndTime, getSessionById } from "@/lib/sessions";
 import { getWhatsAppNumber as getSiteWhatsAppNumber } from "@/lib/site";
 
@@ -15,12 +18,20 @@ export function getWhatsAppUrl(message?: string): string {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
+function getBookingPsychologist(booking: BookingState) {
+  if (booking.psychologistSlug) {
+    return getPsychologistBySlug(booking.psychologistSlug) ?? getDefaultPsychologist();
+  }
+  return getDefaultPsychologist();
+}
+
 export function buildBookingWhatsAppMessage(booking: BookingState): string {
   const session = booking.sessionType ? getSessionById(booking.sessionType) : null;
   if (!session || !booking.date || !booking.timeSlot) {
     throw new Error("Incomplete booking data");
   }
 
+  const psychologist = getBookingPsychologist(booking);
   const endTime = formatSessionEndTime(booking.timeSlot, session.duration);
   const modeLabel = booking.sessionMode === "video" ? "Video" : "Audio";
   const lines = [

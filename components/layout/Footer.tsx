@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Leaf } from "lucide-react";
-import { getInstagramUrl, getLinkedInUrl } from "@/lib/site";
+import { AGENCY_NAME, getAgencyUrl, getInstagramUrl, getLinkedInUrl, showAgencyCredit } from "@/lib/site";
 
 function InstagramIcon() {
   return (
@@ -22,7 +22,7 @@ function LinkedInIcon() {
 
 const footerLinks = [
   { href: "/how-it-works", label: "How It Works" },
-  { href: "/our-psychologist", label: "Our Psychologist" },
+  { href: "/our-psychologist", label: "Our Psychologists" },
   { href: "/book", label: "Book a Session" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },
@@ -89,6 +89,19 @@ export default function Footer() {
         <p className="text-sm text-muted">
           © {new Date().getFullYear()} Aproch Health. All rights reserved.
         </p>
+        {showAgencyCredit() && (
+          <p className="mt-2 text-xs text-muted">
+            Website by{" "}
+            <a
+              href={getAgencyUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-2 hover:text-hero-accent hover:underline"
+            >
+              {AGENCY_NAME}
+            </a>
+          </p>
+        )}
         <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted">
           Aproch Health does not handle medical or psychological emergencies. If
           you are in crisis, please contact iCall: 9152987821.

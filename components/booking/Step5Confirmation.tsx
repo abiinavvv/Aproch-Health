@@ -3,13 +3,17 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { useBooking } from "@/context/BookingContext";
-import { psychologist } from "@/lib/psychologist";
+import { getPsychologistBySlug, getDefaultPsychologist } from "@/lib/psychologists";
 import { getSessionById, formatSessionEndTime } from "@/lib/sessions";
 import { formatDisplayDate, buildGoogleCalendarUrl } from "@/lib/calendar";
 
 export default function Step5Confirmation() {
-  const { sessionType, date, timeSlot, sessionMode } = useBooking();
+  const { psychologistSlug, sessionType, date, timeSlot, sessionMode } = useBooking();
   const shouldReduceMotion = useReducedMotion();
+
+  const psychologist =
+    (psychologistSlug && getPsychologistBySlug(psychologistSlug)) ||
+    getDefaultPsychologist();
 
   const session = sessionType ? getSessionById(sessionType) : null;
   if (!session || !date || !timeSlot) return null;

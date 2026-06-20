@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "compress:hero-images": "node scripts/compress-hero-images.mjs",
-    "compress:psychologist": "node scripts/compress-psychologist.mjs"
+    "compress:psychologist": "node scripts/compress-psychologist.mjs",
+    "fetch:psychologist-images": "node scripts/fetch-psychologist-images.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",

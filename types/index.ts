@@ -5,6 +5,7 @@ export type SessionMode = "video" | "audio";
 export type BookingStep = 1 | 2 | 3 | 4 | 5;
 
 export interface BookingState {
+  psychologistSlug: string | null;
   sessionType: SessionTypeId | null;
   date: string | null;
   timeSlot: string | null;
@@ -33,6 +34,7 @@ export interface Psychologist {
   credentials: string;
   rciNumber: string;
   photo: string;
+  photoWebp?: string;
   languages: string[];
   experience: string;
   sessionHours: string;

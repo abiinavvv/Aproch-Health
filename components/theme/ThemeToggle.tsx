@@ -24,7 +24,11 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
       type="button"
       onClick={toggleNightMode}
       className={`glass-btn-warm inline-flex h-10 w-10 items-center justify-center rounded-full ${className}`}
-      aria-label={showNightMode ? "Switch to day mode" : "Switch to night mode"}
+      aria-label={
+        showNightMode
+          ? "Switch to day mode for this visit"
+          : "Switch to night mode for this visit"
+      }
     >
       {showNightMode ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
     </button>

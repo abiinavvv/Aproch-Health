@@ -40,3 +40,15 @@ export function getLinkedInUrl(): string | null {
   const url = process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim();
   return url || null;
 }
+
+/** Agency footer credit — set NEXT_PUBLIC_SHOW_AGENCY_CREDIT=false to hide */
+export const AGENCY_NAME = "Kaltrix";
+export const DEFAULT_AGENCY_URL = "https://kaltrix.live";
+
+export function getAgencyUrl(): string {
+  return process.env.NEXT_PUBLIC_AGENCY_URL?.trim() || DEFAULT_AGENCY_URL;
+}
+
+export function showAgencyCredit(): boolean {
+  return process.env.NEXT_PUBLIC_SHOW_AGENCY_CREDIT !== "false";
+}

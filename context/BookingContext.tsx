@@ -14,7 +14,8 @@ import type {
   SessionTypeId,
 } from "@/types";
 
-const defaultInitialState: BookingState = {
+export const defaultBookingState: BookingState = {
+  psychologistSlug: null,
   sessionType: null,
   date: null,
   timeSlot: null,
@@ -28,6 +29,7 @@ const defaultInitialState: BookingState = {
 };
 
 interface BookingContextValue extends BookingState {
+  setPsychologistSlug: (slug: string) => void;
   setSessionType: (type: SessionTypeId) => void;
   setDateTime: (date: string, timeSlot: string) => void;
   setSessionMode: (mode: SessionMode) => void;
@@ -50,8 +52,12 @@ export function BookingProvider({
   children: ReactNode;
   initialState?: BookingState;
 }) {
-  const [state, setState] = useState<BookingState>(initial ?? defaultInitialState);
+  const [state, setState] = useState<BookingState>(initial ?? defaultBookingState);
   const [isBookingComplete, setIsBookingComplete] = useState(false);
+
+  const setPsychologistSlug = useCallback((slug: string) => {
+    setState((s) => ({ ...s, psychologistSlug: slug }));
+  }, []);
 
   const setSessionType = useCallback((type: SessionTypeId) => {
     setState((s) => ({ ...s, sessionType: type }));
@@ -92,7 +98,7 @@ export function BookingProvider({
   }, []);
 
   const resetBooking = useCallback(() => {
-    setState(defaultInitialState);
+    setState(defaultBookingState);
     setIsBookingComplete(false);
   }, []);
 
@@ -104,6 +110,7 @@ export function BookingProvider({
     <BookingContext.Provider
       value={{
         ...state,
+        setPsychologistSlug,
         setSessionType,
         setDateTime,
         setSessionMode,
@@ -129,7 +136,6 @@ export function useBooking() {
 }
 
 export function markBookingComplete() {
-  // Used after WhatsApp booking — stored via sessionStorage for confirmation page
   if (typeof window !== "undefined") {
     sessionStorage.setItem("bookingComplete", "true");
   }
@@ -143,6 +149,7 @@ export function isBookingMarkedComplete(): boolean {
 export function saveBookingToSession(state: BookingState) {
   if (typeof window !== "undefined") {
     const {
+      psychologistSlug,
       sessionType,
       date,
       timeSlot,
@@ -157,6 +164,7 @@ export function saveBookingToSession(state: BookingState) {
     sessionStorage.setItem(
       "bookingState",
       JSON.stringify({
+        psychologistSlug,
         sessionType,
         date,
         timeSlot,

@@ -1,22 +1,61 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import StepPsychologistPicker from "@/components/booking/StepPsychologistPicker";
 import { useBooking } from "@/context/BookingContext";
+import { getAllPsychologists } from "@/lib/psychologists";
 import { sessionTypes } from "@/lib/sessions";
 import type { SessionTypeId } from "@/types";
 
 export default function Step1SessionType() {
-  const { sessionType, setSessionType, nextStep } = useBooking();
+  const {
+    psychologistSlug,
+    setPsychologistSlug,
+    sessionType,
+    setSessionType,
+    nextStep,
+  } = useBooking();
+
+  const [phase, setPhase] = useState<"psychologist" | "session">(
+    psychologistSlug ? "session" : "psychologist"
+  );
+  const [psychologistLocked] = useState(() => psychologistSlug !== null);
+
+  useEffect(() => {
+    if (psychologistSlug) setPhase("session");
+  }, [psychologistSlug]);
 
   const select = (id: SessionTypeId) => setSessionType(id);
+
+  if (phase === "psychologist") {
+    return (
+      <StepPsychologistPicker
+        psychologists={getAllPsychologists()}
+        selectedSlug={psychologistSlug}
+        onSelect={setPsychologistSlug}
+        onContinue={() => setPhase("session")}
+      />
+    );
+  }
 
   return (
     <div>
       <h2 className="font-display text-2xl font-semibold text-dark-text">
         What kind of session are you looking for?
       </h2>
+
+      {psychologistSlug && !psychologistLocked && (
+        <button
+          type="button"
+          onClick={() => setPhase("psychologist")}
+          className="mt-2 text-sm text-primary hover:underline"
+        >
+          ← Change psychologist
+        </button>
+      )}
 
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
         {sessionTypes.map((type) => (

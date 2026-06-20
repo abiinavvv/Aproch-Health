@@ -6,11 +6,12 @@ import { useState, useEffect } from "react";
 import { Menu, X, Leaf, CalendarCheck } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import NavbarClock from "@/components/layout/NavbarClock";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/how-it-works", label: "How It Works" },
-  { href: "/our-psychologist", label: "Our Psychologist" },
+  { href: "/our-psychologist", label: "Our Psychologists" },
   { href: "/book", label: "Book a Session" },
   { href: "/contact", label: "Contact" },
 ];
@@ -77,6 +78,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-4 lg:flex">
+          <NavbarClock />
           <ThemeToggle />
           <Link
             href="/book"
@@ -88,6 +90,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3 lg:hidden">
+          <NavbarClock />
           <ThemeToggle />
           <button
             type="button"

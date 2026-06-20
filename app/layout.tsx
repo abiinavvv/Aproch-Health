@@ -3,9 +3,8 @@ import { Inter, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { rootMetadata } from "@/lib/metadata";
+import { themeInitScript } from "@/lib/theme-schedule";
 import "./globals.css";
-
-const themeInitScript = `(function(){try{var t=localStorage.getItem("hero-video-mode");if(t==="night"){document.documentElement.setAttribute("data-theme","night");document.documentElement.style.colorScheme="dark";}}catch(e){}})();`;
 
 const inter = Inter({
   variable: "--font-inter",

@@ -17,9 +17,9 @@ export const homeFAQ: FAQItem[] = [
       "Yes. We understand plans change. Reach out to us on WhatsApp or email at least 24 hours before your session, and we'll help you find a new time that works.",
   },
   {
-    question: "What qualifications does the psychologist have?",
+    question: "What qualifications do our psychologists have?",
     answer:
-      "Our psychologist is an RCI-registered Consultant Clinical Psychologist with an M.Phil in Clinical Psychology. RCI (Rehabilitation Council of India) registration ensures verified, professional credentials.",
+      "All psychologists on Aproch Health are RCI-registered with M.Phil or equivalent qualifications in Clinical Psychology. RCI (Rehabilitation Council of India) registration ensures verified, professional credentials.",
   },
   {
     question: "How do I book and pay?",
@@ -39,7 +39,7 @@ export const homeFAQ: FAQItem[] = [
   {
     question: "Can I switch psychologists later?",
     answer:
-      "In Phase 1, we work with one dedicated psychologist to ensure continuity of care. If you ever feel the need for a different approach, reach out to us and we'll discuss options openly.",
+      "Yes. You can choose a different psychologist when booking a new session. If you'd like guidance on who might be the best fit, reach out to us on WhatsApp and we'll help you decide.",
   },
 ];
 

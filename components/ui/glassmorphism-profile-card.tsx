@@ -6,13 +6,12 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card-primitives";
 import { cn } from "@/lib/utils";
 import PsychologistPhoto from "@/components/ui/PsychologistPhoto";
-import { psychologist } from "@/lib/psychologist";
+import type { Psychologist } from "@/types";
+import { getDefaultPsychologist } from "@/lib/psychologists";
 import { Calendar, Clock, UserRound } from "lucide-react";
 
 export type GlassmorphismProfileCardProps = {
-  name?: string;
-  role?: string;
-  credentials?: string;
+  psychologist?: Psychologist;
   statusText?: string;
   bookHref?: string;
   profileHref?: string;
@@ -20,15 +19,17 @@ export type GlassmorphismProfileCardProps = {
 };
 
 export default function GlassmorphismProfileCard({
-  name = psychologist.name,
-  role = psychologist.designation,
-  credentials = psychologist.credentials,
+  psychologist = getDefaultPsychologist(),
   statusText = "Available for online sessions",
-  bookHref = "/book",
-  profileHref = "/our-psychologist",
+  bookHref,
+  profileHref,
   className,
 }: GlassmorphismProfileCardProps) {
   const [timeText, setTimeText] = useState("");
+
+  const resolvedBookHref = bookHref ?? `/book?psychologist=${psychologist.slug}`;
+  const resolvedProfileHref =
+    profileHref ?? `/our-psychologist/${psychologist.slug}`;
 
   useEffect(() => {
     const updateClock = () => {
@@ -45,7 +46,10 @@ export default function GlassmorphismProfileCard({
     return () => window.clearInterval(id);
   }, []);
 
-  const subtitle = useMemo(() => `${role} · ${credentials}`, [role, credentials]);
+  const subtitle = useMemo(
+    () => `${psychologist.designation} · ${psychologist.credentials}`,
+    [psychologist.designation, psychologist.credentials]
+  );
 
   return (
     <motion.div
@@ -56,8 +60,8 @@ export default function GlassmorphismProfileCard({
       className={cn("relative mx-auto w-full max-w-md", className)}
     >
       <Card className="glass-profile-card relative mx-auto w-full overflow-visible rounded-[20px] shadow-[0_20px_50px_rgba(28,16,8,0.12)]">
-        <CardContent className="p-6 sm:p-8">
-          <div className="mb-6 flex items-center justify-between text-sm text-muted">
+        <CardContent className="p-5 sm:p-6">
+          <div className="mb-4 flex items-center justify-between text-xs text-muted sm:text-sm">
             <div className="flex items-center gap-2">
               <span
                 className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-success"
@@ -72,12 +76,18 @@ export default function GlassmorphismProfileCard({
           </div>
 
           <div className="flex flex-col items-center justify-center gap-5">
-            <div className="glass-profile-avatar relative h-48 w-48 shrink-0 overflow-hidden rounded-[20px] ring-2 ring-hero-accent/25 sm:h-52 sm:w-52">
-              <PsychologistPhoto fill className="psychologist-photo" />
+            <div className="glass-profile-avatar relative h-40 w-40 shrink-0 overflow-hidden rounded-[20px] ring-2 ring-hero-accent/25 sm:h-44 sm:w-44">
+              <PsychologistPhoto
+                photo={psychologist.photo}
+                photoWebp={psychologist.photoWebp}
+                alt={psychologist.name}
+                fill
+                className="psychologist-photo"
+              />
             </div>
             <div className="min-w-0 text-center">
-              <p className="truncate font-display text-xl font-semibold tracking-tight text-dark-text sm:text-2xl">
-                {name}
+              <p className="truncate font-display text-lg font-semibold tracking-tight text-dark-text sm:text-xl">
+                {psychologist.name}
               </p>
               <p className="mt-1 text-sm text-body-text">{subtitle}</p>
               {psychologist.rciNumber && (
@@ -88,7 +98,7 @@ export default function GlassmorphismProfileCard({
 
           <div className="mt-6">
             <Link
-              href={bookHref}
+              href={resolvedBookHref}
               className={cn(
                 "inline-flex h-12 w-full items-center justify-center gap-3 rounded-2xl border border-border px-4",
                 "bg-white/60 text-sm font-semibold text-dark-text transition-colors",
@@ -102,7 +112,7 @@ export default function GlassmorphismProfileCard({
 
           <div className="mt-3">
             <Link
-              href={profileHref}
+              href={resolvedProfileHref}
               className={cn(
                 "inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl",
                 "text-sm font-semibold text-primary transition-colors hover:text-primary-dark"

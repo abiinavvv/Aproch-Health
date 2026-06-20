@@ -90,16 +90,19 @@ export default function Hero() {
               <div className="h-px w-[160px] bg-hero-accent md:w-[180px]" aria-hidden />
             </div>
 
-            <p className="max-w-[300px] text-lg leading-relaxed text-hero-subtext md:text-xl md:leading-relaxed">
-              Aproch Health is here to walk with you, at your pace.
-            </p>
-
             <div className="relative mt-9 inline-block w-full md:mt-10 md:w-auto">
               <Link
                 href="/book"
-                className="btn-3d-warm relative inline-flex w-full items-center justify-center rounded-xl px-6 py-3.5 text-base font-semibold md:w-auto md:rounded-2xl md:px-10 md:py-5 md:text-xl"
+                className="hero-book-image-btn inline-block w-full max-w-[260px] rounded-2xl md:max-w-[320px]"
               >
-                Book Appointment →
+                <img
+                  src="/images/hero-book-cat.png"
+                  alt="Book Appointment"
+                  width={640}
+                  height={200}
+                  className="h-auto w-full select-none"
+                  draggable={false}
+                />
               </Link>
             </div>
           </motion.div>
