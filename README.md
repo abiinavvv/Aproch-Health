@@ -1,24 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project for **Aproch Health** — online therapy booking for students and young adults in India.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
+
+## Deploy & launch
+
+See **[DEPLOY.md](DEPLOY.md)** for the full hosting checklist (Vercel, custom domain, Resend email).
+
+- **[docs/CLIENT_INTAKE.md](docs/CLIENT_INTAKE.md)** — questions to send the client before DNS
+- **[docs/LAUNCH_QA.md](docs/LAUNCH_QA.md)** — post-launch QA checklist
 
 ## Learn More
 
