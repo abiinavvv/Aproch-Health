@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/our-psychologist",
     "/book",
     "/contact",
+    "/crisis-help",
     "/privacy",
     "/terms",
   ];

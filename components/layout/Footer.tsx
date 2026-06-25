@@ -104,7 +104,15 @@ export default function Footer() {
         )}
         <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted">
           Aproch Health does not handle medical or psychological emergencies. If
-          you are in crisis, please contact iCall: 9152987821.
+          you are in crisis, see{" "}
+          <Link href="/crisis-help" className="font-semibold text-primary hover:underline">
+            Crisis Help
+          </Link>{" "}
+          or contact iCall:{" "}
+          <a href="tel:919152987821" className="font-medium text-primary hover:underline">
+            9152987821
+          </a>
+          .
         </p>
       </div>
     </footer>

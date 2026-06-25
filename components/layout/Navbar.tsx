@@ -16,6 +16,9 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+const crisisHelpClassName =
+  "inline-flex items-center rounded-full border border-red-500/80 px-3 py-1.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 dark:border-red-400/70 dark:text-red-400 dark:hover:bg-red-950/30";
+
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname.startsWith(href);
@@ -78,6 +81,9 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-4 lg:flex">
+          <Link href="/crisis-help" className={crisisHelpClassName}>
+            Crisis Help
+          </Link>
           <NavbarClock />
           <ThemeToggle />
           <Link
@@ -90,6 +96,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3 lg:hidden">
+          <Link href="/crisis-help" className={crisisHelpClassName}>
+            Crisis Help
+          </Link>
           <NavbarClock />
           <ThemeToggle />
           <button
@@ -141,6 +150,13 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href="/crisis-help"
+                className={`mt-4 border-b border-border py-4 text-base font-semibold text-red-600 ${linkClass("/crisis-help")}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                Crisis Help
+              </Link>
               <Link
                 href="/book"
                 className="glass-btn-warm mt-6 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium"
