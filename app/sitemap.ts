@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/crisis-help",
     "/privacy",
     "/terms",
+    "/refund-policy",
+    "/minor-safety-policy",
+    "/security-policy",
   ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({

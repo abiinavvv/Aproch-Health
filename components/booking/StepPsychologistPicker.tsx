@@ -3,6 +3,7 @@
 import type { Psychologist } from "@/types";
 import PsychologistPhoto from "@/components/ui/PsychologistPhoto";
 import Tag from "@/components/ui/Tag";
+import { formatSessionFee } from "@/lib/psychologists";
 import { cn } from "@/lib/utils";
 
 type StepPsychologistPickerProps = {
@@ -42,18 +43,21 @@ export default function StepPsychologistPicker({
                   : "border-border bg-white hover:border-primary/40"
               )}
             >
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
+              <div className="psychologist-photo-avatar relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
                 <PsychologistPhoto
                   photo={p.photo}
                   photoWebp={p.photoWebp}
                   alt={p.name}
                   fill
-                  className="psychologist-photo !object-cover"
+                  className="psychologist-photo"
                 />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="font-semibold text-dark-text">{p.name}</p>
                 <p className="text-xs text-muted">{p.designation}</p>
+                <p className="mt-0.5 text-xs text-muted">
+                  {p.sessionHours} therapy hours · {formatSessionFee(p.sessionFee)} per session
+                </p>
                 <div className="mt-2 flex flex-wrap gap-1">
                   {p.specialties.slice(0, 2).map((s) => (
                     <Tag key={s} className="!text-[10px]">

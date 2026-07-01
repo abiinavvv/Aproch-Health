@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import StepPsychologistPicker from "@/components/booking/StepPsychologistPicker";
 import { useBooking } from "@/context/BookingContext";
-import { getAllPsychologists } from "@/lib/psychologists";
+import { getAllPsychologists, getPsychologistSessionFee } from "@/lib/psychologists";
 import { sessionTypes } from "@/lib/sessions";
 import type { SessionTypeId } from "@/types";
 
@@ -29,6 +29,7 @@ export default function Step1SessionType() {
   }, [psychologistSlug]);
 
   const select = (id: SessionTypeId) => setSessionType(id);
+  const sessionFee = getPsychologistSessionFee(psychologistSlug);
 
   if (phase === "psychologist") {
     return (
@@ -70,7 +71,7 @@ export default function Step1SessionType() {
               {type.label}
             </h3>
             <p className="mt-1 text-2xl font-bold text-primary">
-              ₹{type.price}
+              ₹{sessionFee.toLocaleString("en-IN")}
             </p>
             <p className="mt-2 text-sm font-medium text-body-text">
               {type.tagline}

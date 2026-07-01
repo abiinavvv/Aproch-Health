@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card-primitives";
 import { cn } from "@/lib/utils";
 import PsychologistPhoto from "@/components/ui/PsychologistPhoto";
 import type { Psychologist } from "@/types";
-import { getDefaultPsychologist } from "@/lib/psychologists";
+import { getDefaultPsychologist, formatTherapyHours, formatSessionFee } from "@/lib/psychologists";
 import { Calendar, Clock, UserRound } from "lucide-react";
 
 export type GlassmorphismProfileCardProps = {
@@ -90,6 +90,12 @@ export default function GlassmorphismProfileCard({
                 {psychologist.name}
               </p>
               <p className="mt-1 text-sm text-body-text">{subtitle}</p>
+              <p className="mt-1 text-xs text-muted">
+                {formatTherapyHours(psychologist.sessionHours)}
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                {formatSessionFee(psychologist.sessionFee)} per session · video or audio
+              </p>
               {psychologist.rciNumber && (
                 <p className="mt-1 text-xs text-muted">RCI · {psychologist.rciNumber}</p>
               )}

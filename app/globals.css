@@ -475,7 +475,9 @@ h3 {
   border-color: color-mix(in srgb, var(--border) 85%, transparent);
 }
 
-.glass-profile-avatar .psychologist-photo {
+.glass-profile-avatar .psychologist-photo,
+.psychologist-photo-avatar .psychologist-photo,
+.what-we-do-photo .psychologist-photo {
   object-fit: cover;
   object-position: center top;
 }

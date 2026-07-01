@@ -38,6 +38,7 @@ export interface Psychologist {
   languages: string[];
   experience: string;
   sessionHours: string;
+  sessionFee: number;
   specialties: string[];
   bio: string;
   philosophy: string;

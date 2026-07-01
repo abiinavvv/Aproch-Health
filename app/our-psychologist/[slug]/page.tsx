@@ -10,6 +10,9 @@ import PsychologistPhoto from "@/components/ui/PsychologistPhoto";
 import {
   getAllPsychologists,
   getPsychologistBySlug,
+  getPsychologistFirstName,
+  formatTherapyHours,
+  formatSessionFee,
 } from "@/lib/psychologists";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -59,12 +62,15 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
               </h1>
               <p className="mt-2 text-lg text-body-text">{psychologist.designation}</p>
               <p className="mt-1 text-body-text">{psychologist.credentials}</p>
-              <div className="mt-4 flex items-center gap-2">
-                <Badge variant="verified">✓ Verified by RCI</Badge>
-                {psychologist.rciNumber && (
+              <p className="mt-2 text-sm text-muted">
+                {formatTherapyHours(psychologist.sessionHours)}
+              </p>
+              {psychologist.rciNumber && (
+                <div className="mt-4 flex items-center gap-2">
+                  <Badge variant="verified">✓ Verified by RCI</Badge>
                   <span className="text-sm text-muted">{psychologist.rciNumber}</span>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -106,12 +112,24 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
                 <dd>30 min (Introductory) / 60 min (Full Session)</dd>
               </div>
               <div className="flex justify-between border-b border-border pb-3">
+                <dt className="text-muted">Session fee</dt>
+                <dd>{formatSessionFee(psychologist.sessionFee)}</dd>
+              </div>
+              <div className="flex justify-between border-b border-border pb-3">
+                <dt className="text-muted">Mode</dt>
+                <dd>Video or audio (same fee)</dd>
+              </div>
+              <div className="flex justify-between border-b border-border pb-3">
                 <dt className="text-muted">Platform</dt>
                 <dd>Google Meet (video or audio)</dd>
               </div>
               <div className="flex justify-between border-b border-border pb-3">
                 <dt className="text-muted">Language</dt>
                 <dd>{psychologist.languages.join(", ")}</dd>
+              </div>
+              <div className="flex justify-between border-b border-border pb-3">
+                <dt className="text-muted">Therapy experience</dt>
+                <dd>{psychologist.sessionHours} hours</dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted">Availability</dt>
@@ -128,7 +146,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
               variant="primary"
               fullWidth
             >
-              Book a session with {psychologist.name.split(" ").pop()}
+              Book a session with {getPsychologistFirstName(psychologist.name)}
             </Button>
             <p className="text-center text-sm text-muted">
               <Link href="/our-psychologist" className="text-primary hover:underline">

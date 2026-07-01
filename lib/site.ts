@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   "Book a session with a verified clinical psychologist. Online. Affordable. Confidential.";
 export const SITE_EMAIL = "hello@aprochhealth.com";
 
-export const DEFAULT_WHATSAPP_NUMBER = "919562170975";
+export const DEFAULT_WHATSAPP_NUMBER = "918921849028";
 
 export function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -26,6 +26,16 @@ export function normalizeWhatsAppNumber(raw?: string): string {
 export function getWhatsAppNumber(): string {
   return normalizeWhatsAppNumber(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER);
 }
+
+export function formatDisplayPhone(digits: string): string {
+  const national = digits.startsWith("91") ? digits.slice(2) : digits;
+  if (national.length === 10) {
+    return `+91 ${national.slice(0, 5)} ${national.slice(5)}`;
+  }
+  return `+${digits}`;
+}
+
+export const BUSINESS_HOURS = "Monday–Saturday, 9:00 AM – 6:00 PM IST";
 
 export function getRciNumber(): string {
   return process.env.NEXT_PUBLIC_RCI_NUMBER?.trim() || "";

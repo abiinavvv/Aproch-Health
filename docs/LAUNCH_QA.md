@@ -34,7 +34,7 @@ Check each box before client sign-off.
 ## Psychologists
 
 - [ ] `/our-psychologist` — team grid loads
-- [ ] `/our-psychologist/dr-priya-nair` (and other slugs) — profile pages load
+- [ ] `/our-psychologist/safiyath-t-s` (and other slugs) — profile pages load
 - [ ] Invalid slug → 404
 - [ ] “Book a Session” from card → `/book?psychologist=<slug>`
 

@@ -3,6 +3,7 @@ import { formatDisplayDate } from "@/lib/calendar";
 import {
   getDefaultPsychologist,
   getPsychologistBySlug,
+  formatSessionFee,
 } from "@/lib/psychologists";
 import { formatSessionEndTime, getSessionById } from "@/lib/sessions";
 import { getWhatsAppNumber as getSiteWhatsAppNumber } from "@/lib/site";
@@ -43,7 +44,7 @@ export function buildBookingWhatsAppMessage(booking: BookingState): string {
     `*Age:* ${booking.age}`,
     "",
     `*Session:* ${session.label} (${session.duration} min)`,
-    `*Fee:* ₹${session.price}`,
+    `*Fee:* ${formatSessionFee(psychologist.sessionFee)}`,
     `*Date:* ${formatDisplayDate(booking.date)}`,
     `*Time:* ${booking.timeSlot} – ${endTime}`,
     `*Mode:* ${modeLabel}`,

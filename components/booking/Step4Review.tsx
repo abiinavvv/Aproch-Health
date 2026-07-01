@@ -8,7 +8,7 @@ import {
   useBooking,
   saveBookingToSession,
 } from "@/context/BookingContext";
-import { getPsychologistBySlug, getDefaultPsychologist } from "@/lib/psychologists";
+import { getPsychologistBySlug, getDefaultPsychologist, formatSessionFee } from "@/lib/psychologists";
 import {
   getSessionById,
   formatSessionEndTime,
@@ -42,6 +42,7 @@ export default function Step4Review() {
   const psychologist =
     (psychologistSlug && getPsychologistBySlug(psychologistSlug)) ||
     getDefaultPsychologist();
+  const sessionFee = psychologist.sessionFee;
 
   const handleWhatsAppConfirm = () => {
     if (!agreed) return;
@@ -88,7 +89,7 @@ export default function Step4Review() {
       <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
         <div className="flex items-start justify-between border-b border-border p-5">
           <div className="flex gap-4">
-            <div className="relative h-14 w-14 shrink-0">
+            <div className="psychologist-photo-avatar relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
               <PsychologistPhoto
                 photo={psychologist.photo}
                 photoWebp={psychologist.photoWebp}
@@ -150,7 +151,7 @@ export default function Step4Review() {
           </p>
           <div className="mt-3 flex justify-between font-semibold text-dark-text">
             <span>{session.label}</span>
-            <span>₹{session.price}</span>
+            <span>{formatSessionFee(sessionFee)}</span>
           </div>
           <p className="mt-2 text-xs text-muted">
             Payment details will be shared when we confirm your slot on WhatsApp.

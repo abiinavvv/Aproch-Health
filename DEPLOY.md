@@ -38,7 +38,7 @@ Smoke-test: home (hero, day/night), `/book`, `/our-psychologist`, `/contact`, `/
 | Variable | Required | Example / notes |
 |----------|----------|-----------------|
 | `NEXT_PUBLIC_SITE_URL` | **Yes at launch** | `https://aprochhealth.com` — no trailing slash |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | **Yes** | `919562170975` (digits + country code, no `+`) |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | **Yes** | `918921849028` (digits + country code, no `+`) |
 | `NEXT_PUBLIC_RCI_NUMBER` | Recommended | `RCI/CL/2021/XXXXX` |
 | `NEXT_PUBLIC_INSTAGRAM_URL` | Optional | Footer hidden if unset |
 | `NEXT_PUBLIC_LINKEDIN_URL` | Optional | Footer hidden if unset |

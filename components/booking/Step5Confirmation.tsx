@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { useBooking } from "@/context/BookingContext";
-import { getPsychologistBySlug, getDefaultPsychologist } from "@/lib/psychologists";
+import { getPsychologistBySlug, getDefaultPsychologist, formatSessionFee } from "@/lib/psychologists";
 import { getSessionById, formatSessionEndTime } from "@/lib/sessions";
 import { formatDisplayDate, buildGoogleCalendarUrl } from "@/lib/calendar";
 
@@ -69,6 +69,10 @@ export default function Step5Confirmation() {
           <div className="flex justify-between">
             <dt className="text-muted">Session</dt>
             <dd className="text-dark-text">{session.label} ({session.duration} min)</dd>
+          </div>
+          <div className="flex justify-between">
+            <dt className="text-muted">Session fee</dt>
+            <dd className="text-dark-text">{formatSessionFee(psychologist.sessionFee)}</dd>
           </div>
           <div className="flex justify-between">
             <dt className="text-muted">Mode</dt>
