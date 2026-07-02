@@ -194,6 +194,24 @@ h3 {
   object-position: 56% 32%;
 }
 
+@media (max-width: 767px) {
+  .hero-video-cover-mobile {
+    object-position: 58% 34%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .hero-video-root--mobile:has(> .hero-video-layer) > .hero-video-fallback {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+  }
+
+  .hero-video-root--mobile .hero-video-fallback {
+    background-position: 58% 34%;
+    transform: translate(-4%, 0) scale(1);
+  }
+}
+
 .hero-video-fallback {
   background-size: cover;
   background-position: 56% 32%;
@@ -237,22 +255,6 @@ h3 {
   opacity: 1;
 }
 
-.hero-mobile-bg.hero-theme-day {
-  opacity: 0.3;
-}
-
-.hero-mobile-bg.hero-theme-night {
-  opacity: 0;
-}
-
-[data-theme="night"] .hero-mobile-bg.hero-theme-day {
-  opacity: 0;
-}
-
-[data-theme="night"] .hero-mobile-bg.hero-theme-night {
-  opacity: 0.3;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-theme-fade {
     transition: none;
@@ -264,14 +266,6 @@ h3 {
 
   [data-theme="night"] .hero-theme-night {
     opacity: 1;
-  }
-
-  [data-theme="night"] .hero-mobile-bg.hero-theme-day {
-    opacity: 0;
-  }
-
-  [data-theme="night"] .hero-mobile-bg.hero-theme-night {
-    opacity: 0.3;
   }
 }
 
@@ -479,7 +473,7 @@ h3 {
 .psychologist-photo-avatar .psychologist-photo,
 .what-we-do-photo .psychologist-photo {
   object-fit: cover;
-  object-position: center top;
+  object-position: center 7%;
 }
 
 [data-theme="night"] .what-we-do-cta {

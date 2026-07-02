@@ -37,6 +37,16 @@ const DAY_GRADIENT =
 const NIGHT_GRADIENT =
   "linear-gradient(to right, rgba(18, 24, 21, 1) 0%, rgba(18, 24, 21, 1) 12%, rgba(18, 24, 21, 0.92) 28%, rgba(18, 24, 21, 0.55) 48%, rgba(18, 24, 21, 0) 62%)";
 
+const MOBILE_DAY_GRADIENT =
+  "linear-gradient(to bottom, rgba(248, 241, 232, 1) 0%, rgba(248, 241, 232, 0.9) 20%, rgba(248, 241, 232, 0.45) 55%, rgba(248, 241, 232, 0) 75%)";
+
+const MOBILE_NIGHT_GRADIENT =
+  "linear-gradient(to bottom, rgba(18, 24, 21, 1) 0%, rgba(18, 24, 21, 0.9) 20%, rgba(18, 24, 21, 0.45) 55%, rgba(18, 24, 21, 0) 75%)";
+
+type HeroVideoProps = {
+  variant?: "desktop" | "mobile";
+};
+
 function playVideo(video: HTMLVideoElement | null) {
   if (!video) return;
   video.play().catch(() => {});
@@ -53,11 +63,16 @@ function videoLayerStyle(visible: boolean, reducedMotion: boolean): CSSPropertie
   };
 }
 
-export default function HeroVideo() {
+export default function HeroVideo({ variant = "desktop" }: HeroVideoProps) {
   const dayVideoRef = useRef<HTMLVideoElement>(null);
   const nightVideoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = useReducedMotion() ?? false;
   const { isNightMode } = useTheme();
+  const isMobile = variant === "mobile";
+
+  const videoClassName = isMobile
+    ? "hero-video-cover hero-video-cover-mobile"
+    : "hero-video-cover";
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -68,10 +83,12 @@ export default function HeroVideo() {
   const fadeClass = reducedMotion ? "" : "hero-theme-fade";
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div
+      className={`absolute inset-0 overflow-hidden${isMobile ? " hero-video-root--mobile" : ""}`}
+    >
       {/* Fallback images — crossfade tied to data-theme */}
       <div
-        className={`hero-video-fallback hero-theme-day absolute inset-0 md:block ${fadeClass}`}
+        className={`hero-video-fallback hero-theme-day absolute inset-0 ${fadeClass}`}
         style={{
           backgroundImage: heroFallbackBackground(
             HERO_FALLBACK_WEBP,
@@ -81,7 +98,7 @@ export default function HeroVideo() {
         aria-hidden
       />
       <div
-        className={`hero-video-fallback hero-theme-night absolute inset-0 md:block ${fadeClass}`}
+        className={`hero-video-fallback hero-theme-night absolute inset-0 ${fadeClass}`}
         style={{
           backgroundImage: heroFallbackBackground(
             HERO_NIGHT_FALLBACK_WEBP,
@@ -94,7 +111,7 @@ export default function HeroVideo() {
       {!reducedMotion && (
         <>
           <div
-            className="hero-video-layer hidden md:block"
+            className="hero-video-layer"
             style={videoLayerStyle(!isNightMode, reducedMotion)}
             aria-hidden
           >
@@ -102,7 +119,7 @@ export default function HeroVideo() {
               ref={dayVideoRef}
               src={HERO_DAY_VIDEO}
               poster={HERO_FALLBACK_WEBP}
-              className="hero-video-cover"
+              className={videoClassName}
               autoPlay
               muted
               loop
@@ -111,7 +128,7 @@ export default function HeroVideo() {
             />
           </div>
           <div
-            className="hero-video-layer hidden md:block"
+            className="hero-video-layer"
             style={videoLayerStyle(isNightMode, reducedMotion)}
             aria-hidden
           >
@@ -119,7 +136,7 @@ export default function HeroVideo() {
               ref={nightVideoRef}
               src={HERO_NIGHT_VIDEO}
               poster={HERO_NIGHT_FALLBACK_WEBP}
-              className="hero-video-cover"
+              className={videoClassName}
               autoPlay
               muted
               loop
@@ -130,17 +147,33 @@ export default function HeroVideo() {
         </>
       )}
 
-      {/* Gradient overlays — crossfade tied to data-theme */}
-      <div
-        className={`hero-theme-day pointer-events-none absolute inset-0 z-[1] hidden md:block ${fadeClass}`}
-        style={{ background: DAY_GRADIENT }}
-        aria-hidden
-      />
-      <div
-        className={`hero-theme-night pointer-events-none absolute inset-0 z-[1] hidden md:block ${fadeClass}`}
-        style={{ background: NIGHT_GRADIENT }}
-        aria-hidden
-      />
+      {isMobile ? (
+        <>
+          <div
+            className={`hero-theme-day pointer-events-none absolute inset-0 z-[1] ${fadeClass}`}
+            style={{ background: MOBILE_DAY_GRADIENT }}
+            aria-hidden
+          />
+          <div
+            className={`hero-theme-night pointer-events-none absolute inset-0 z-[1] ${fadeClass}`}
+            style={{ background: MOBILE_NIGHT_GRADIENT }}
+            aria-hidden
+          />
+        </>
+      ) : (
+        <>
+          <div
+            className={`hero-theme-day pointer-events-none absolute inset-0 z-[1] ${fadeClass}`}
+            style={{ background: DAY_GRADIENT }}
+            aria-hidden
+          />
+          <div
+            className={`hero-theme-night pointer-events-none absolute inset-0 z-[1] ${fadeClass}`}
+            style={{ background: NIGHT_GRADIENT }}
+            aria-hidden
+          />
+        </>
+      )}
     </div>
   );
 }

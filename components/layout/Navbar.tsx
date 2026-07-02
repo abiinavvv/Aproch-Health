@@ -16,8 +16,12 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-const crisisHelpClassName =
-  "inline-flex items-center rounded-full border border-red-500/80 px-3 py-1.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 dark:border-red-400/70 dark:text-red-400 dark:hover:bg-red-950/30";
+const crisisHelpBase =
+  "inline-flex items-center justify-center rounded-full border border-red-500/80 font-semibold text-red-600 transition-colors hover:bg-red-50 dark:border-red-400/70 dark:text-red-400 dark:hover:bg-red-950/30";
+
+const crisisHelpMobileClassName = `${crisisHelpBase} h-8 shrink-0 px-2 text-xs`;
+
+const crisisHelpDesktopClassName = `${crisisHelpBase} px-3 py-1.5 text-sm`;
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -48,12 +52,17 @@ export default function Navbar() {
       isActive(pathname, href) ? "nav-link-warm-active" : ""
     }`;
 
+  const headerBackgroundClass = menuOpen
+    ? "bg-hero-cream/95 shadow-sm"
+    : scrolled
+      ? "bg-hero-cream/95 shadow-sm backdrop-blur-sm"
+      : "bg-transparent";
+
   return (
-    <header
-      className={`theme-surface fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-hero-cream/95 shadow-sm backdrop-blur-sm" : "bg-transparent"
-      }`}
-    >
+    <>
+      <header
+        className={`theme-surface fixed top-0 z-50 w-full transition-all duration-300 ${headerBackgroundClass}`}
+      >
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-4 lg:px-8">
         <Link href="/" className="group flex items-start gap-1.5">
           <div className="flex flex-col leading-none">
@@ -81,7 +90,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <Link href="/crisis-help" className={crisisHelpClassName}>
+          <Link href="/crisis-help" className={crisisHelpDesktopClassName}>
             Crisis Help
           </Link>
           <NavbarClock />
@@ -95,15 +104,16 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-3 lg:hidden">
-          <Link href="/crisis-help" className={crisisHelpClassName}>
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:hidden">
+          <Link href="/crisis-help" className={crisisHelpMobileClassName}>
             Crisis Help
           </Link>
-          <NavbarClock />
-          <ThemeToggle />
+          <div className="max-[400px]:hidden">
+            <NavbarClock className="h-8 min-w-[5.5rem] px-2 text-xs sm:h-10 sm:min-w-[6.75rem] sm:px-3 sm:text-sm" />
+          </div>
           <button
             type="button"
-            className="text-hero-nav"
+            className="inline-flex h-8 w-8 shrink-0 items-center justify-center text-hero-nav sm:h-10 sm:w-10"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
           >
@@ -111,6 +121,7 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
+      </header>
 
       <AnimatePresence>
         {menuOpen && (
@@ -119,7 +130,7 @@ export default function Navbar() {
               initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/30 lg:hidden"
+              className="fixed inset-0 z-[60] bg-black/30 lg:hidden"
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
@@ -127,10 +138,13 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed right-0 top-0 z-50 flex h-full w-72 flex-col bg-hero-cream p-6 shadow-lg lg:hidden"
+              className="theme-surface fixed right-0 top-0 z-[70] flex h-full w-72 flex-col bg-surface p-6 shadow-lg backdrop-blur-none lg:hidden"
             >
               <div className="mb-8 flex items-center justify-between">
-                <ThemeToggle />
+                <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <span className="text-sm font-medium text-hero-nav">Day / Night</span>
+                </div>
                 <button
                   type="button"
                   className="text-hero-nav"
@@ -169,6 +183,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

@@ -5,23 +5,22 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Sprout, ArrowRight } from "lucide-react";
 import RealisticFogBackground from "@/components/ui/realistic-fog-background";
-import HeroVideo, {
-  HERO_FALLBACK_IMAGE,
-  HERO_FALLBACK_WEBP,
-  HERO_NIGHT_FALLBACK_IMAGE,
-  HERO_NIGHT_FALLBACK_WEBP,
-  heroFallbackBackground,
-} from "@/components/home/HeroVideo";
+import HeroVideo from "@/components/home/HeroVideo";
 import HeroFeatureStrip from "./HeroFeatureStrip";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [showFog, setShowFog] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const heroMainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
-    const update = () => setShowFog(mq.matches);
+    const update = () => {
+      const matches = mq.matches;
+      setIsDesktop(matches);
+      setShowFog(matches);
+    };
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
@@ -41,27 +40,14 @@ export default function Hero() {
         />
       </div>
 
-      {/* Mobile illustration overlay */}
-      <div className="pointer-events-none absolute inset-0 md:hidden" aria-hidden>
+      {!isDesktop && (
         <div
-          className={`hero-mobile-bg hero-theme-day absolute inset-0 bg-cover bg-center ${mobileFadeClass}`}
-          style={{
-            backgroundImage: heroFallbackBackground(
-              HERO_FALLBACK_WEBP,
-              HERO_FALLBACK_IMAGE
-            ),
-          }}
-        />
-        <div
-          className={`hero-mobile-bg hero-theme-night absolute inset-0 bg-cover bg-center ${mobileFadeClass}`}
-          style={{
-            backgroundImage: heroFallbackBackground(
-              HERO_NIGHT_FALLBACK_WEBP,
-              HERO_NIGHT_FALLBACK_IMAGE
-            ),
-          }}
-        />
-      </div>
+          className="pointer-events-none absolute inset-0 z-0 overflow-hidden md:hidden"
+          aria-hidden
+        >
+          <HeroVideo variant="mobile" />
+        </div>
+      )}
 
       <div ref={heroMainRef} className="relative flex min-h-0 flex-1 flex-col md:flex-row">
         {showFog && (
@@ -110,7 +96,7 @@ export default function Hero() {
 
         {/* Right video zone — 60% */}
         <div className="relative z-0 hidden flex-1 overflow-hidden md:block">
-          <HeroVideo />
+          {isDesktop && <HeroVideo variant="desktop" />}
           <Link
             href="/how-it-works"
             className="glass-btn-warm absolute bottom-[8%] right-[4%] z-20 inline-flex items-center justify-center gap-2 rounded-2xl px-10 py-5 text-xl font-semibold"

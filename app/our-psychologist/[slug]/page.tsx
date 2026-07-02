@@ -45,8 +45,8 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
     <>
       <Navbar />
       <main className="flex-1">
-        <section className="hero-gradient px-4 py-12 lg:px-6 lg:py-20">
-          <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 md:flex-row md:gap-16">
+        <section className="hero-gradient px-4 pt-24 pb-6 lg:px-6 lg:pt-28 lg:pb-8">
+          <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 md:flex-row md:gap-10 lg:gap-12">
             <PsychologistPhoto
               photo={psychologist.photo}
               photoWebp={psychologist.photoWebp}
@@ -75,27 +75,26 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 py-12 lg:px-6 lg:py-20">
-          <div className="mx-auto max-w-[800px]">
-            <h2 className="font-display text-2xl font-semibold text-dark-text">About</h2>
-            <p className="mt-6 leading-[1.8] text-body-text">{psychologist.bio}</p>
-          </div>
-        </section>
-
-        <section className="bg-hero-start px-4 py-12 lg:px-6 lg:py-20">
-          <div className="mx-auto max-w-[800px]">
-            <h2 className="font-display text-2xl font-semibold text-dark-text">Specialties</h2>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {psychologist.specialties.map((s) => (
-                <Tag key={s}>{s}</Tag>
-              ))}
+        <section className="px-4 pt-2 pb-10 lg:px-6 lg:pt-4 lg:pb-12">
+          <div className="mx-auto max-w-[800px] space-y-10 lg:space-y-12">
+            <div>
+              <h2 className="font-display text-2xl font-semibold text-dark-text">About</h2>
+              <p className="mt-4 leading-[1.8] text-body-text">{psychologist.bio}</p>
+            </div>
+            <div className="border-t border-border pt-10 lg:pt-12">
+              <h2 className="font-display text-2xl font-semibold text-dark-text">Specialties</h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {psychologist.specialties.map((s) => (
+                  <Tag key={s}>{s}</Tag>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="px-4 py-12 lg:px-6 lg:py-20">
-          <div className="mx-auto max-w-[800px] rounded-2xl bg-light-green/30 p-8 md:p-12">
-            <span className="font-display text-6xl text-primary opacity-40">&ldquo;</span>
+        <section className="px-4 py-10 lg:px-6 lg:py-12">
+          <div className="mx-auto max-w-[800px] rounded-2xl bg-light-green/30 p-6 md:p-8 lg:p-8">
+            <span className="font-display text-5xl text-primary opacity-40">&ldquo;</span>
             <p className="mt-2 font-display text-xl italic leading-relaxed text-dark-text md:text-2xl">
               {psychologist.philosophy}
             </p>
@@ -103,10 +102,10 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 py-12 lg:px-6 lg:py-20">
-          <div className="mx-auto max-w-[800px] rounded-2xl border border-border bg-white p-8 shadow-sm">
+        <section className="px-4 py-10 lg:px-6 lg:py-12">
+          <div className="mx-auto max-w-[800px] rounded-2xl border border-border bg-white p-6 shadow-sm lg:p-8">
             <h2 className="font-display text-xl font-semibold text-dark-text">Session details</h2>
-            <dl className="mt-6 space-y-4 text-body-text">
+            <dl className="mt-4 space-y-4 text-body-text">
               <div className="flex justify-between border-b border-border pb-3">
                 <dt className="text-muted">Duration</dt>
                 <dd>30 min (Introductory) / 60 min (Full Session)</dd>
@@ -139,7 +138,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 pb-16 lg:px-6">
+        <section className="px-4 pb-12 pt-6 lg:px-6 lg:pb-14 lg:pt-8">
           <div className="mx-auto max-w-[800px] space-y-4">
             <Button
               href={`/book?psychologist=${psychologist.slug}`}
