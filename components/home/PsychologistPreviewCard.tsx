@@ -8,10 +8,10 @@ export default function PsychologistPreviewCard() {
   const psychologists = getAllPsychologists();
 
   return (
-    <section className="bg-hero-cream/30 px-4 py-12 lg:px-6 lg:py-20">
+    <section className="relative z-10 -mt-20 bg-hero-cream/30 px-4 pb-12 pt-52 md:mt-0 md:py-12 lg:px-6 lg:py-20">
       <div className="mx-auto max-w-[1400px]">
         <ScrollReveal>
-          <h2 className="relative z-20 mb-10 text-center font-display text-[2.25rem] font-semibold text-dark-text">
+          <h2 className="relative z-20 mb-8 text-center font-display text-[2.25rem] font-semibold text-dark-text md:mb-10">
             Meet our psychologists
           </h2>
         </ScrollReveal>

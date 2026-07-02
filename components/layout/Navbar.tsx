@@ -111,6 +111,7 @@ export default function Navbar() {
           <div className="max-[400px]:hidden">
             <NavbarClock className="h-8 min-w-[5.5rem] px-2 text-xs sm:h-10 sm:min-w-[6.75rem] sm:px-3 sm:text-sm" />
           </div>
+          <ThemeToggle className="h-8 w-8 sm:h-10 sm:w-10" />
           <button
             type="button"
             className="inline-flex h-8 w-8 shrink-0 items-center justify-center text-hero-nav sm:h-10 sm:w-10"
@@ -140,11 +141,7 @@ export default function Navbar() {
               transition={{ type: "tween", duration: 0.3 }}
               className="theme-surface fixed right-0 top-0 z-[70] flex h-full w-72 flex-col bg-surface p-6 shadow-lg backdrop-blur-none lg:hidden"
             >
-              <div className="mb-8 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <ThemeToggle />
-                  <span className="text-sm font-medium text-hero-nav">Day / Night</span>
-                </div>
+              <div className="mb-8 flex items-center justify-end">
                 <button
                   type="button"
                   className="text-hero-nav"
