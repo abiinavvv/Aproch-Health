@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -47,9 +47,42 @@ type HeroVideoProps = {
   variant?: "desktop" | "mobile";
 };
 
-function playVideo(video: HTMLVideoElement | null) {
-  if (!video) return;
-  video.play().catch(() => {});
+function attemptPlay(video: HTMLVideoElement) {
+  video.muted = true;
+  video.playsInline = true;
+  void video.play().catch(() => {});
+}
+
+function attachPlayback(
+  video: HTMLVideoElement | null,
+  onPlaying: () => void
+): () => void {
+  if (!video) return () => {};
+
+  const markPlaying = () => onPlaying();
+  const retry = () => {
+    if (document.visibilityState !== "visible") return;
+    attemptPlay(video);
+  };
+
+  attemptPlay(video);
+  if (!video.paused && !video.ended) {
+    markPlaying();
+  }
+
+  video.addEventListener("loadeddata", retry);
+  video.addEventListener("canplay", retry);
+  video.addEventListener("playing", markPlaying);
+  window.addEventListener("pageshow", retry);
+  document.addEventListener("visibilitychange", retry);
+
+  return () => {
+    video.removeEventListener("loadeddata", retry);
+    video.removeEventListener("canplay", retry);
+    video.removeEventListener("playing", markPlaying);
+    window.removeEventListener("pageshow", retry);
+    document.removeEventListener("visibilitychange", retry);
+  };
 }
 
 function videoLayerStyle(visible: boolean, reducedMotion: boolean): CSSProperties {
@@ -66,6 +99,7 @@ function videoLayerStyle(visible: boolean, reducedMotion: boolean): CSSPropertie
 export default function HeroVideo({ variant = "desktop" }: HeroVideoProps) {
   const dayVideoRef = useRef<HTMLVideoElement>(null);
   const nightVideoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const reducedMotion = useReducedMotion() ?? false;
   const { isNightMode } = useTheme();
   const isMobile = variant === "mobile";
@@ -74,18 +108,45 @@ export default function HeroVideo({ variant = "desktop" }: HeroVideoProps) {
     ? "hero-video-cover hero-video-cover-mobile"
     : "hero-video-cover";
 
+  const videoPreload = isMobile ? "auto" : "metadata";
+
   useEffect(() => {
-    if (reducedMotion) return;
-    playVideo(dayVideoRef.current);
-    playVideo(nightVideoRef.current);
-  }, [reducedMotion]);
+    if (reducedMotion) {
+      setIsPlaying(false);
+      return;
+    }
+
+    const day = dayVideoRef.current;
+    const night = nightVideoRef.current;
+
+    if (isMobile) {
+      const active = isNightMode ? night : day;
+      const inactive = isNightMode ? day : night;
+      inactive?.pause();
+      setIsPlaying(false);
+      return attachPlayback(active, () => setIsPlaying(true));
+    }
+
+    const cleanupDay = attachPlayback(day, () => {});
+    const cleanupNight = attachPlayback(night, () => {});
+    return () => {
+      cleanupDay();
+      cleanupNight();
+    };
+  }, [reducedMotion, isNightMode, isMobile]);
 
   const fadeClass = reducedMotion ? "" : "hero-theme-fade";
 
+  const rootClassName = [
+    "absolute inset-0 overflow-hidden",
+    isMobile ? "hero-video-root--mobile" : "",
+    isMobile && isPlaying ? "hero-video-root--playing" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div
-      className={`absolute inset-0 overflow-hidden${isMobile ? " hero-video-root--mobile" : ""}`}
-    >
+    <div className={rootClassName}>
       {/* Fallback images — crossfade tied to data-theme */}
       <div
         className={`hero-video-fallback hero-theme-day absolute inset-0 ${fadeClass}`}
@@ -124,7 +185,7 @@ export default function HeroVideo({ variant = "desktop" }: HeroVideoProps) {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload={videoPreload}
             />
           </div>
           <div
@@ -141,7 +202,7 @@ export default function HeroVideo({ variant = "desktop" }: HeroVideoProps) {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload={videoPreload}
             />
           </div>
         </>
