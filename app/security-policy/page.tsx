@@ -30,36 +30,36 @@ export default function SecurityPolicyPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 px-4 py-12 lg:px-6 lg:py-20">
+      <main className="flex-1 px-4 pt-24 pb-8 md:py-12 lg:px-6 lg:py-20">
         <article className="prose-policy mx-auto max-w-[800px]">
-          <h1 className="font-display text-3xl font-bold text-dark-text">
+          <h1 className="font-display text-2xl font-bold text-dark-text md:text-3xl">
             Aproch Information Security & Confidentiality Policy
           </h1>
           <p className="mt-2 text-sm text-muted">Last updated: June 2026</p>
 
-          <section className="mt-8 space-y-4 leading-[1.7]">
-            <h2 className="font-display text-xl font-semibold text-dark-text">Purpose</h2>
+          <section className="mt-6 space-y-4 leading-[1.7] md:mt-8">
+            <h2 className="font-display text-lg font-semibold text-dark-text md:text-xl">Purpose</h2>
             {informationSecurityPurpose.map((paragraph) => (
-              <p key={paragraph} className="text-body-text">
+              <p key={paragraph} className="text-sm text-body-text md:text-base">
                 {paragraph}
               </p>
             ))}
           </section>
 
           {informationSecuritySections.map((section) => (
-            <section key={section.id} className="mt-10 space-y-6">
-              <h2 className="font-display text-xl font-semibold text-dark-text">
+            <section key={section.id} className="mt-8 space-y-5 md:mt-10 md:space-y-6">
+              <h2 className="font-display text-lg font-semibold text-dark-text md:text-xl">
                 {section.title}
               </h2>
 
               {section.subsections.map((subsection) => (
                 <div key={subsection.number} className="space-y-3 leading-[1.7]">
-                  <h3 className="font-display text-lg font-semibold text-dark-text">
+                  <h3 className="font-display text-base font-semibold text-dark-text md:text-lg">
                     {subsection.number}. {subsection.title}
                   </h3>
                   <PolicyBlocks blocks={subsection.blocks} />
                   {subsection.number === 27 && (
-                    <ul className="list-none space-y-2 pl-0 text-body-text">
+                    <ul className="list-none space-y-2 pl-0 text-sm text-body-text md:text-base">
                       <li>
                         <span className="font-medium text-dark-text">WhatsApp: </span>
                         <a
@@ -94,8 +94,8 @@ export default function SecurityPolicyPage() {
             </section>
           ))}
 
-          <section className="mt-10 space-y-4 leading-[1.7] text-body-text">
-            <h2 className="font-display text-xl font-semibold text-dark-text">
+          <section className="mt-8 space-y-4 leading-[1.7] text-sm text-body-text md:mt-10 md:text-base">
+            <h2 className="font-display text-lg font-semibold text-dark-text md:text-xl">
               Related policies
             </h2>
             <p>

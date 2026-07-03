@@ -80,25 +80,25 @@ export default function Step3UserDetails() {
 
   return (
     <div>
-      <h2 className="font-display text-2xl font-semibold text-dark-text">
+      <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
         Tell us a little about yourself
       </h2>
-      <p className="mt-2 text-body-text">
+      <p className="mt-2 text-sm text-body-text md:text-base">
         This stays between you and your psychologist.
       </p>
 
-      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="mt-5 grid grid-cols-1 gap-5 md:mt-8 md:gap-8 lg:grid-cols-3">
         <div>
-          <h3 className="mb-4 font-medium text-dark-text">
+          <h3 className="mb-3 text-sm font-medium text-dark-text md:mb-4 md:text-base">
             How would you like your session?
           </h3>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2 md:gap-3">
             {modes.map((m) => (
               <Card
                 key={m.id}
                 selected={sessionMode === m.id}
                 onClick={() => setSessionMode(m.id)}
-                className="p-4"
+                className="p-3 text-sm md:p-4 md:text-base"
               >
                 <span className="mr-2">{m.emoji}</span>
                 <span className="font-medium">{m.label}</span>
@@ -108,8 +108,8 @@ export default function Step3UserDetails() {
         </div>
 
         <div>
-          <h3 className="mb-4 font-medium text-dark-text">About You</h3>
-          <div className="space-y-4">
+          <h3 className="mb-3 text-sm font-medium text-dark-text md:mb-4 md:text-base">About You</h3>
+          <div className="space-y-3 md:space-y-4">
             {[
               { id: "name", label: "Full Name", type: "text", value: name },
               { id: "email", label: "Email Address", type: "email", value: email },
@@ -122,13 +122,13 @@ export default function Step3UserDetails() {
               <div key={field.id}>
                 <label
                   htmlFor={`booking-${field.id}`}
-                  className="mb-1 block text-sm text-body-text"
+                  className="mb-1 block text-xs text-body-text md:text-sm"
                 >
                   {field.label}
                 </label>
                 <div className="flex">
                   {field.prefix && (
-                    <span className="flex items-center rounded-l-xl border border-r-0 border-border bg-hero-start px-3 text-sm text-muted">
+                    <span className="flex items-center rounded-l-xl border border-r-0 border-border bg-hero-start px-2.5 text-xs text-muted md:px-3 md:text-sm">
                       {field.prefix}
                     </span>
                   )}
@@ -151,7 +151,7 @@ export default function Step3UserDetails() {
                           "aria-describedby": `booking-${field.id}-error`,
                         }
                       : {})}
-                    className={`w-full rounded-xl border border-border px-4 py-3 text-dark-text outline-none focus:border-primary ${field.prefix ? "rounded-l-none" : ""}`}
+                    className={`w-full rounded-xl border border-border px-3 py-2.5 text-sm text-dark-text outline-none focus:border-primary md:px-4 md:py-3 md:text-base ${field.prefix ? "rounded-l-none" : ""}`}
                   />
                 </div>
                 {fieldError && (
@@ -171,11 +171,11 @@ export default function Step3UserDetails() {
         <div>
           <label
             htmlFor="booking-intakeMessage"
-            className="mb-1 block font-medium text-dark-text"
+            className="mb-1 block text-sm font-medium text-dark-text md:text-base"
           >
             Send a confidential message to your psychologist before the session
           </label>
-          <p className="mb-4 text-xs italic text-muted">
+          <p className="mb-3 text-[11px] italic leading-relaxed text-muted md:mb-4 md:text-xs">
             Your psychologist will read this before meeting you, so you don&apos;t
             have to start from scratch.
           </p>
@@ -186,8 +186,8 @@ export default function Step3UserDetails() {
             maxLength={200}
             onChange={(e) => setUserDetails({ intakeMessage: e.target.value })}
             placeholder="You might share what's been on your mind, or what you'd like to focus on. Completely optional."
-            rows={5}
-            className="w-full rounded-xl border border-border px-4 py-3 text-dark-text outline-none focus:border-primary resize-none"
+            rows={4}
+            className="w-full resize-none rounded-xl border border-border px-3 py-2.5 text-sm text-dark-text outline-none focus:border-primary md:px-4 md:py-3 md:text-base"
           />
           <p className="mt-1 text-right text-xs text-muted">
             {intakeMessage.length}/200
@@ -195,8 +195,8 @@ export default function Step3UserDetails() {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-end">
-        <Button variant="yellow" onClick={handleNext} disabled={!isValid}>
+      <div className="mt-5 flex justify-end md:mt-8">
+        <Button variant="yellow" onClick={handleNext} disabled={!isValid} className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
           NEXT →
         </Button>
       </div>

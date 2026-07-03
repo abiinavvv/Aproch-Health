@@ -25,7 +25,7 @@ function ConfirmationInner() {
       <MinimalHeader />
       <div className="min-h-screen bg-hero-cream/25">
         <StepIndicator />
-        <div className="mx-auto max-w-[800px] px-4 py-8 lg:px-6 lg:py-12">
+        <div className="mx-auto max-w-[800px] px-4 py-6 md:py-8 lg:px-6 lg:py-12">
           <Step5Confirmation />
         </div>
       </div>

@@ -6,7 +6,7 @@ export default function PolicyBlocks({ blocks }: { blocks: PolicyBlock[] }) {
       {blocks.map((block, index) => {
         if (block.type === "paragraph") {
           return (
-            <p key={index} className="text-body-text">
+            <p key={index} className="text-sm text-body-text md:text-base">
               {block.text}
             </p>
           );
@@ -14,7 +14,7 @@ export default function PolicyBlocks({ blocks }: { blocks: PolicyBlock[] }) {
 
         if (block.type === "subheading") {
           return (
-            <h4 key={index} className="font-display text-base font-semibold text-dark-text">
+            <h4 key={index} className="font-display text-sm font-semibold text-dark-text md:text-base">
               {block.text}
             </h4>
           );
@@ -23,9 +23,9 @@ export default function PolicyBlocks({ blocks }: { blocks: PolicyBlock[] }) {
         return (
           <div key={index}>
             {block.label && (
-              <p className="font-medium text-dark-text">{block.label}</p>
+              <p className="text-sm font-medium text-dark-text md:text-base">{block.label}</p>
             )}
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-body-text">
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-body-text md:text-base">
               {block.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}

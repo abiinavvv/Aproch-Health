@@ -40,12 +40,12 @@ export default function HowItWorksPage() {
     <>
       <Navbar />
       <main className="flex-1">
-        <section className="hero-gradient flex min-h-[60vh] items-center px-4 py-12 lg:px-6">
+        <section className="hero-gradient flex min-h-0 items-center px-4 pt-24 pb-8 md:min-h-[50vh] md:py-12 lg:px-6 lg:pb-16">
           <div className="mx-auto max-w-[800px] text-center">
-            <h1 className="font-display text-[clamp(2.25rem,5vw,3.5rem)] font-bold leading-tight text-dark-text">
+            <h1 className="font-display text-2xl font-bold leading-snug text-dark-text md:text-[clamp(2.25rem,5vw,3.5rem)] md:leading-tight">
               Here&apos;s exactly how it works
             </h1>
-            <p className="mt-6 text-lg leading-[1.7] text-body-text">
+            <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-6 md:text-lg md:leading-[1.7]">
               Simple, private, and designed around your schedule.
             </p>
           </div>
@@ -54,19 +54,21 @@ export default function HowItWorksPage() {
         {steps.map((step, i) => (
           <section
             key={step.title}
-            className={`px-4 py-12 lg:px-6 lg:py-20 ${i % 2 === 1 ? "bg-hero-start" : ""}`}
+            className={`px-4 py-8 md:py-12 lg:px-6 lg:py-20 ${i % 2 === 1 ? "bg-hero-start" : ""}`}
           >
-            <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 md:flex-row md:gap-16">
+            <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-5 md:flex-row md:gap-16">
               <div className={`flex-1 ${i % 2 === 1 ? "md:order-2" : ""}`}>
-                <step.icon size={40} className="text-primary" />
-                <h2 className="mt-4 font-display text-2xl font-semibold text-dark-text">
+                <step.icon size={28} className="text-primary md:h-10 md:w-10" strokeWidth={2} />
+                <h2 className="mt-3 font-display text-lg font-semibold text-dark-text md:mt-4 md:text-2xl">
                   {step.title}
                 </h2>
-                <p className="mt-4 leading-[1.7] text-body-text">{step.body}</p>
+                <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-4 md:text-base md:leading-[1.7]">
+                  {step.body}
+                </p>
               </div>
-              <div className={`flex-1 ${i % 2 === 1 ? "md:order-1" : ""}`}>
-                <div className="rounded-2xl bg-light-green/50 p-12 text-center">
-                  <span className="font-display text-6xl font-bold text-primary opacity-30">
+              <div className={`w-full max-w-[200px] flex-1 md:max-w-none ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                <div className="rounded-2xl bg-light-green/50 p-6 text-center md:p-12">
+                  <span className="font-display text-4xl font-bold text-primary opacity-30 md:text-6xl">
                     {i + 1}
                   </span>
                 </div>
@@ -75,15 +77,15 @@ export default function HowItWorksPage() {
           </section>
         ))}
 
-        <section className="px-4 py-12 lg:px-6 lg:py-20">
+        <section className="px-4 py-8 md:py-12 lg:px-6 lg:py-20">
           <div className="mx-auto max-w-[800px]">
-            <h2 className="font-display text-2xl font-semibold text-dark-text">
+            <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
               What happens after you book
             </h2>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-4 space-y-3 md:mt-6 md:space-y-4">
               {afterBooking.map((item) => (
-                <li key={item} className="flex gap-3 text-body-text">
-                  <span className="text-primary">✓</span>
+                <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-body-text md:gap-3 md:text-base">
+                  <span className="shrink-0 text-primary">✓</span>
                   {item}
                 </li>
               ))}
@@ -91,15 +93,15 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className="bg-hero-start px-4 py-12 lg:px-6 lg:py-20">
+        <section className="bg-hero-start px-4 py-8 md:py-12 lg:px-6 lg:py-20">
           <div className="mx-auto max-w-[800px]">
-            <h2 className="font-display text-2xl font-semibold text-dark-text">
+            <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
               What to expect in your first session
             </h2>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-4 space-y-3 md:mt-6 md:space-y-4">
               {firstSession.map((item) => (
-                <li key={item} className="flex gap-3 text-body-text">
-                  <span className="text-primary">✓</span>
+                <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-body-text md:gap-3 md:text-base">
+                  <span className="shrink-0 text-primary">✓</span>
                   {item}
                 </li>
               ))}
@@ -107,8 +109,8 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className="px-4 py-12 text-center lg:px-6 lg:py-20">
-          <Button href="/book" variant="primary">
+        <section className="px-4 py-8 text-center md:py-12 lg:px-6 lg:py-20">
+          <Button href="/book" variant="primary" className="!px-5 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
             Book a Session
           </Button>
         </section>

@@ -82,27 +82,27 @@ export default function Step2DateTime() {
   return (
     <div>
       {/* ⚠️ Slots to be managed manually by Anirudh — update this array weekly */}
-      <h2 className="font-display text-2xl font-semibold text-dark-text">
+      <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
         When would you like your session?
       </h2>
 
-      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <div className="rounded-2xl border border-border bg-white p-6">
-          <div className="mb-4 flex items-center justify-between">
+      <div className="mt-5 grid grid-cols-1 gap-5 md:mt-8 md:gap-8 lg:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-white p-4 md:p-6">
+          <div className="mb-3 flex items-center justify-between md:mb-4">
             <button type="button" onClick={prevMonth} aria-label="Previous month">
-              <ChevronLeft size={20} className="text-body-text" />
+              <ChevronLeft size={18} className="text-body-text md:h-5 md:w-5" />
             </button>
-            <span className="font-medium text-dark-text">{monthLabel}</span>
+            <span className="text-sm font-medium text-dark-text md:text-base">{monthLabel}</span>
             <button type="button" onClick={nextMonth} aria-label="Next month">
-              <ChevronRight size={20} className="text-body-text" />
+              <ChevronRight size={18} className="text-body-text md:h-5 md:w-5" />
             </button>
           </div>
-          <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted">
+          <div className="grid grid-cols-7 gap-0.5 text-center text-[10px] text-muted md:gap-1 md:text-xs">
             {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
-              <div key={d} className="py-2 font-medium">{d}</div>
+              <div key={d} className="py-1.5 font-medium md:py-2">{d}</div>
             ))}
           </div>
-          <div className="grid grid-cols-7 gap-1">
+          <div className="grid grid-cols-7 gap-0.5 md:gap-1">
             {calendarDays.map((day, i) => {
               if (day === null) return <div key={`empty-${i}`} />;
               const available = isDateAvailable(day);
@@ -114,7 +114,7 @@ export default function Step2DateTime() {
                   type="button"
                   disabled={!available}
                   onClick={() => selectDate(day)}
-                  className={`aspect-square rounded-full text-sm transition-colors ${
+                  className={`aspect-square rounded-full text-xs transition-colors md:text-sm ${
                     selected
                       ? "bg-primary text-white"
                       : available
@@ -132,10 +132,10 @@ export default function Step2DateTime() {
         <div>
           {date ? (
             <>
-              <h3 className="font-medium text-dark-text">
+              <h3 className="text-sm font-medium text-dark-text md:text-base">
                 Available times on {selectedDateLabel}
               </h3>
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-3 grid grid-cols-2 gap-2 md:mt-4 md:gap-3">
                 {availableTimeSlots.map((slot) => {
                   const unavailable = unavailableSlots.includes(slot);
                   const selected = timeSlot === slot;
@@ -145,7 +145,7 @@ export default function Step2DateTime() {
                       type="button"
                       disabled={unavailable}
                       onClick={() => selectSlot(slot)}
-                      className={`rounded-full px-4 py-2.5 text-sm font-medium transition-colors ${
+                      className={`rounded-full px-3 py-2 text-xs font-medium transition-colors md:px-4 md:py-2.5 md:text-sm ${
                         selected
                           ? "bg-primary text-white"
                           : unavailable
@@ -159,20 +159,20 @@ export default function Step2DateTime() {
                 })}
               </div>
               {session && timeSlot && (
-                <p className="mt-4 text-sm text-muted">
+                <p className="mt-3 text-xs text-muted md:mt-4 md:text-sm">
                   Each session is {session.duration} min. Your session ends at{" "}
                   {formatSessionEndTime(timeSlot, session.duration)}.
                 </p>
               )}
             </>
           ) : (
-            <p className="text-body-text">Select a date to see available times.</p>
+            <p className="text-sm text-body-text">Select a date to see available times.</p>
           )}
         </div>
       </div>
 
-      <div className="mt-8 flex justify-end">
-        <Button variant="yellow" onClick={nextStep} disabled={!date || !timeSlot}>
+      <div className="mt-5 flex justify-end md:mt-8">
+        <Button variant="yellow" onClick={nextStep} disabled={!date || !timeSlot} className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
           NEXT →
         </Button>
       </div>

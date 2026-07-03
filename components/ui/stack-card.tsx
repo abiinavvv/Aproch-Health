@@ -48,14 +48,16 @@ export default function StackCard({
     setCards((prev) => [...prev.slice(1), prev[0]]);
   }, []);
 
-  const stackTopSpace = `${(initialCards.length - 1) * 2.25}rem`;
+  const stackGap =
+    "var(--stack-gap, 2.25rem)";
+  const stackTopSpace = `calc((${initialCards.length} - 1) * ${stackGap})`;
 
   return (
     <div
       className={cn("flex flex-col items-center", className)}
       style={{ paddingTop: stackTopSpace }}
     >
-      <div className="relative aspect-[4/3] w-full max-w-md overflow-visible sm:max-w-lg">
+      <div className="relative aspect-[16/10] w-full max-w-[280px] overflow-visible sm:max-w-xs md:aspect-[4/3] md:max-w-md lg:max-w-lg">
         <ul className="relative m-0 h-full w-full p-0">
           {cards.map(({ id, src, alt, title, description }, i) => {
             const isFront = i === 0;
@@ -112,14 +114,14 @@ export default function StackCard({
                       className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1c1008]/85 via-[#1c1008]/25 to-transparent"
                       aria-hidden
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-left text-white">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white md:p-6">
                       {title && (
-                        <p className="font-display text-xl font-semibold text-white">
+                        <p className="font-display text-base font-semibold text-white md:text-xl">
                           {title}
                         </p>
                       )}
                       {description && (
-                        <p className="mt-2 text-sm leading-relaxed text-white/90">
+                        <p className="mt-1 text-xs leading-relaxed text-white/90 md:mt-2 md:text-sm">
                           {description}
                         </p>
                       )}
@@ -133,7 +135,9 @@ export default function StackCard({
       </div>
 
       {hint && (
-        <p className="mt-10 max-w-sm text-center text-sm text-muted">{hint}</p>
+        <p className="mt-6 max-w-xs text-center text-xs leading-relaxed text-muted md:mt-10 md:max-w-sm md:text-sm">
+          {hint}
+        </p>
       )}
     </div>
   );

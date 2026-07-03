@@ -98,10 +98,10 @@ export default function MissionStats() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-10">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={0.1 * i}>
-              <p className="font-display text-4xl font-bold text-primary md:text-5xl">
+              <p className="font-display text-2xl font-bold text-primary sm:text-3xl md:text-5xl">
                 <CountUp
                   target={stat.value}
                   suffix={stat.suffix}
@@ -109,7 +109,9 @@ export default function MissionStats() {
                   active={isInView}
                 />
               </p>
-              <p className="mt-2 text-sm text-body-text">{stat.label}</p>
+              <p className="mt-1 text-[11px] leading-tight text-body-text sm:text-xs md:mt-2 md:text-sm md:leading-normal">
+                {stat.label}
+              </p>
             </ScrollReveal>
           ))}
         </div>

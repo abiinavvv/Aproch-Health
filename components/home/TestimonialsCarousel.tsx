@@ -48,9 +48,9 @@ const trustCards: StackCardItem[] = [
 
 export default function TestimonialsCarousel() {
   return (
-    <section className="bg-hero-start px-4 py-12 lg:px-6 lg:py-20">
+    <section className="bg-hero-start px-4 py-8 md:py-12 lg:px-6 lg:py-20">
       <div className="mx-auto max-w-[1200px]">
-        <h2 className="relative z-20 mb-6 text-center font-display text-[2.25rem] font-semibold text-dark-text">
+        <h2 className="relative z-20 mb-4 text-center font-display text-2xl font-semibold text-dark-text md:mb-6 md:text-[2.25rem]">
           Why students choose us
         </h2>
 
@@ -58,6 +58,7 @@ export default function TestimonialsCarousel() {
           <StackCard
             cards={trustCards}
             hint="Drag the top card upward to see the next reason"
+            className="max-md:[--stack-gap:1.25rem] md:[--stack-gap:2.25rem]"
           />
         </ScrollReveal>
       </div>

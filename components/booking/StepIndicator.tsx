@@ -16,12 +16,12 @@ export default function StepIndicator() {
   const progress = ((currentStep - 1) / 4) * 100;
 
   return (
-    <div className="border-b border-border bg-white px-4 py-6">
+    <div className="border-b border-border bg-white px-4 py-4 md:py-6">
       <div className="mx-auto max-w-[800px]">
-        <p className="mb-3 text-center text-sm font-medium text-body-text lg:hidden">
+        <p className="mb-2 text-center text-xs font-medium text-body-text md:mb-3 md:text-sm lg:hidden">
           Step {currentStep} of 5
         </p>
-        <div className="mb-4 h-1 rounded-full bg-border lg:hidden">
+        <div className="mb-3 h-1 rounded-full bg-border md:mb-4 lg:hidden">
           <div
             className="h-full rounded-full bg-primary transition-all duration-300"
             style={{ width: `${progress}%` }}

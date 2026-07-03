@@ -44,7 +44,7 @@ export default function Step1SessionType() {
 
   return (
     <div>
-      <h2 className="font-display text-2xl font-semibold text-dark-text">
+      <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
         What kind of session are you looking for?
       </h2>
 
@@ -52,39 +52,39 @@ export default function Step1SessionType() {
         <button
           type="button"
           onClick={() => setPhase("psychologist")}
-          className="mt-2 text-sm text-primary hover:underline"
+          className="mt-2 text-xs text-primary hover:underline md:text-sm"
         >
           ← Change psychologist
         </button>
       )}
 
-      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="mt-5 grid grid-cols-1 gap-4 md:mt-8 md:grid-cols-2 md:gap-6">
         {sessionTypes.map((type) => (
           <Card
             key={type.id}
             selected={sessionType === type.id}
             onClick={() => select(type.id)}
-            className="p-6"
+            className="p-4 md:p-6"
           >
             <Badge variant="green">{type.duration} min</Badge>
-            <h3 className="mt-4 text-lg font-semibold text-dark-text">
+            <h3 className="mt-3 text-base font-semibold text-dark-text md:mt-4 md:text-lg">
               {type.label}
             </h3>
-            <p className="mt-1 text-2xl font-bold text-primary">
+            <p className="mt-1 text-xl font-bold text-primary md:text-2xl">
               ₹{sessionFee.toLocaleString("en-IN")}
             </p>
-            <p className="mt-2 text-sm font-medium text-body-text">
+            <p className="mt-2 text-xs font-medium text-body-text md:text-sm">
               {type.tagline}
             </p>
-            <p className="mt-2 text-sm leading-[1.7] text-body-text">
+            <p className="mt-2 text-xs leading-relaxed text-body-text md:text-sm md:leading-[1.7]">
               {type.description}
             </p>
           </Card>
         ))}
       </div>
 
-      <div className="mt-8 flex justify-end">
-        <Button variant="yellow" onClick={nextStep} disabled={!sessionType}>
+      <div className="mt-5 flex justify-end md:mt-8">
+        <Button variant="yellow" onClick={nextStep} disabled={!sessionType} className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
           NEXT →
         </Button>
       </div>

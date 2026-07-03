@@ -20,9 +20,9 @@ export default function Error({
   return (
     <>
       <Navbar />
-      <main className="flex flex-1 flex-col items-center justify-center px-4 py-20 text-center">
-        <h1 className="font-display text-4xl font-bold text-dark-text">Something went wrong</h1>
-        <p className="mt-4 max-w-md text-body-text">
+      <main className="flex flex-1 flex-col items-center justify-center px-4 pt-24 pb-12 text-center md:py-20">
+        <h1 className="font-display text-2xl font-bold text-dark-text md:text-4xl">Something went wrong</h1>
+        <p className="mt-4 max-w-md text-sm text-body-text md:text-base">
           We hit an unexpected error. Please try again, or return to the home page.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

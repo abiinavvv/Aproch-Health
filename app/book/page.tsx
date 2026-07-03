@@ -33,10 +33,10 @@ function BookingContent() {
       <MinimalHeader />
       <div className="min-h-screen bg-hero-cream/25">
         <StepIndicator />
-        <div className="mx-auto max-w-[800px] px-4 py-8 lg:px-6 lg:py-12">
+        <div className="mx-auto max-w-[800px] px-4 py-6 md:py-8 lg:px-6 lg:py-12">
           {currentStep > 1 && currentStep < 5 && (
-            <div className="mb-6">
-              <Button variant="outline" onClick={prevStep} className="!px-4 !py-2">
+            <div className="mb-4 md:mb-6">
+              <Button variant="outline" onClick={prevStep} className="!px-3 !py-1.5 text-xs md:!px-4 md:!py-2 md:text-sm">
                 ← Back
               </Button>
             </div>

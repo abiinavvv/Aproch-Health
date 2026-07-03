@@ -60,8 +60,8 @@ export default function GlassmorphismProfileCard({
       className={cn("relative mx-auto w-full max-w-md", className)}
     >
       <Card className="glass-profile-card relative mx-auto w-full overflow-visible rounded-[20px] shadow-[0_20px_50px_rgba(28,16,8,0.12)]">
-        <CardContent className="p-5 sm:p-6">
-          <div className="mb-4 flex items-center justify-between text-xs text-muted sm:text-sm">
+        <CardContent className="p-4 md:p-5 lg:p-6">
+          <div className="mb-3 flex items-center justify-between text-xs text-muted md:mb-4 md:text-sm">
             <div className="flex items-center gap-2">
               <span
                 className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-success"
@@ -75,8 +75,8 @@ export default function GlassmorphismProfileCard({
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-5">
-            <div className="glass-profile-avatar relative h-40 w-40 shrink-0 overflow-hidden rounded-[20px] ring-2 ring-hero-accent/25 sm:h-44 sm:w-44">
+          <div className="flex flex-col items-center justify-center gap-3 md:gap-5">
+            <div className="glass-profile-avatar relative h-32 w-32 shrink-0 overflow-hidden rounded-[20px] ring-2 ring-hero-accent/25 md:h-40 md:w-40 lg:h-44 lg:w-44">
               <PsychologistPhoto
                 photo={psychologist.photo}
                 photoWebp={psychologist.photoWebp}
@@ -86,10 +86,10 @@ export default function GlassmorphismProfileCard({
               />
             </div>
             <div className="min-w-0 text-center">
-              <p className="truncate font-display text-lg font-semibold tracking-tight text-dark-text sm:text-xl">
+              <p className="truncate font-display text-base font-semibold tracking-tight text-dark-text md:text-lg lg:text-xl">
                 {psychologist.name}
               </p>
-              <p className="mt-1 text-sm text-body-text">{subtitle}</p>
+              <p className="mt-1 text-xs text-body-text md:text-sm">{subtitle}</p>
               <p className="mt-1 text-xs text-muted">
                 {formatTherapyHours(psychologist.sessionHours)}
               </p>
@@ -102,29 +102,29 @@ export default function GlassmorphismProfileCard({
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-5 md:mt-6">
             <Link
               href={resolvedBookHref}
               className={cn(
-                "inline-flex h-12 w-full items-center justify-center gap-3 rounded-2xl border border-border px-4",
-                "bg-white/60 text-sm font-semibold text-dark-text transition-colors",
+                "inline-flex h-10 w-full items-center justify-center gap-2 rounded-2xl border border-border px-4 md:h-12 md:gap-3",
+                "bg-white/60 text-xs font-semibold text-dark-text transition-colors md:text-sm",
                 "hover:border-primary hover:bg-white/80 hover:text-primary"
               )}
             >
-              <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+              <Calendar className="h-3.5 w-3.5 shrink-0 md:h-4 md:w-4" aria-hidden />
               Book a Session
             </Link>
           </div>
 
-          <div className="mt-3">
+          <div className="mt-2 md:mt-3">
             <Link
               href={resolvedProfileHref}
               className={cn(
-                "inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl",
-                "text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
+                "inline-flex h-9 w-full items-center justify-center gap-2 rounded-2xl md:h-11",
+                "text-xs font-semibold text-primary transition-colors hover:text-primary-dark md:text-sm"
               )}
             >
-              <UserRound className="h-4 w-4" aria-hidden />
+              <UserRound className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
               View full profile
             </Link>
           </div>

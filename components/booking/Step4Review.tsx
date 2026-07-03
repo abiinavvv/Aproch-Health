@@ -82,14 +82,14 @@ export default function Step4Review() {
 
   return (
     <div className="mx-auto max-w-[520px]">
-      <h2 className="mb-6 font-display text-2xl font-bold text-dark-text">
+      <h2 className="mb-4 font-display text-xl font-bold text-dark-text md:mb-6 md:text-2xl">
         Review your booking
       </h2>
 
       <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-        <div className="flex items-start justify-between border-b border-border p-5">
-          <div className="flex gap-4">
-            <div className="psychologist-photo-avatar relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
+        <div className="flex items-start justify-between border-b border-border p-4 md:p-5">
+          <div className="flex gap-3 md:gap-4">
+            <div className="psychologist-photo-avatar relative h-12 w-12 shrink-0 overflow-hidden rounded-xl md:h-14 md:w-14">
               <PsychologistPhoto
                 photo={psychologist.photo}
                 photoWebp={psychologist.photoWebp}
@@ -99,67 +99,69 @@ export default function Step4Review() {
               />
             </div>
             <div>
-              <p className="font-semibold text-dark-text">{psychologist.name}</p>
-              <p className="text-sm text-muted">{psychologist.designation}</p>
+              <p className="text-sm font-semibold text-dark-text md:text-base">{psychologist.name}</p>
+              <p className="text-xs text-muted md:text-sm">{psychologist.designation}</p>
             </div>
           </div>
           <button
             type="button"
             onClick={() => goToStep(1)}
-            className="flex items-center gap-1 text-sm text-primary"
+            className="flex items-center gap-1 text-xs text-primary md:text-sm"
           >
             <Pencil size={14} /> Edit
           </button>
         </div>
 
-        <div className="border-b border-border p-5 text-sm text-body-text">
+        <div className="border-b border-border p-4 text-xs text-body-text md:p-5 md:text-sm">
           {session.label} · {session.duration} min · {modeLabel}
         </div>
 
-        <div className="flex items-start justify-between border-b border-border p-5">
-          <div>
-            <p className="text-xs text-muted">Date</p>
-            <p className="font-medium text-dark-text">{formatDisplayDate(date)}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-muted">Time</p>
-            <p className="font-medium text-dark-text">
-              {timeSlot} – {endTime}
-            </p>
+        <div className="flex flex-col gap-3 border-b border-border p-4 max-md:gap-4 md:flex-row md:items-start md:justify-between md:gap-5 md:p-5">
+          <div className="flex gap-6 max-md:w-full md:gap-8">
+            <div>
+              <p className="text-xs font-medium text-muted md:text-sm md:font-normal">Date</p>
+              <p className="mt-0.5 text-sm font-medium text-dark-text md:mt-1">{formatDisplayDate(date)}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium text-muted md:text-sm md:font-normal">Time</p>
+              <p className="mt-0.5 text-sm font-medium text-dark-text md:mt-1">
+                {timeSlot} – {endTime}
+              </p>
+            </div>
           </div>
           <button
             type="button"
             onClick={() => goToStep(2)}
-            className="flex items-center gap-1 text-sm text-primary"
+            className="flex shrink-0 items-center gap-1 self-start text-xs text-primary md:text-sm"
           >
             <Pencil size={14} /> Edit
           </button>
         </div>
 
-        <div className="border-b border-border p-5 text-sm">
+        <div className="border-b border-border p-4 text-xs md:p-5 md:text-sm">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted">
             Your details
           </p>
-          <p className="mt-2 text-dark-text">{name}</p>
-          <p className="text-body-text">+91 {phone} · {email}</p>
-          <p className="text-body-text">Age {age}</p>
+          <p className="mt-2 text-sm text-dark-text md:mt-3">{name}</p>
+          <p className="mt-0.5 text-xs text-body-text md:mt-1 md:text-sm">+91 {phone} · {email}</p>
+          <p className="mt-0.5 text-xs text-body-text md:mt-1 md:text-sm">Age {age}</p>
         </div>
 
-        <div className="p-5">
+        <div className="p-4 md:p-5">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted">
             Session fee
           </p>
-          <div className="mt-3 flex justify-between font-semibold text-dark-text">
+          <div className="mt-2 flex flex-col gap-0.5 text-sm font-semibold text-dark-text max-md:gap-1 md:mt-3 md:flex-row md:justify-between md:text-base">
             <span>{session.label}</span>
             <span>{formatSessionFee(sessionFee)}</span>
           </div>
-          <p className="mt-2 text-xs text-muted">
+          <p className="mt-2 text-[11px] leading-relaxed text-muted md:mt-3 md:text-xs">
             Payment details will be shared when we confirm your slot on WhatsApp.
           </p>
         </div>
       </div>
 
-      <label className="mt-6 flex cursor-pointer items-start gap-3 text-sm text-body-text">
+      <label className="mt-4 flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-body-text md:mt-6 md:gap-3 md:text-sm">
         <input
           type="checkbox"
           checked={agreed}
@@ -169,12 +171,13 @@ export default function Step4Review() {
         By proceeding, I agree to the Terms and Conditions and Consent to Therapy
       </label>
 
-      <div className="mt-6">
+      <div className="mt-4 md:mt-6">
         <Button
           variant="yellow"
           fullWidth
           onClick={handleWhatsAppConfirm}
           disabled={!agreed}
+          className="!px-4 !py-2.5 text-xs md:!py-3 md:text-sm"
         >
           Confirm on WhatsApp →
         </Button>

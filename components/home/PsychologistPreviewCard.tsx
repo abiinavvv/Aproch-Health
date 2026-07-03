@@ -11,12 +11,12 @@ export default function PsychologistPreviewCard() {
     <section className="relative z-10 -mt-20 bg-hero-cream/30 px-4 pb-12 pt-52 md:mt-0 md:py-12 lg:px-6 lg:py-20">
       <div className="mx-auto max-w-[1400px]">
         <ScrollReveal>
-          <h2 className="relative z-20 mb-8 text-center font-display text-[2.25rem] font-semibold text-dark-text md:mb-10">
+          <h2 className="relative z-20 mb-8 text-center font-display text-2xl font-semibold text-dark-text md:mb-10 md:text-[2.25rem]">
             Meet our psychologists
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-4">
           {psychologists.map((p, i) => (
             <ScrollReveal
               key={p.slug}
