@@ -47,7 +47,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
       <main className="flex-1">
         <section className="hero-gradient px-4 pt-24 pb-4 lg:px-6 lg:pt-24 lg:pb-6">
           <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 md:grid-cols-[minmax(200px,280px)_1fr] md:items-start md:gap-x-8">
-            <div className="psychologist-photo-profile-frame relative mx-auto h-[min(300px,45vw)] w-full max-w-[280px] overflow-hidden rounded-2xl ring-2 ring-hero-accent/25 md:col-start-1 md:row-start-1 md:mx-0 md:self-start">
+            <div className="psychologist-photo-profile-frame relative mx-auto aspect-[14/15] w-full max-w-[280px] overflow-hidden rounded-2xl ring-2 ring-hero-accent/25 md:col-start-1 md:row-start-1 md:mx-0 md:self-start">
               <PsychologistPhoto
                 photo={psychologist.photo}
                 photoWebp={psychologist.photoWebp}
