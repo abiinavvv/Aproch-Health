@@ -512,6 +512,11 @@ h3 {
   filter: brightness(1.06) contrast(1.04);
 }
 
+.psychologist-photo-profile {
+  object-fit: cover;
+  object-position: center 8%;
+}
+
 [data-theme="night"] .glass-profile-card {
   background: color-mix(in srgb, var(--surface-elevated) 55%, transparent);
   border-color: color-mix(in srgb, var(--border) 80%, transparent);

@@ -45,43 +45,46 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
     <>
       <Navbar />
       <main className="flex-1">
-        <section className="hero-gradient px-4 pt-24 pb-6 lg:px-6 lg:pt-28 lg:pb-8">
-          <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 md:flex-row md:gap-10 lg:gap-12">
-            <PsychologistPhoto
-              photo={psychologist.photo}
-              photoWebp={psychologist.photoWebp}
-              alt={psychologist.name}
-              width={280}
-              height={360}
-              priority
-              className="psychologist-photo h-[min(360px,50vw)] w-auto max-w-[280px]"
-            />
-            <div>
-              <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-dark-text">
-                {psychologist.name}
-              </h1>
-              <p className="mt-2 text-lg text-body-text">{psychologist.designation}</p>
-              <p className="mt-1 text-body-text">{psychologist.credentials}</p>
-              <p className="mt-2 text-sm text-muted">
-                {formatTherapyHours(psychologist.sessionHours)}
-              </p>
-              {psychologist.rciNumber && (
-                <div className="mt-4 flex items-center gap-2">
-                  <Badge variant="verified">✓ Verified by RCI</Badge>
-                  <span className="text-sm text-muted">{psychologist.rciNumber}</span>
-                </div>
-              )}
+        <section className="hero-gradient px-4 pt-24 pb-4 lg:px-6 lg:pt-24 lg:pb-6">
+          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 md:grid-cols-[minmax(200px,280px)_1fr] md:items-start md:gap-x-8">
+            <div className="psychologist-photo-profile-frame relative mx-auto h-[min(300px,45vw)] w-full max-w-[280px] overflow-hidden rounded-2xl ring-2 ring-hero-accent/25 md:col-start-1 md:row-start-1 md:mx-0 md:self-start">
+              <PsychologistPhoto
+                photo={psychologist.photo}
+                photoWebp={psychologist.photoWebp}
+                alt={psychologist.name}
+                priority
+                fill
+                className="psychologist-photo psychologist-photo-profile"
+              />
+            </div>
+            <div className="flex flex-col gap-3 md:col-start-2 md:row-start-1">
+              <div className="text-center md:pt-0 md:text-left">
+                <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-tight text-dark-text">
+                  {psychologist.name}
+                </h1>
+                <p className="mt-2 text-lg text-body-text">{psychologist.designation}</p>
+                <p className="mt-1 text-body-text">{psychologist.credentials}</p>
+                <p className="mt-2 text-sm text-muted">
+                  {formatTherapyHours(psychologist.sessionHours)}
+                </p>
+                {psychologist.rciNumber && (
+                  <div className="mt-4 flex items-center justify-center gap-2 md:justify-start">
+                    <Badge variant="verified">✓ Verified by RCI</Badge>
+                    <span className="text-sm text-muted">{psychologist.rciNumber}</span>
+                  </div>
+                )}
+              </div>
+              <div>
+                <h2 className="font-display text-2xl font-semibold text-dark-text">About</h2>
+                <p className="mt-2 leading-[1.8] text-body-text">{psychologist.bio}</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="px-4 pt-2 pb-10 lg:px-6 lg:pt-4 lg:pb-12">
-          <div className="mx-auto max-w-[800px] space-y-10 lg:space-y-12">
-            <div>
-              <h2 className="font-display text-2xl font-semibold text-dark-text">About</h2>
-              <p className="mt-4 leading-[1.8] text-body-text">{psychologist.bio}</p>
-            </div>
-            <div className="border-t border-border pt-10 lg:pt-12">
+        <section className="px-4 pb-10 lg:px-6 lg:pb-12">
+          <div className="mx-auto max-w-[800px]">
+            <div className="border-t border-border pt-6 lg:pt-8">
               <h2 className="font-display text-2xl font-semibold text-dark-text">Specialties</h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {psychologist.specialties.map((s) => (
@@ -92,7 +95,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 py-10 lg:px-6 lg:py-12">
+        <section className="px-4 py-6 lg:px-6 lg:py-8">
           <div className="mx-auto max-w-[800px] rounded-2xl bg-light-green/30 p-6 md:p-8 lg:p-8">
             <span className="font-display text-5xl text-primary opacity-40">&ldquo;</span>
             <p className="mt-2 font-display text-xl italic leading-relaxed text-dark-text md:text-2xl">
@@ -102,7 +105,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 py-10 lg:px-6 lg:py-12">
+        <section className="px-4 py-6 lg:px-6 lg:py-8">
           <div className="mx-auto max-w-[800px] rounded-2xl border border-border bg-white p-6 shadow-sm lg:p-8">
             <h2 className="font-display text-xl font-semibold text-dark-text">Session details</h2>
             <dl className="mt-4 space-y-4 text-body-text">
@@ -138,7 +141,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 pb-12 pt-6 lg:px-6 lg:pb-14 lg:pt-8">
+        <section className="px-4 pb-10 pt-4 lg:px-6 lg:pb-12 lg:pt-6">
           <div className="mx-auto max-w-[800px] space-y-4">
             <Button
               href={`/book?psychologist=${psychologist.slug}`}

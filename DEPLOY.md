@@ -5,6 +5,7 @@ Full launch playbook for **Vercel** + custom domain + **Resend** email.
 **Quick links**
 
 - [Client intake form](docs/CLIENT_INTAKE.md) — send to client before DNS setup
+- [GoDaddy → Vercel DNS](docs/GODADDY_VERCEL_DNS.md) — connect GoDaddy domain step-by-step
 - [Post-launch QA checklist](docs/LAUNCH_QA.md) — run after domain is live
 
 ---
