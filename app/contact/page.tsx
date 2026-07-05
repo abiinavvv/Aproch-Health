@@ -48,48 +48,16 @@ export default function ContactPage() {
     <>
       <Navbar />
       <main className="flex-1">
-        <section className="hero-gradient px-4 pt-24 pb-8 md:pb-12 lg:px-6 lg:pt-24 lg:pb-20">
+        <section className="hero-gradient px-4 pt-24 pb-6 md:pb-8 lg:px-6 lg:pt-24 lg:pb-10">
           <div className="mx-auto max-w-[800px] text-center">
             <h1 className="font-display text-2xl font-bold leading-snug text-dark-text md:text-[clamp(2rem,4vw,3rem)]">
               We&apos;re here to help
             </h1>
-            <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-4 md:text-lg">
-              Reach out before booking, after booking, or just to ask a question.
-            </p>
           </div>
         </section>
 
-        <section className="px-4 py-8 md:py-12 lg:px-6 lg:py-20">
+        <section className="-mt-2 px-4 pb-8 pt-0 md:-mt-4 md:pb-12 lg:px-6 lg:pb-20">
           <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
-            <div>
-              <h2 className="font-display text-lg font-semibold text-dark-text md:text-xl">
-                Get in touch
-              </h2>
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-primary-dark md:mt-6 md:px-6 md:py-3 md:text-sm"
-              >
-                Chat with us on WhatsApp
-              </a>
-              <p className="mt-4 text-sm text-body-text md:mt-6 md:text-base">
-                Email:{" "}
-                <a
-                  href={`mailto:${psychologist.email}`}
-                  className="break-all text-primary hover:underline"
-                >
-                  {psychologist.email}
-                </a>
-              </p>
-              <p className="mt-3 text-xs text-muted md:mt-4 md:text-sm">
-                We typically respond within a few hours.
-              </p>
-              <p className="mt-3 text-xs leading-relaxed text-body-text md:mt-4 md:text-sm">
-                We are an online-only platform. Sessions are conducted via Google Meet.
-              </p>
-            </div>
-
             <div className="rounded-2xl border border-border bg-white p-4 shadow-sm md:p-6">
               <div className="space-y-3 md:space-y-4">
                 <div>
@@ -159,6 +127,35 @@ export default function ContactPage() {
                   </p>
                 )}
               </div>
+            </div>
+
+            <div>
+              <h2 className="font-display text-lg font-semibold text-dark-text md:text-xl">
+                Get in touch
+              </h2>
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-primary-dark md:mt-6 md:px-6 md:py-3 md:text-sm"
+              >
+                Chat with us on WhatsApp
+              </a>
+              <p className="mt-4 text-sm text-body-text md:mt-6 md:text-base">
+                Email:{" "}
+                <a
+                  href={`mailto:${psychologist.email}`}
+                  className="break-all text-primary hover:underline"
+                >
+                  {psychologist.email}
+                </a>
+              </p>
+              <p className="mt-3 text-xs text-muted md:mt-4 md:text-sm">
+                We typically respond within a few hours.
+              </p>
+              <p className="mt-3 text-xs leading-relaxed text-body-text md:mt-4 md:text-sm">
+                We are an online-only platform. Sessions are conducted via Google Meet.
+              </p>
             </div>
           </div>
         </section>

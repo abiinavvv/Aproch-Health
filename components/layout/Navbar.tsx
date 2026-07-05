@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, Leaf, CalendarCheck } from "lucide-react";
+import { Menu, X, CalendarCheck } from "lucide-react";
+import SiteLogo from "@/components/brand/SiteLogo";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import NavbarClock from "@/components/layout/NavbarClock";
@@ -64,21 +65,8 @@ export default function Navbar() {
         className={`theme-surface fixed top-0 z-50 w-full transition-all duration-300 ${headerBackgroundClass}`}
       >
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-4 lg:px-8">
-        <Link href="/" className="group flex items-start gap-1.5">
-          <div className="flex flex-col leading-none">
-            <span className="flex items-center gap-1.5 font-body text-[22px] font-bold text-hero-brown">
-              Aproch
-              <Leaf
-                size={18}
-                className="text-hero-accent"
-                strokeWidth={2}
-                aria-hidden
-              />
-            </span>
-            <span className="mt-0.5 font-body text-[11px] font-semibold tracking-[0.22em] text-hero-nav">
-              HEALTH
-            </span>
-          </div>
+        <Link href="/" className="group inline-flex items-center">
+          <SiteLogo priority className="h-8 md:h-9" />
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">

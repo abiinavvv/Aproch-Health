@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { useBooking } from "@/context/BookingContext";
 import { getPsychologistBySlug, getDefaultPsychologist, formatSessionFee } from "@/lib/psychologists";
-import { getSessionById, formatSessionEndTime } from "@/lib/sessions";
+import { introductorySession, formatSessionEndTime } from "@/lib/sessions";
 import { formatDisplayDate, buildGoogleCalendarUrl } from "@/lib/calendar";
 
 export default function Step5Confirmation() {
@@ -15,8 +15,8 @@ export default function Step5Confirmation() {
     (psychologistSlug && getPsychologistBySlug(psychologistSlug)) ||
     getDefaultPsychologist();
 
-  const session = sessionType ? getSessionById(sessionType) : null;
-  if (!session || !date || !timeSlot) return null;
+  const session = introductorySession;
+  if (!date || !timeSlot) return null;
 
   const endTime = formatSessionEndTime(timeSlot, session.duration);
   const modeLabel =

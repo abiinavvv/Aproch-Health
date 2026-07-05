@@ -1,4 +1,4 @@
-export type SessionTypeId = "introductory" | "full";
+export type SessionTypeId = "introductory";
 
 export type SessionMode = "video" | "audio";
 

@@ -34,7 +34,7 @@ export const homeFAQ: FAQItem[] = [
   {
     question: "How long is a session?",
     answer:
-      "We offer two options: a 30-minute introductory session (₹500) for your first conversation, and a 60-minute full session (₹999) for deeper work. You can choose what feels right for you.",
+      "Every session is a 30-minute introductory session. Fees vary by psychologist (₹499–₹999) and are shown when you book.",
   },
   {
     question: "Can I switch psychologists later?",

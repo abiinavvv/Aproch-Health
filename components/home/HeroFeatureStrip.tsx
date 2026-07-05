@@ -1,4 +1,5 @@
 import { Heart, Leaf, Shield, Users } from "lucide-react";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const features = [
   {
@@ -33,23 +34,15 @@ function FeatureRow({
   icon: Icon,
   title,
   description,
-  isLast,
   compact,
 }: {
   icon: typeof Heart;
   title: string;
   description: string;
-  isLast: boolean;
   compact?: boolean;
 }) {
   return (
-    <div
-      className={`group flex items-start gap-4 ${
-        compact
-          ? `py-5 ${isLast ? "" : "border-b border-border"}`
-          : `lg:px-8 lg:first:pl-0 lg:last:pr-0 ${!isLast ? "lg:border-r lg:border-hero-accent/12" : ""}`
-      }`}
-    >
+    <div className="group flex items-start gap-4">
       <div
         className={`flex shrink-0 items-center justify-center rounded-2xl bg-hero-accent/10 text-hero-accent transition-colors duration-200 group-hover:bg-hero-accent/16 ${
           compact ? "h-12 w-12" : "h-14 w-14 lg:h-16 lg:w-16"
@@ -74,39 +67,29 @@ export default function HeroFeatureStrip() {
   return (
     <div className="hero-theme-sync relative z-10 w-full px-0 pb-0 pt-0 md:px-5 md:py-8 lg:px-12 lg:py-10">
       <div
-        className="hero-theme-day hero-theme-fade pointer-events-none absolute inset-0 hidden md:block"
+        className="hero-theme-day hero-theme-fade pointer-events-none absolute inset-0"
         style={{ background: DAY_STRIP_GRADIENT }}
         aria-hidden
       />
       <div
-        className="hero-theme-night hero-theme-fade pointer-events-none absolute inset-0 hidden md:block"
+        className="hero-theme-night hero-theme-fade pointer-events-none absolute inset-0"
         style={{ background: NIGHT_STRIP_GRADIENT }}
         aria-hidden
       />
 
-      {/* Mobile — overlapping white card into psychologists section */}
-      <div className="relative z-20 mx-auto -mb-20 max-w-[420px] md:hidden">
-        <div className="theme-surface relative -mt-10 mx-5 rounded-3xl bg-white px-5 py-2 shadow-[0_8px_32px_rgba(28,16,8,0.08)]">
-          {features.map((feature, index) => (
-            <FeatureRow
+      <div className="relative z-20 mx-auto -mb-20 max-w-[1400px] -mt-10 px-5 md:-mb-16 md:mt-0 md:px-0 lg:-mb-12">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-4">
+          {features.map((feature) => (
+            <GlowCard
               key={feature.title}
-              {...feature}
-              isLast={index === features.length - 1}
-              compact
-            />
+              glowColor="orange"
+              customSize
+              className="theme-surface w-full border border-border/80 bg-white/90 p-4 shadow-[0_8px_32px_rgba(28,16,8,0.08)] md:p-5 lg:p-6"
+            >
+              <FeatureRow {...feature} compact />
+            </GlowCard>
           ))}
         </div>
-      </div>
-
-      {/* Desktop — 4-column grid */}
-      <div className="relative mx-auto hidden max-w-[1400px] md:grid md:grid-cols-2 md:gap-x-10 md:gap-y-10 lg:grid-cols-4 lg:gap-0">
-        {features.map((feature, index) => (
-          <FeatureRow
-            key={feature.title}
-            {...feature}
-            isLast={index === features.length - 1}
-          />
-        ))}
       </div>
     </div>
   );

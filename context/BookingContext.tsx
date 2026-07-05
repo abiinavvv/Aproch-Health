@@ -16,7 +16,7 @@ import type {
 
 export const defaultBookingState: BookingState = {
   psychologistSlug: null,
-  sessionType: null,
+  sessionType: "introductory",
   date: null,
   timeSlot: null,
   sessionMode: null,
@@ -56,7 +56,7 @@ export function BookingProvider({
   const [isBookingComplete, setIsBookingComplete] = useState(false);
 
   const setPsychologistSlug = useCallback((slug: string) => {
-    setState((s) => ({ ...s, psychologistSlug: slug }));
+    setState((s) => ({ ...s, psychologistSlug: slug, sessionType: "introductory" }));
   }, []);
 
   const setSessionType = useCallback((type: SessionTypeId) => {

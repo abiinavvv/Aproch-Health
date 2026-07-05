@@ -25,7 +25,7 @@ const steps = [
   {
     icon: CalendarCheck,
     number: "Step 1",
-    title: "Choose your session",
+    title: "Choose your psychologist",
   },
   {
     icon: Clock,

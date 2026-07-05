@@ -10,7 +10,7 @@ import {
 } from "@/context/BookingContext";
 import { getPsychologistBySlug, getDefaultPsychologist, formatSessionFee } from "@/lib/psychologists";
 import {
-  getSessionById,
+  introductorySession,
   formatSessionEndTime,
 } from "@/lib/sessions";
 import { formatDisplayDate } from "@/lib/calendar";
@@ -33,8 +33,8 @@ export default function Step4Review() {
 
   const [agreed, setAgreed] = useState(false);
 
-  const session = sessionType ? getSessionById(sessionType) : null;
-  if (!session || !date || !timeSlot) return null;
+  const session = introductorySession;
+  if (!date || !timeSlot) return null;
 
   const endTime = formatSessionEndTime(timeSlot, session.duration);
   const modeLabel = sessionMode === "video" ? "Video" : "Audio";

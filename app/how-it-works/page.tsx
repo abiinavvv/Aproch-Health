@@ -6,8 +6,8 @@ import { CalendarCheck, Clock, MessageCircle } from "lucide-react";
 const steps = [
   {
     icon: CalendarCheck,
-    title: "Step 1: Choose your session type",
-    body: "Start with a 30-minute introductory session (₹500) if you're new to therapy — it's a gentle way to get comfortable. Or choose a 60-minute full session (₹999) if you're ready to go deeper on specific concerns like anxiety, burnout, or relationships.",
+    title: "Step 1: Choose your psychologist",
+    body: "Browse our RCI-registered psychologists and pick who you'd like to speak with. Every session is a 30-minute introductory session — a gentle way to get comfortable and start the conversation.",
   },
   {
     icon: Clock,

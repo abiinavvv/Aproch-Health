@@ -8,7 +8,7 @@ import {
   availableDays,
   availableTimeSlots,
   unavailableSlots,
-  getSessionById,
+  introductorySession,
   formatSessionEndTime,
 } from "@/lib/sessions";
 
@@ -17,12 +17,12 @@ function toISODate(year: number, month: number, day: number) {
 }
 
 export default function Step2DateTime() {
-  const { date, timeSlot, sessionType, setDateTime, nextStep } = useBooking();
+  const { date, timeSlot, setDateTime, nextStep } = useBooking();
   const today = new Date();
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
 
-  const session = sessionType ? getSessionById(sessionType) : null;
+  const session = introductorySession;
 
   const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
   const firstDayOfWeek = new Date(viewYear, viewMonth, 1).getDay();
@@ -158,7 +158,7 @@ export default function Step2DateTime() {
                   );
                 })}
               </div>
-              {session && timeSlot && (
+              {timeSlot && (
                 <p className="mt-3 text-xs text-muted md:mt-4 md:text-sm">
                   Each session is {session.duration} min. Your session ends at{" "}
                   {formatSessionEndTime(timeSlot, session.duration)}.

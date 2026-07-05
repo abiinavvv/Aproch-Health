@@ -1,25 +1,16 @@
 import type { SessionType } from "@/types";
 
-export const sessionTypes: SessionType[] = [
-  {
-    id: "introductory",
-    label: "Introductory Session",
-    duration: 30,
-    price: 500,
-    tagline: "Perfect for your first conversation",
-    description:
-      "Not sure where to start? This shorter session helps you get comfortable and understand what therapy looks like for you.",
-  },
-  {
-    id: "full",
-    label: "Full Session",
-    duration: 60,
-    price: 999,
-    tagline: "A complete therapeutic session",
-    description:
-      "A full hour to go deep. Recommended if you know what you'd like to work on.",
-  },
-];
+export const introductorySession: SessionType = {
+  id: "introductory",
+  label: "Introductory Session",
+  duration: 30,
+  price: 500,
+  tagline: "Perfect for your first conversation",
+  description:
+    "Not sure where to start? This shorter session helps you get comfortable and understand what therapy looks like for you.",
+};
+
+export const sessionTypes: SessionType[] = [introductorySession];
 
 // ⚠️ Update these slots weekly — Anirudh manages availability manually
 export const availableTimeSlots = [

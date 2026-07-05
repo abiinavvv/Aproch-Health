@@ -13,13 +13,8 @@ import { psychologist } from "@/lib/psychologist";
 
 const listItems = [
   {
-    title: "Full Session",
-    description: "60 minutes for deeper therapeutic work",
-    href: "/book",
-  },
-  {
     title: "How booking works",
-    description: "Simple steps from session pick to confirmation",
+    description: "Simple steps from psychologist pick to confirmation",
     href: "/how-it-works",
   },
 ];

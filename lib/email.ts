@@ -6,10 +6,7 @@ export async function sendBookingConfirmation(data: SendConfirmationRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const from = process.env.RESEND_FROM_EMAIL || "hello@aprochhealth.com";
 
-  const sessionLabel =
-    data.sessionType === "introductory"
-      ? "Introductory Session (30 min)"
-      : "Full Session (60 min)";
+  const sessionLabel = "Introductory Session (30 min)";
 
   const html = `
     <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; color: #4A4A6A;">

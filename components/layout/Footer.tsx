@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Leaf } from "lucide-react";
+import SiteLogo from "@/components/brand/SiteLogo";
 import { AGENCY_NAME, getAgencyUrl, getInstagramUrl, getLinkedInUrl, showAgencyCredit } from "@/lib/site";
 
 function InstagramIcon() {
@@ -40,10 +40,8 @@ export default function Footer() {
     <footer className="theme-surface border-t border-border bg-hero-cream/70 px-4 py-8 md:py-12 lg:px-6 lg:py-16">
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-5 md:mb-8">
-          <Link href="/" className="inline-flex items-center gap-1.5 font-display text-lg font-bold text-hero-brown md:text-xl">
-            Aproch
-            <Leaf size={14} className="text-hero-accent md:h-4 md:w-4" strokeWidth={2} aria-hidden />
-            <span className="sr-only">Health</span>
+          <Link href="/" className="inline-flex">
+            <SiteLogo className="h-7 md:h-8" />
           </Link>
           <p className="mt-1.5 text-xs text-hero-subtext md:mt-2 md:text-sm">
             Mental wellness, made accessible.

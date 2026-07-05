@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import MinimalHeader from "@/components/layout/MinimalHeader";
 import StepIndicator from "@/components/booking/StepIndicator";
-import Step1SessionType from "@/components/booking/Step1SessionType";
+import Step1Psychologist from "@/components/booking/Step1Psychologist";
 import Step2DateTime from "@/components/booking/Step2DateTime";
 import Step3UserDetails from "@/components/booking/Step3UserDetails";
 import Step4Review from "@/components/booking/Step4Review";
@@ -22,7 +22,7 @@ function BookingContent() {
   const shouldReduceMotion = useReducedMotion();
 
   const steps = [
-    <Step1SessionType key="1" />,
+    <Step1Psychologist key="1" />,
     <Step2DateTime key="2" />,
     <Step3UserDetails key="3" />,
     <Step4Review key="4" />,
@@ -70,6 +70,7 @@ function BookPageInner() {
       initialState={{
         ...defaultBookingState,
         psychologistSlug,
+        currentStep: psychologistSlug ? 2 : 1,
       }}
     >
       <BookingContent />

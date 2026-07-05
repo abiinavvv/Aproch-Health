@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import { useBooking } from "@/context/BookingContext";
 
 const steps = [
-  { num: 1, label: "Type" },
+  { num: 1, label: "Psychologist" },
   { num: 2, label: "Date & Time" },
   { num: 3, label: "Your Details" },
   { num: 4, label: "Review" },

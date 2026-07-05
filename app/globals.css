@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+.site-logo {
+  color: var(--hero-brown);
+}
+
+[data-theme="night"] .site-logo {
+  color: #ffffff;
+}
+
+.site-logo img {
+  filter: none;
+}
+
+[data-theme="night"] .site-logo img {
+  filter: brightness(0) invert(1);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #1c1008;
@@ -27,9 +43,16 @@
   --glass-bg-hover: rgba(255, 255, 255, 0.58);
   --shadow-soft: rgba(28, 16, 8, 0.06);
   --shadow-medium: rgba(28, 16, 8, 0.1);
-  --theme-duration: 600ms;
+  --theme-duration: 400ms;
+  --theme-color-duration: 250ms;
+  --theme-surface-duration: 400ms;
   --hero-fade-duration: 1400ms;
   --theme-easing: ease-in-out;
+  --glow-backdrop: hsl(0 0% 100% / 0.55);
+  --glow-backup-border: color-mix(in srgb, var(--border) 80%, transparent);
+  --bg-spot-opacity: 0.12;
+  --border-spot-opacity: 0.85;
+  --border-light-opacity: 0.6;
 }
 
 [data-theme="night"] {
@@ -58,6 +81,11 @@
   --glass-bg-hover: rgba(255, 255, 255, 0.14);
   --shadow-soft: rgba(0, 0, 0, 0.25);
   --shadow-medium: rgba(0, 0, 0, 0.35);
+  --glow-backdrop: color-mix(in srgb, var(--surface-elevated) 72%, transparent);
+  --glow-backup-border: color-mix(in srgb, var(--border) 90%, transparent);
+  --bg-spot-opacity: 0.18;
+  --border-spot-opacity: 0.7;
+  --border-light-opacity: 0.35;
 }
 
 @theme inline {
@@ -94,38 +122,41 @@ body {
   color: var(--body-text);
   font-family: var(--font-inter), system-ui, sans-serif;
   transition:
-    background-color var(--theme-duration) var(--theme-easing),
-    color var(--theme-duration) var(--theme-easing);
+    background-color var(--theme-surface-duration) var(--theme-easing),
+    color var(--theme-color-duration) var(--theme-easing);
 }
 
 html[data-theme] .theme-surface {
   transition:
-    background-color var(--theme-duration) var(--theme-easing),
-    color var(--theme-duration) var(--theme-easing),
-    border-color var(--theme-duration) var(--theme-easing),
-    box-shadow var(--theme-duration) var(--theme-easing);
+    background-color var(--theme-surface-duration) var(--theme-easing),
+    color var(--theme-color-duration) var(--theme-easing),
+    border-color var(--theme-color-duration) var(--theme-easing),
+    box-shadow var(--theme-surface-duration) var(--theme-easing);
 }
 
 html[data-theme] .hero-theme-sync,
 html[data-theme] .hero-theme-sync * {
   transition:
-    color var(--hero-fade-duration) var(--theme-easing),
-    border-color var(--hero-fade-duration) var(--theme-easing),
-    background-color var(--hero-fade-duration) var(--theme-easing);
+    color var(--theme-color-duration) var(--theme-easing),
+    border-color var(--theme-color-duration) var(--theme-easing),
+    background-color var(--theme-surface-duration) var(--theme-easing);
 }
 
 @media (max-width: 767px) {
-  html[data-theme] body,
-  html[data-theme] .theme-surface {
-    transition-duration: var(--hero-fade-duration);
-  }
-
   body {
     line-height: 1.65;
   }
 
   p + p {
     margin-top: 0.75em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --theme-color-duration: 0ms;
+    --theme-surface-duration: 0ms;
+    --hero-fade-duration: 0ms;
   }
 }
 
@@ -513,7 +544,7 @@ h3 {
   object-fit: contain;
   object-position: center bottom;
   background: transparent;
-  transition: filter var(--theme-duration) var(--theme-easing);
+  transition: filter var(--theme-surface-duration) var(--theme-easing);
 }
 
 [data-theme="night"] .psychologist-photo {
@@ -550,4 +581,73 @@ h3 {
 
 [data-theme="night"] .what-we-do-cta:hover {
   color: #1c1008 !important;
+}
+
+/* Spotlight glow card — used by components/ui/spotlight-card.tsx */
+[data-glow]::before,
+[data-glow]::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-size) * -1);
+  border: var(--border-size) solid transparent;
+  border-radius: calc(var(--radius) * 1px);
+  background-attachment: fixed;
+  background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+  -webkit-mask-clip: padding-box, border-box;
+  mask-clip: padding-box, border-box;
+  mask-composite: intersect;
+}
+
+[data-glow]::before {
+  background-image: radial-gradient(
+    calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
+    calc(var(--x, 0) * 1px)
+    calc(var(--y, 0) * 1px),
+    hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 50) * 1%) / var(--border-spot-opacity, 1)),
+    transparent 100%
+  );
+  filter: brightness(2);
+}
+
+[data-glow]::after {
+  background-image: radial-gradient(
+    calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
+    calc(var(--x, 0) * 1px)
+    calc(var(--y, 0) * 1px),
+    hsl(0 100% 100% / var(--border-light-opacity, 1)),
+    transparent 100%
+  );
+}
+
+[data-glow] [data-glow] {
+  position: absolute;
+  inset: 0;
+  will-change: filter;
+  opacity: var(--outer, 1);
+  border-radius: calc(var(--radius) * 1px);
+  border-width: calc(var(--border-size) * 20);
+  filter: blur(calc(var(--border-size) * 10));
+  background: none;
+  pointer-events: none;
+  border: none;
+}
+
+[data-glow] > [data-glow]::before {
+  inset: -10px;
+  border-width: 10px;
+}
+
+@media (max-width: 767px) {
+  .glow-card {
+    background-attachment: scroll;
+  }
+
+  [data-glow]::before,
+  [data-glow]::after {
+    background-attachment: scroll;
+  }
 }

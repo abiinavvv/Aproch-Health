@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Sprout, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import RealisticFogBackground from "@/components/ui/realistic-fog-background";
 import HeroVideo from "@/components/home/HeroVideo";
 import HeroFeatureStrip from "./HeroFeatureStrip";
@@ -99,11 +99,6 @@ export default function Hero() {
               <br />
               <span className="text-hero-accent">a single touch.</span>
             </h1>
-
-            <div className="my-5 flex items-center gap-3">
-              <Sprout size={24} className="text-hero-accent" strokeWidth={2} aria-hidden />
-              <div className="h-px w-[160px] bg-hero-accent" aria-hidden />
-            </div>
           </motion.div>
 
           <motion.div
@@ -140,11 +135,6 @@ export default function Hero() {
               <br />
               <span className="text-hero-accent">a single touch.</span>
             </h1>
-
-            <div className="my-5 flex items-center gap-3 md:my-6">
-              <Sprout size={24} className="text-hero-accent" strokeWidth={2} aria-hidden />
-              <div className="h-px w-[160px] bg-hero-accent md:w-[180px]" aria-hidden />
-            </div>
 
             <div className="relative mt-9 inline-block w-full md:mt-10 md:w-auto">
               <Link
