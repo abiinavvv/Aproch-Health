@@ -7,7 +7,7 @@ export default function MinimalHeader() {
     <header className="theme-surface border-b border-border bg-hero-cream/80 px-4 py-3 backdrop-blur-sm md:py-4 lg:px-6">
       <div className="mx-auto flex max-w-[800px] items-center justify-between">
         <Link href="/" className="inline-flex">
-          <SiteLogo className="h-7 md:h-8" />
+          <SiteLogo className="h-7 md:h-10" />
         </Link>
         <a
           href={getWhatsAppUrl()}

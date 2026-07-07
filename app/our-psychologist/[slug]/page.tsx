@@ -14,6 +14,7 @@ import {
   formatTherapyHours,
   formatSessionFee,
 } from "@/lib/psychologists";
+import { introductorySession } from "@/lib/sessions";
 import { pageMetadata } from "@/lib/metadata";
 
 type PageProps = {
@@ -117,7 +118,7 @@ export default async function PsychologistProfilePage({ params }: PageProps) {
             <dl className="mt-3 space-y-3 text-sm text-body-text md:mt-4 md:space-y-4 md:text-base">
               <div className="flex flex-col gap-1 border-b border-border pb-3 max-md:pb-4 md:flex-row md:justify-between md:gap-4 md:pb-3">
                 <dt className="text-xs text-muted max-md:font-medium md:text-sm">Duration</dt>
-                <dd className="max-md:text-sm max-md:leading-relaxed">30 min (Introductory Session)</dd>
+                <dd className="max-md:text-sm max-md:leading-relaxed">{introductorySession.duration} min (Introductory Session)</dd>
               </div>
               <div className="flex flex-col gap-1 border-b border-border pb-3 max-md:pb-4 md:flex-row md:justify-between md:gap-4 md:pb-3">
                 <dt className="text-xs text-muted max-md:font-medium md:text-sm">Session fee</dt>

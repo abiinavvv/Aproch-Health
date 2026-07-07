@@ -41,7 +41,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-5 md:mb-8">
           <Link href="/" className="inline-flex">
-            <SiteLogo className="h-7 md:h-8" />
+            <SiteLogo className="h-7 md:h-10" />
           </Link>
           <p className="mt-1.5 text-xs text-hero-subtext md:mt-2 md:text-sm">
             Mental wellness, made accessible.

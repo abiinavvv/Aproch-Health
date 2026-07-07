@@ -13,16 +13,13 @@ const stats = [
 ];
 
 const missionWords = [
-  { text: "Empowering" },
-  { text: "young" },
-  { text: "India" },
-  { text: "with" },
-  { text: "our" },
-  { text: "therapist", highlight: true },
-  { text: "through" },
+  { text: "We're" },
+  { text: "reimagining", highlight: true },
+  { text: "how" },
+  { text: "people" },
+  { text: "access" },
   { text: "mental", highlight: true },
-  { text: "wellness", highlight: true },
-  { text: "support" },
+  { text: "healthcare.", highlight: true },
 ];
 
 function CountUp({
@@ -92,9 +89,9 @@ export default function MissionStats() {
 
         <ScrollReveal delay={0.2}>
           <p className="mx-auto mb-14 max-w-2xl text-base leading-[1.75] text-body-text">
-            We are on a mission to provide comprehensive mental health support for
-            students and young adults. Our passionate team is dedicated to
-            fostering your well-being — one session at a time.
+            aproch is building a modern mental health ecosystem that helps people discover
+            trusted therapist, book sessions through confidence and access thoughtful care
+            all in one place
           </p>
         </ScrollReveal>
 

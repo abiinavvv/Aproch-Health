@@ -19,7 +19,7 @@ export const homeFAQ: FAQItem[] = [
   {
     question: "What qualifications do our psychologists have?",
     answer:
-      "All psychologists on Aproch Health are RCI-registered with M.Phil or equivalent qualifications in Clinical Psychology. RCI (Rehabilitation Council of India) registration ensures verified, professional credentials.",
+      "Every professional on Aproch holds at least a postgraduate degree (M.A./M.Sc.) in Psychology or a related mental health discipline. Our network includes counselling psychologists, consultant psychologists, therapists, and RCI-registered clinical psychologists. Each professional's qualifications, experience, and areas of expertise are clearly displayed on their profile, so you can make an informed choice",
   },
   {
     question: "How do I book and pay?",
@@ -34,7 +34,7 @@ export const homeFAQ: FAQItem[] = [
   {
     question: "How long is a session?",
     answer:
-      "Every session is a 30-minute introductory session. Fees vary by psychologist (₹499–₹999) and are shown when you book.",
+      "Every session is a 60-minute introductory session. Fees vary by psychologist (₹499–₹999) and are shown when you book.",
   },
   {
     question: "Can I switch psychologists later?",

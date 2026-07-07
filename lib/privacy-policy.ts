@@ -673,5 +673,5 @@ export const privacyPolicyContactSection = {
   title: "Contact Information",
   intro:
     "For privacy-related inquiries, data requests, complaints, or concerns, Users may contact:",
-  businessHours: "Monday–Saturday, 9:00 AM – 6:00 PM IST",
+  businessHours: "Monday–Sunday, 9:00 AM – 6:00 PM IST",
 };

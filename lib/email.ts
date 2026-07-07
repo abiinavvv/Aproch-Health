@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { introductorySession } from "@/lib/sessions";
 import type { SendConfirmationRequest } from "@/types";
 
 // ⚠️ Replace RESEND_FROM_EMAIL with verified sender domain before launch
@@ -6,7 +7,7 @@ export async function sendBookingConfirmation(data: SendConfirmationRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const from = process.env.RESEND_FROM_EMAIL || "hello@aprochhealth.com";
 
-  const sessionLabel = "Introductory Session (30 min)";
+  const sessionLabel = `${introductorySession.label} (${introductorySession.duration} min)`;
 
   const html = `
     <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; color: #4A4A6A;">

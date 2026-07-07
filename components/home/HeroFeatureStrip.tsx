@@ -84,7 +84,7 @@ export default function HeroFeatureStrip() {
               key={feature.title}
               glowColor="orange"
               customSize
-              className="theme-surface w-full border border-border/80 bg-white/90 p-4 shadow-[0_8px_32px_rgba(28,16,8,0.08)] md:p-5 lg:p-6"
+              className="theme-surface w-full border border-border/80 bg-surface-elevated/90 p-4 shadow-[0_8px_32px_rgba(28,16,8,0.08)] md:p-5 lg:p-6"
             >
               <FeatureRow {...feature} compact />
             </GlowCard>

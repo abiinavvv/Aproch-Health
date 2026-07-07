@@ -36,7 +36,7 @@ export default function OurPsychologistPage() {
               >
                 <GlassmorphismProfileCard
                   psychologist={p}
-                  className="w-full max-w-none xl:max-w-[320px]"
+                  className="w-full max-w-none xl:max-w-[380px]"
                 />
               </div>
             ))}

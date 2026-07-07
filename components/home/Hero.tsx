@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState, useEffect } from "react";
+import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import RealisticFogBackground from "@/components/ui/realistic-fog-background";
 import HeroVideo from "@/components/home/HeroVideo";
 import HeroFeatureStrip from "./HeroFeatureStrip";
 import { useTheme } from "@/context/ThemeContext";
@@ -16,17 +15,7 @@ const MOBILE_HERO_NIGHT = "/videos/boy1.png";
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const { isNightMode } = useTheme();
-  const [showFog, setShowFog] = useState(false);
-  const heroMainRef = useRef<HTMLDivElement>(null);
   const reducedMotion = shouldReduceMotion ?? false;
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const update = () => setShowFog(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
 
   useEffect(() => {
     [MOBILE_HERO_DAY, MOBILE_HERO_NIGHT].forEach((src) => {
@@ -77,15 +66,7 @@ export default function Hero() {
         />
       </div>
 
-      <div ref={heroMainRef} className="relative flex min-h-0 flex-1 flex-col md:flex-row">
-        {showFog && (
-          <RealisticFogBackground
-            trackRef={heroMainRef}
-            reducedMotion={shouldReduceMotion ?? false}
-            className="z-[5]"
-          />
-        )}
-
+      <div className="relative flex min-h-0 flex-1 flex-col md:flex-row">
         {/* Mobile hero */}
         <div className="relative z-10 flex min-h-[min(88vh,720px)] flex-col items-start px-6 pb-32 pt-24 text-left md:hidden">
           <motion.div
@@ -94,11 +75,14 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex w-full max-w-[420px] flex-col items-start"
           >
-            <h1 className="font-playfair text-[40px] font-extrabold leading-[1.08] text-hero-brown">
+            <h1 className="font-display text-[40px] font-extrabold leading-[1.08] text-hero-brown">
               It only needs
               <br />
-              <span className="text-hero-accent">a single touch.</span>
+              <span className="text-hero-accent">a single touch</span>
             </h1>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
+              Book your first conversation, lets handle the rest
+            </p>
           </motion.div>
 
           <motion.div
@@ -130,11 +114,14 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="font-playfair text-[40px] font-extrabold leading-[1.08] text-hero-brown md:text-[60px] lg:text-[64px]">
+            <h1 className="font-display text-[40px] font-extrabold leading-[1.08] text-hero-brown md:text-[60px] lg:text-[64px]">
               It only needs
               <br />
-              <span className="text-hero-accent">a single touch.</span>
+              <span className="text-hero-accent">a single touch</span>
             </h1>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
+              Book your first conversation, lets handle the rest
+            </p>
 
             <div className="relative mt-9 inline-block w-full md:mt-10 md:w-auto">
               <Link

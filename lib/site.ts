@@ -35,7 +35,7 @@ export function formatDisplayPhone(digits: string): string {
   return `+${digits}`;
 }
 
-export const BUSINESS_HOURS = "Monday–Saturday, 9:00 AM – 6:00 PM IST";
+export const BUSINESS_HOURS = "Monday–Sunday, 9:00 AM – 6:00 PM IST";
 
 export function getRciNumber(): string {
   return process.env.NEXT_PUBLIC_RCI_NUMBER?.trim() || "";

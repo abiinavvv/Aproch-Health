@@ -3,7 +3,7 @@ import type { SessionType } from "@/types";
 export const introductorySession: SessionType = {
   id: "introductory",
   label: "Introductory Session",
-  duration: 30,
+  duration: 60,
   price: 500,
   tagline: "Perfect for your first conversation",
   description:
@@ -12,27 +12,10 @@ export const introductorySession: SessionType = {
 
 export const sessionTypes: SessionType[] = [introductorySession];
 
-// ⚠️ Update these slots weekly — Anirudh manages availability manually
-export const availableTimeSlots = [
-  "9:00 AM",
-  "9:30 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "2:00 PM",
-  "2:30 PM",
-  "3:00 PM",
-  "5:00 PM",
-  "5:30 PM",
-  "6:00 PM",
-  "7:00 PM",
-  "8:00 PM",
-];
-
 // Days of week where sessions are available (0 = Sunday)
-export const availableDays = [1, 2, 3, 4, 5, 6];
+export const availableDays = [0, 1, 2, 3, 4, 5, 6];
 
-// Slots greyed out for realism — update weekly
-export const unavailableSlots = ["11:00 AM", "3:00 PM", "7:00 PM"];
+export const TIME_MINUTE_OPTIONS = [0, 30] as const;
 
 export function getSessionById(id: string) {
   return sessionTypes.find((s) => s.id === id);
@@ -45,6 +28,19 @@ export function parseTimeSlot(slot: string): { hours: number; minutes: number } 
   if (period === "PM" && h !== 12) hours += 12;
   if (period === "AM" && h === 12) hours = 0;
   return { hours, minutes: m };
+}
+
+export function formatTimeSlot(hours24: number, minutes: number): string {
+  const period = hours24 >= 12 ? "PM" : "AM";
+  const displayHours = hours24 % 12 || 12;
+  return `${displayHours}:${minutes.toString().padStart(2, "0")} ${period}`;
+}
+
+export function isTimeSlotInPast(dateIso: string, slot: string): boolean {
+  const { hours, minutes } = parseTimeSlot(slot);
+  const selected = new Date(dateIso + "T00:00:00");
+  selected.setHours(hours, minutes, 0, 0);
+  return selected.getTime() < Date.now();
 }
 
 export function formatSessionEndTime(

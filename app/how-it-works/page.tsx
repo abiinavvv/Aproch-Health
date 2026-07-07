@@ -7,12 +7,12 @@ const steps = [
   {
     icon: CalendarCheck,
     title: "Step 1: Choose your psychologist",
-    body: "Browse our RCI-registered psychologists and pick who you'd like to speak with. Every session is a 30-minute introductory session — a gentle way to get comfortable and start the conversation.",
+    body: "Browse our RCI-registered psychologists and pick who you'd like to speak with. Every session is a 60-minute introductory session — a gentle way to get comfortable and start the conversation.",
   },
   {
     icon: Clock,
     title: "Step 2: Pick your slot",
-    body: "Browse available dates on our calendar and pick a time that fits your schedule. Slots are updated weekly, and you don't need to create an account. Just choose what works for you.",
+    body: "Pick a date and set your preferred time using the time picker — just like setting an alarm. Sessions can be booked any time, day or night, and you don't need to create an account.",
   },
   {
     icon: MessageCircle,

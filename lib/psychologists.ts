@@ -29,6 +29,7 @@ export const psychologists: Psychologist[] = [
     bio: `Safiyath T S is a compassionate psychologist who believes in creating a safe, supportive space where individuals feel heard and understood. With experience working across rehabilitation, child guidance, and mental health settings, she supports children, adolescents, and adults through life's emotional and behavioral challenges. Her approach combines empathy with evidence-based care, helping clients build resilience, confidence, and meaningful change. At Aproch Health, she shares our belief that mental well-being is deeply connected to overall health, making care more holistic, accessible, and human.`,
     philosophy:
       "Mental well-being is deeply connected to overall health.",
+    tagline: "Healing starts here",
     sessionFormat: "Online via Google Meet (video or audio call)",
     whatsappNumber: sharedWhatsApp,
     email: sharedEmail,
@@ -54,6 +55,7 @@ export const psychologists: Psychologist[] = [
     bio: `Kripa K A is a psychologist dedicated to creating a safe, compassionate, and supportive space where individuals feel heard and understood. With experience across clinical, wellness, and educational settings, she believes in making mental healthcare approachable, evidence-based, and personalized. At Aproch Health, she shares our vision of providing holistic care by recognizing the deep connection between mental and physical well-being.`,
     philosophy:
       "Mental healthcare should be approachable, evidence-based, and personalized.",
+    tagline: "Your pace, your space",
     sessionFormat: "Online via Google Meet (video or audio call)",
     whatsappNumber: sharedWhatsApp,
     email: sharedEmail,
@@ -82,6 +84,7 @@ export const psychologists: Psychologist[] = [
     bio: `Swathija Das K V believes that everyone deserves a safe space to be heard without judgment. She is passionate about supporting people through life's challenges with empathy, understanding, and practical guidance. Her goal is to help individuals feel more confident, balanced, and emotionally well, one conversation at a time. As part of Aproch Health, she shares our vision of making mental healthcare more accessible, compassionate, and connected to overall well-being.`,
     philosophy:
       "Everyone deserves a safe space to be heard without judgment.",
+    tagline: "One conversation at a time",
     sessionFormat: "Online via Google Meet (video or audio call)",
     whatsappNumber: sharedWhatsApp,
     email: sharedEmail,
@@ -110,6 +113,7 @@ export const psychologists: Psychologist[] = [
     bio: `Parvathi R is a Consultant Psychologist and Certified Clinical Hypnotherapist who is passionate about helping children, adolescents, and adults navigate emotional and behavioral challenges with empathy and understanding. She combines evidence-based psychological practices with hypnotherapy to create a supportive, personalized space where individuals can grow, heal, and build resilience. At Aproch Health, she believes in making mental healthcare approachable, compassionate, and centered around each person's unique journey.`,
     philosophy:
       "Mental healthcare should be approachable, compassionate, and centered around each person's unique journey.",
+    tagline: "Healing starts here",
     sessionFormat: "Online via Google Meet (video or audio call)",
     whatsappNumber: sharedWhatsApp,
     email: sharedEmail,
@@ -138,6 +142,7 @@ export const psychologists: Psychologist[] = [
     bio: `Gopika Muraleedhran is a Consultant Psychologist specializing in psychotherapy, counseling, and hypnotherapy. With experience in clinical and online mental health settings, she is dedicated to providing compassionate, evidence-based care while helping individuals overcome emotional and psychological challenges. At Aproch Health, she is committed to creating a safe, non-judgmental space where every individual feels heard, supported, and empowered to take meaningful steps toward lasting mental well-being.`,
     philosophy:
       "Every individual deserves to feel heard, supported, and empowered toward lasting well-being.",
+    tagline: "Lasting well-being begins here",
     sessionFormat: "Online via Google Meet (video or audio call)",
     whatsappNumber: sharedWhatsApp,
     email: sharedEmail,

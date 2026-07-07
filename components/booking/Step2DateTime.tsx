@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { TimePicker } from "@/components/ui/time-picker";
 import { useBooking } from "@/context/BookingContext";
 import {
   availableDays,
-  availableTimeSlots,
-  unavailableSlots,
+  formatTimeSlot,
   introductorySession,
-  formatSessionEndTime,
+  isTimeSlotInPast,
 } from "@/lib/sessions";
 
 function toISODate(year: number, month: number, day: number) {
@@ -66,11 +66,6 @@ export default function Step2DateTime() {
     setDateTime(toISODate(viewYear, viewMonth, day), timeSlot || "");
   };
 
-  const selectSlot = (slot: string) => {
-    if (!date || unavailableSlots.includes(slot)) return;
-    setDateTime(date, slot);
-  };
-
   const selectedDateLabel = date
     ? new Date(date + "T00:00:00").toLocaleDateString("en-IN", {
         weekday: "long",
@@ -79,9 +74,42 @@ export default function Step2DateTime() {
       })
     : "";
 
+  const defaultSlotForDate = (dateIso: string) => {
+    const now = new Date();
+    const d = new Date(dateIso + "T00:00:00");
+    const sameDay =
+      now.getFullYear() === d.getFullYear() &&
+      now.getMonth() === d.getMonth() &&
+      now.getDate() === d.getDate();
+
+    if (!sameDay) return "9:00 AM";
+
+    const next = new Date(now.getTime());
+    next.setSeconds(0, 0);
+    const mins = next.getMinutes();
+    const roundedMinutes = mins <= 0 ? 0 : mins <= 30 ? 30 : 60;
+    next.setMinutes(roundedMinutes);
+    if (roundedMinutes === 60) next.setHours(next.getHours() + 1, 0, 0, 0);
+
+    return formatTimeSlot(next.getHours(), next.getMinutes());
+  };
+
+  useEffect(() => {
+    if (!date) return;
+    if (!timeSlot) {
+      setDateTime(date, defaultSlotForDate(date));
+      return;
+    }
+    if (isTimeSlotInPast(date, timeSlot)) {
+      setDateTime(date, defaultSlotForDate(date));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
+
+  const timeInvalid = !!(date && timeSlot && isTimeSlotInPast(date, timeSlot));
+
   return (
     <div>
-      {/* ⚠️ Slots to be managed manually by Anirudh — update this array weekly */}
       <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
         When would you like your session?
       </h2>
@@ -133,46 +161,42 @@ export default function Step2DateTime() {
           {date ? (
             <>
               <h3 className="text-sm font-medium text-dark-text md:text-base">
-                Available times on {selectedDateLabel}
+                Choose your preferred time on {selectedDateLabel}
               </h3>
-              <div className="mt-3 grid grid-cols-2 gap-2 md:mt-4 md:gap-3">
-                {availableTimeSlots.map((slot) => {
-                  const unavailable = unavailableSlots.includes(slot);
-                  const selected = timeSlot === slot;
-                  return (
-                    <button
-                      key={slot}
-                      type="button"
-                      disabled={unavailable}
-                      onClick={() => selectSlot(slot)}
-                      className={`rounded-full px-3 py-2 text-xs font-medium transition-colors md:px-4 md:py-2.5 md:text-sm ${
-                        selected
-                          ? "bg-primary text-white"
-                          : unavailable
-                            ? "bg-border text-muted cursor-not-allowed"
-                            : "border border-border hover:border-primary text-body-text"
-                      }`}
-                    >
-                      {slot}
-                    </button>
-                  );
-                })}
+              <p className="mt-1.5 text-sm leading-relaxed text-body-text">
+                Sessions can be booked any time, day or night. We&apos;ll confirm your slot on
+                WhatsApp.
+              </p>
+
+              <div className="mt-4">
+                <TimePicker
+                  value={timeSlot ?? undefined}
+                  onChange={(slot) => setDateTime(date, slot)}
+                  showCurrentTimeButton={false}
+                />
               </div>
-              {timeSlot && (
-                <p className="mt-3 text-xs text-muted md:mt-4 md:text-sm">
-                  Each session is {session.duration} min. Your session ends at{" "}
-                  {formatSessionEndTime(timeSlot, session.duration)}.
+
+              {timeInvalid && (
+                <p className="mt-3 text-sm font-medium text-red-600">
+                  Please choose a future time.
                 </p>
               )}
             </>
           ) : (
-            <p className="text-sm text-body-text">Select a date to see available times.</p>
+            <p className="text-sm text-body-text">
+              Select a date to choose your preferred time.
+            </p>
           )}
         </div>
       </div>
 
       <div className="mt-5 flex justify-end md:mt-8">
-        <Button variant="yellow" onClick={nextStep} disabled={!date || !timeSlot} className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
+        <Button
+          variant="yellow"
+          onClick={nextStep}
+          disabled={!date || !timeSlot || timeInvalid}
+          className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm"
+        >
           NEXT →
         </Button>
       </div>

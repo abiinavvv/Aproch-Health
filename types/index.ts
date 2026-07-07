@@ -42,6 +42,7 @@ export interface Psychologist {
   specialties: string[];
   bio: string;
   philosophy: string;
+  tagline: string;
   sessionFormat: string;
   whatsappNumber: string;
   email: string;

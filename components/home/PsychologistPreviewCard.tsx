@@ -29,7 +29,7 @@ export default function PsychologistPreviewCard() {
             >
               <GlassmorphismProfileCard
                 psychologist={p}
-                className="w-full max-w-none xl:max-w-[320px]"
+                className="w-full max-w-none xl:max-w-[380px]"
               />
             </ScrollReveal>
           ))}

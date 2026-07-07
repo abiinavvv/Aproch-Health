@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +28,28 @@ const sizeMap = {
   lg: "w-80 h-96",
 };
 
+const DESKTOP_MQ = "(min-width: 768px)";
+const FINE_POINTER_MQ = "(pointer: fine)";
+
+function useGlowEffectsEnabled(shouldReduceMotion: boolean | null) {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setEnabled(false);
+      return;
+    }
+
+    const desktopMq = window.matchMedia(DESKTOP_MQ);
+    const update = () => setEnabled(desktopMq.matches);
+    update();
+    desktopMq.addEventListener("change", update);
+    return () => desktopMq.removeEventListener("change", update);
+  }, [shouldReduceMotion]);
+
+  return enabled;
+}
+
 export function GlowCard({
   children,
   className = "",
@@ -39,9 +61,13 @@ export function GlowCard({
 }: GlowCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const glowEnabled = useGlowEffectsEnabled(shouldReduceMotion);
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (!glowEnabled) return;
+
+    const finePointerMq = window.matchMedia(FINE_POINTER_MQ);
+    if (!finePointerMq.matches) return;
 
     const syncPointer = (e: PointerEvent) => {
       const { clientX: x, clientY: y } = e;
@@ -56,7 +82,7 @@ export function GlowCard({
 
     document.addEventListener("pointermove", syncPointer);
     return () => document.removeEventListener("pointermove", syncPointer);
-  }, [shouldReduceMotion]);
+  }, [glowEnabled]);
 
   const { base, spread } = glowColorMap[glowColor];
 
@@ -64,6 +90,18 @@ export function GlowCard({
     if (customSize) return "";
     return sizeMap[size];
   };
+
+  const sharedClassName = cn(
+    "glow-card",
+    getSizeClasses(),
+    !customSize && "aspect-[3/4]",
+    "relative grid grid-rows-[1fr_auto] gap-4 rounded-2xl p-4",
+    className
+  );
+
+  if (!glowEnabled) {
+    return <div className={sharedClassName}>{children}</div>;
+  }
 
   const getInlineStyles = (): CSSProperties => {
     const baseStyles: CSSProperties = {
@@ -108,11 +146,8 @@ export function GlowCard({
       data-glow
       style={getInlineStyles()}
       className={cn(
-        "glow-card",
-        getSizeClasses(),
-        !customSize && "aspect-[3/4]",
-        "relative grid grid-rows-[1fr_auto] gap-4 rounded-2xl p-4 shadow-[0_1rem_2rem_-1rem_black] backdrop-blur-[5px]",
-        className
+        sharedClassName,
+        "shadow-[0_1rem_2rem_-1rem_black] backdrop-blur-[5px]"
       )}
     >
       <div data-glow aria-hidden />
