@@ -66,7 +66,7 @@ export default function Navbar() {
       >
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-4 lg:px-8">
         <Link href="/" className="group inline-flex items-center">
-          <SiteLogo priority className="h-8 md:h-13 lg:h-16" />
+          <SiteLogo priority className="h-13 md:h-14 lg:h-16" />
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
@@ -96,9 +96,6 @@ export default function Navbar() {
           <Link href="/crisis-help" className={crisisHelpMobileClassName}>
             Crisis Help
           </Link>
-          <div className="max-[400px]:hidden">
-            <NavbarClock className="h-8 min-w-[5.5rem] px-2 text-xs sm:h-10 sm:min-w-[6.75rem] sm:px-3 sm:text-sm" />
-          </div>
           <ThemeToggle className="h-8 w-8 sm:h-10 sm:w-10" />
           <button
             type="button"
