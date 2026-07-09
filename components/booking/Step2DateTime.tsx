@@ -84,12 +84,8 @@ export default function Step2DateTime() {
 
     if (!sameDay) return "9:00 AM";
 
-    const next = new Date(now.getTime());
+    const next = new Date(now.getTime() + 60_000);
     next.setSeconds(0, 0);
-    const mins = next.getMinutes();
-    const roundedMinutes = mins <= 0 ? 0 : mins <= 30 ? 30 : 60;
-    next.setMinutes(roundedMinutes);
-    if (roundedMinutes === 60) next.setHours(next.getHours() + 1, 0, 0, 0);
 
     return formatTimeSlot(next.getHours(), next.getMinutes());
   };

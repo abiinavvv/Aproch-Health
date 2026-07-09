@@ -15,7 +15,11 @@ export const sessionTypes: SessionType[] = [introductorySession];
 // Days of week where sessions are available (0 = Sunday)
 export const availableDays = [0, 1, 2, 3, 4, 5, 6];
 
-export const TIME_MINUTE_OPTIONS = [0, 30] as const;
+export const TIME_MINUTE_OPTIONS = Array.from({ length: 60 }, (_, i) => i);
+
+export function formatMinuteOption(minute: number): string {
+  return minute.toString().padStart(2, "0");
+}
 
 export function getSessionById(id: string) {
   return sessionTypes.find((s) => s.id === id);

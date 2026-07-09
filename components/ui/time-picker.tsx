@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Button from "@/components/ui/Button";
+import { TIME_MINUTE_OPTIONS, formatMinuteOption } from "@/lib/sessions";
 
 export interface TimePickerProps {
   value?: string;
@@ -48,7 +49,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     h = h % 12;
     if (h === 0) h = 12;
 
-    const minute = m < 30 ? "00" : "30";
+    const minute = String(m).padStart(2, "0");
     const hour = String(h).padStart(2, "0");
 
     return { hour, minute, amPm: ap };
@@ -98,7 +99,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     [onChange, value]
   );
 
-  const minuteOptions = ["00", "30"];
+  const minuteOptions = TIME_MINUTE_OPTIONS.map(formatMinuteOption);
 
   return (
     <div

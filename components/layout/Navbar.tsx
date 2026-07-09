@@ -66,7 +66,7 @@ export default function Navbar() {
       >
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-4 lg:px-8">
         <Link href="/" className="group inline-flex items-center">
-          <SiteLogo priority className="h-8 md:h-11 lg:h-12" />
+          <SiteLogo priority className="h-8 md:h-13 lg:h-16" />
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
