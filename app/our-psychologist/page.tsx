@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import GlassmorphismProfileCard from "@/components/ui/glassmorphism-profile-card";
+import PsychologistCardGrid from "@/components/psychologists/PsychologistCardGrid";
 import { getAllPsychologists } from "@/lib/psychologists";
 
 export default function OurPsychologistPage() {
@@ -13,7 +13,7 @@ export default function OurPsychologistPage() {
       <main className="flex-1">
         <section className="hero-gradient px-4 pt-24 pb-8 md:pb-12 lg:px-6 lg:py-20">
           <div className="mx-auto max-w-[800px] text-center">
-            <h1 className="font-display text-2xl font-bold leading-snug text-dark-text md:text-[clamp(2rem,4vw,3rem)]">
+            <h1 className="font-display text-3xl font-bold leading-snug text-dark-text md:text-[clamp(3rem,5vw,5rem)]">
               Our Psychologists
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-4 md:text-lg">
@@ -24,22 +24,8 @@ export default function OurPsychologistPage() {
         </section>
 
         <section className="px-4 py-8 md:py-12 lg:px-6 lg:py-20">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-4">
-            {psychologists.map((p, i) => (
-              <div
-                key={p.slug}
-                className={
-                  i === psychologists.length - 1 && psychologists.length % 4 !== 0
-                    ? "xl:col-span-4 xl:flex xl:justify-center"
-                    : undefined
-                }
-              >
-                <GlassmorphismProfileCard
-                  psychologist={p}
-                  className="w-full max-w-none xl:max-w-[380px]"
-                />
-              </div>
-            ))}
+          <div className="mx-auto max-w-[1400px]">
+            <PsychologistCardGrid psychologists={psychologists} />
           </div>
         </section>
 
