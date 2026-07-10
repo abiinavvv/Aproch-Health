@@ -37,7 +37,7 @@ export const psychologists: Psychologist[] = [
   {
     name: "Kripa K A",
     slug: "kripa-k-a",
-    designation: "Consultant Psychologist",
+    designation: "Clinical Psychologist",
     credentials: "M.Phil Psychology",
     rciNumber: "",
     photo: "/images/psychologists/kripa-k-a.png",
