@@ -198,7 +198,7 @@ export default function Step3UserDetails() {
                 >
                   {field.label}
                 </label>
-                <div className="flex">
+                <div className="flex min-w-0">
                   {field.id === "phone" && (
                     <Select
                       value={phoneCountryCode}
@@ -211,12 +211,12 @@ export default function Step3UserDetails() {
                       <SelectTrigger
                         size="sm"
                         aria-label="Country code"
-                        className="h-auto w-[5.75rem] shrink-0 rounded-l-xl rounded-r-none border-r-0 bg-hero-start px-2 py-2.5 text-sm md:w-[6.25rem] md:px-2.5 md:py-3"
+                        className="h-auto w-auto! max-w-[5.5rem] shrink-0 gap-1 rounded-l-xl rounded-r-none border-r-0 bg-hero-start px-1.5 py-2.5 text-xs md:max-w-[6.25rem] md:gap-1.5 md:px-2 md:py-3 md:text-sm"
                       >
                         <SelectValue>
-                          <span className="inline-flex items-center gap-1.5">
-                            <CountryFlag dialCode={phoneCountryCode} />
-                            <span>{phoneCountryCode}</span>
+                          <span className="inline-flex items-center gap-1">
+                            <CountryFlag dialCode={phoneCountryCode} className="h-3.5 w-4" />
+                            <span className="tabular-nums">{phoneCountryCode}</span>
                           </span>
                         </SelectValue>
                       </SelectTrigger>
@@ -272,7 +272,7 @@ export default function Step3UserDetails() {
                           "aria-describedby": `booking-${field.id}-error`,
                         }
                       : {})}
-                    className={`w-full rounded-xl border border-border px-3 py-2.5 text-sm text-dark-text outline-none focus:border-primary md:px-4 md:py-3 md:text-base ${field.id === "phone" ? "rounded-l-none" : ""}`}
+                    className={`min-w-0 rounded-xl border border-border px-3 py-2.5 text-sm text-dark-text outline-none focus:border-primary md:px-4 md:py-3 md:text-base ${field.id === "phone" ? "w-auto flex-1 rounded-l-none" : "w-full"}`}
                   />
                 </div>
                 {fieldError && (
