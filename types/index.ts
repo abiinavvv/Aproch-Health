@@ -13,6 +13,7 @@ export interface BookingState {
   name: string;
   email: string;
   phone: string;
+  phoneCountryCode: string;
   age: string;
   intakeMessage: string;
   currentStep: BookingStep;

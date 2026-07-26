@@ -81,7 +81,7 @@ export default function Hero() {
               <span className="text-hero-accent">a single touch</span>
             </h1>
             <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
-              Book your first conversation, lets handle the rest
+              Book your first conversation, let us handle the rest
             </p>
           </motion.div>
 
@@ -120,7 +120,7 @@ export default function Hero() {
               <span className="text-hero-accent">a single touch</span>
             </h1>
             <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
-              Book your first conversation, lets handle the rest
+              Book your first conversation, let us handle the rest
             </p>
 
             <div className="relative mt-9 inline-block w-full md:mt-10 md:w-auto">

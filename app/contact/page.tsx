@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SocialLinks from "@/components/layout/SocialLinks";
 import Button from "@/components/ui/Button";
 import FAQAccordion from "@/components/home/FAQAccordion";
-import { psychologist } from "@/lib/psychologist";
+import { SITE_EMAIL } from "@/lib/site";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { allFAQ } from "@/lib/faq";
 
@@ -144,12 +145,13 @@ export default function ContactPage() {
               <p className="mt-4 text-sm text-body-text md:mt-6 md:text-base">
                 Email:{" "}
                 <a
-                  href={`mailto:${psychologist.email}`}
+                  href={`mailto:${SITE_EMAIL}`}
                   className="break-all text-primary hover:underline"
                 >
-                  {psychologist.email}
+                  {SITE_EMAIL}
                 </a>
               </p>
+              <SocialLinks className="mt-4 flex gap-3 md:mt-5 md:gap-4" />
               <p className="mt-3 text-xs text-muted md:mt-4 md:text-sm">
                 We typically respond within a few hours.
               </p>

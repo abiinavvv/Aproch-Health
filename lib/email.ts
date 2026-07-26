@@ -5,7 +5,7 @@ import type { SendConfirmationRequest } from "@/types";
 // ⚠️ Replace RESEND_FROM_EMAIL with verified sender domain before launch
 export async function sendBookingConfirmation(data: SendConfirmationRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const from = process.env.RESEND_FROM_EMAIL || "hello@aprochhealth.com";
+  const from = process.env.RESEND_FROM_EMAIL || "support@aprochhere.com";
 
   const sessionLabel = `${introductorySession.label} (${introductorySession.duration} min)`;
 
@@ -40,7 +40,7 @@ export async function sendContactMessage(data: {
   message: string;
 }) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const from = process.env.RESEND_FROM_EMAIL || "hello@aprochhealth.com";
+  const from = process.env.RESEND_FROM_EMAIL || "support@aprochhere.com";
 
   return resend.emails.send({
     from,

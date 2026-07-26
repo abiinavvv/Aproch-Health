@@ -23,6 +23,7 @@ export const defaultBookingState: BookingState = {
   name: "",
   email: "",
   phone: "",
+  phoneCountryCode: "+91",
   age: "",
   intakeMessage: "",
   currentStep: 1,
@@ -157,6 +158,7 @@ export function saveBookingToSession(state: BookingState) {
       name,
       email,
       phone,
+      phoneCountryCode,
       age,
       intakeMessage,
       currentStep,
@@ -172,6 +174,7 @@ export function saveBookingToSession(state: BookingState) {
         name,
         email,
         phone,
+        phoneCountryCode,
         age,
         intakeMessage,
         currentStep,
@@ -185,7 +188,8 @@ export function loadBookingFromSession(): BookingState | null {
   const raw = sessionStorage.getItem("bookingState");
   if (!raw) return null;
   try {
-    return JSON.parse(raw) as BookingState;
+    const parsed = JSON.parse(raw) as BookingState;
+    return { ...defaultBookingState, ...parsed };
   } catch {
     return null;
   }

@@ -1,24 +1,7 @@
 import Link from "next/link";
 import SiteLogo from "@/components/brand/SiteLogo";
-import { AGENCY_NAME, getAgencyUrl, getInstagramUrl, getLinkedInUrl, showAgencyCredit } from "@/lib/site";
-
-function InstagramIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="md:h-5 md:w-5">
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function LinkedInIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="md:h-5 md:w-5">
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V23h-4v-7.1c0-1.7-.03-3.88-2.37-3.88-2.37 0-2.73 1.85-2.73 3.76V23h-4V8.5z" />
-    </svg>
-  );
-}
+import SocialLinks from "@/components/layout/SocialLinks";
+import { AGENCY_NAME, getAgencyUrl, showAgencyCredit } from "@/lib/site";
 
 const footerLinks = [
   { href: "/how-it-works", label: "How It Works" },
@@ -33,9 +16,6 @@ const footerLinks = [
 ];
 
 export default function Footer() {
-  const instagramUrl = getInstagramUrl();
-  const linkedInUrl = getLinkedInUrl();
-
   return (
     <footer className="theme-surface border-t border-border bg-hero-cream/70 px-4 py-8 md:py-12 lg:px-6 lg:py-16">
       <div className="mx-auto max-w-[1200px]">
@@ -60,32 +40,7 @@ export default function Footer() {
           ))}
         </div>
 
-        {(instagramUrl || linkedInUrl) && (
-          <div className="mb-5 flex gap-3 md:mb-8 md:gap-4">
-            {instagramUrl && (
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-muted transition-colors hover:text-hero-accent"
-              >
-                <InstagramIcon />
-              </a>
-            )}
-            {linkedInUrl && (
-              <a
-                href={linkedInUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-muted transition-colors hover:text-hero-accent"
-              >
-                <LinkedInIcon />
-              </a>
-            )}
-          </div>
-        )}
+        <SocialLinks className="mb-5 flex gap-3 md:mb-8 md:gap-4" />
 
         <p className="text-xs text-muted md:text-sm">
           © {new Date().getFullYear()} Aproch Health. All rights reserved.

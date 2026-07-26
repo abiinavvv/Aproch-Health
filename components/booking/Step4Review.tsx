@@ -27,6 +27,7 @@ export default function Step4Review() {
     name,
     email,
     phone,
+    phoneCountryCode,
     age,
     goToStep,
   } = booking;
@@ -56,6 +57,7 @@ export default function Step4Review() {
       name: booking.name,
       email: booking.email,
       phone: booking.phone,
+      phoneCountryCode: booking.phoneCountryCode,
       age: booking.age,
       intakeMessage: booking.intakeMessage,
       currentStep: 5,
@@ -72,6 +74,7 @@ export default function Step4Review() {
       name: booking.name,
       email: booking.email,
       phone: booking.phone,
+      phoneCountryCode: booking.phoneCountryCode,
       age: booking.age,
       intakeMessage: booking.intakeMessage,
       currentStep: 5,
@@ -143,7 +146,7 @@ export default function Step4Review() {
             Your details
           </p>
           <p className="mt-2 text-sm text-dark-text md:mt-3">{name}</p>
-          <p className="mt-0.5 text-xs text-body-text md:mt-1 md:text-sm">+91 {phone} · {email}</p>
+          <p className="mt-0.5 text-xs text-body-text md:mt-1 md:text-sm">{phoneCountryCode} {phone} · {email}</p>
           <p className="mt-0.5 text-xs text-body-text md:mt-1 md:text-sm">Age {age}</p>
         </div>
 

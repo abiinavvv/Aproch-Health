@@ -3,6 +3,13 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useBooking } from "@/context/BookingContext";
 import type { SessionMode } from "@/types";
 
@@ -10,8 +17,71 @@ function validateEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function validatePhone(phone: string) {
-  return /^\d{10}$/.test(phone.replace(/\s/g, ""));
+const COUNTRY_CODES = [
+  {
+    code: "+91",
+    flag: "🇮🇳",
+    flagSrc: "/images/flags/in.png",
+    digits: 10,
+  },
+  {
+    code: "+971",
+    flag: "🇦🇪",
+    flagSrc: "/images/flags/ae.png",
+    digits: 9,
+  },
+] as const;
+
+function getCountryDigits(dialCode: string) {
+  return COUNTRY_CODES.find((c) => c.code === dialCode)?.digits ?? 10;
+}
+
+function getCountry(dialCode: string) {
+  return COUNTRY_CODES.find((c) => c.code === dialCode) ?? COUNTRY_CODES[0];
+}
+
+function CountryFlag({
+  dialCode,
+  className = "h-4 w-5",
+}: {
+  dialCode: string;
+  className?: string;
+}) {
+  const country = getCountry(dialCode);
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={country.flagSrc}
+      alt={country.flag}
+      width={20}
+      height={15}
+      className={`inline-block rounded-[2px] object-cover ${className}`}
+    />
+  );
+}
+
+function validatePhone(phone: string, dialCode: string) {
+  const digits = getCountryDigits(dialCode);
+  return new RegExp(`^\\d{${digits}}$`).test(phone.replace(/\D/g, ""));
+}
+
+/** Strip country codes / leading zeros from autofill and cap to country length. */
+function normalizePhoneInput(raw: string, dialCode: string): string {
+  let digits = raw.replace(/\D/g, "");
+  const max = getCountryDigits(dialCode);
+
+  digits = digits.replace(/^0+/, "");
+
+  // Longer prefixes first so 971 is not partially matched as 91
+  for (const prefix of ["971", "91"] as const) {
+    if (digits.startsWith(prefix) && digits.length > max) {
+      digits = digits.slice(prefix.length);
+      break;
+    }
+  }
+
+  digits = digits.replace(/^0+/, "");
+  return digits.slice(0, max);
 }
 
 export default function Step3UserDetails() {
@@ -20,6 +90,7 @@ export default function Step3UserDetails() {
     name,
     email,
     phone,
+    phoneCountryCode,
     age,
     intakeMessage,
     setSessionMode,
@@ -42,7 +113,8 @@ export default function Step3UserDetails() {
         break;
       case "phone":
         if (!value.trim()) error = "Phone is required";
-        else if (!validatePhone(value)) error = "Enter a valid 10-digit number";
+        else if (!validatePhone(value, phoneCountryCode))
+          error = `Enter a valid ${getCountryDigits(phoneCountryCode)}-digit number`;
         break;
       case "age": {
         const n = parseInt(value, 10);
@@ -59,7 +131,7 @@ export default function Step3UserDetails() {
     sessionMode &&
     name.trim().length >= 2 &&
     validateEmail(email) &&
-    validatePhone(phone) &&
+    validatePhone(phone, phoneCountryCode) &&
     parseInt(age, 10) >= 18 &&
     parseInt(age, 10) <= 65;
 
@@ -113,7 +185,7 @@ export default function Step3UserDetails() {
             {[
               { id: "name", label: "Full Name", type: "text", value: name },
               { id: "email", label: "Email Address", type: "email", value: email },
-              { id: "phone", label: "Phone Number", type: "tel", value: phone, prefix: "+91" },
+              { id: "phone", label: "Phone Number", type: "tel", value: phone },
               { id: "age", label: "Age", type: "number", value: age },
             ].map((field) => {
               const fieldError = errors[field.id];
@@ -127,31 +199,80 @@ export default function Step3UserDetails() {
                   {field.label}
                 </label>
                 <div className="flex">
-                  {field.prefix && (
-                    <span className="flex items-center rounded-l-xl border border-r-0 border-border bg-hero-start px-2.5 text-xs text-muted md:px-3 md:text-sm">
-                      {field.prefix}
-                    </span>
+                  {field.id === "phone" && (
+                    <Select
+                      value={phoneCountryCode}
+                      onValueChange={(code) => {
+                        const normalized = normalizePhoneInput(phone, code);
+                        setUserDetails({ phoneCountryCode: code, phone: normalized });
+                        validateField("phone", normalized);
+                      }}
+                    >
+                      <SelectTrigger
+                        size="sm"
+                        aria-label="Country code"
+                        className="h-auto w-[5.75rem] shrink-0 rounded-l-xl rounded-r-none border-r-0 bg-hero-start px-2 py-2.5 text-sm md:w-[6.25rem] md:px-2.5 md:py-3"
+                      >
+                        <SelectValue>
+                          <span className="inline-flex items-center gap-1.5">
+                            <CountryFlag dialCode={phoneCountryCode} />
+                            <span>{phoneCountryCode}</span>
+                          </span>
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {COUNTRY_CODES.map((c) => (
+                          <SelectItem key={c.code} value={c.code}>
+                            <span className="inline-flex items-center gap-2">
+                              <CountryFlag dialCode={c.code} />
+                              <span>{c.code}</span>
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   )}
                   <input
                     id={`booking-${field.id}`}
                     name={field.id}
                     type={field.type}
                     value={field.value}
+                    inputMode={field.id === "phone" ? "numeric" : undefined}
+                    autoComplete={field.id === "phone" ? "tel-national" : undefined}
                     min={field.id === "age" ? 18 : undefined}
                     max={field.id === "age" ? 65 : undefined}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      if (field.id === "phone") {
+                        const normalized = normalizePhoneInput(
+                          e.target.value,
+                          phoneCountryCode
+                        );
+                        setUserDetails({ phone: normalized });
+                        return;
+                      }
                       setUserDetails({
                         [field.id]: e.target.value,
-                      })
-                    }
-                    onBlur={(e) => validateField(field.id, e.target.value)}
+                      });
+                    }}
+                    onBlur={(e) => {
+                      if (field.id === "phone") {
+                        const normalized = normalizePhoneInput(
+                          e.target.value,
+                          phoneCountryCode
+                        );
+                        if (normalized !== phone) setUserDetails({ phone: normalized });
+                        validateField("phone", normalized);
+                        return;
+                      }
+                      validateField(field.id, e.target.value);
+                    }}
                     {...(fieldError
                       ? {
                           "aria-invalid": "true",
                           "aria-describedby": `booking-${field.id}-error`,
                         }
                       : {})}
-                    className={`w-full rounded-xl border border-border px-3 py-2.5 text-sm text-dark-text outline-none focus:border-primary md:px-4 md:py-3 md:text-base ${field.prefix ? "rounded-l-none" : ""}`}
+                    className={`w-full rounded-xl border border-border px-3 py-2.5 text-sm text-dark-text outline-none focus:border-primary md:px-4 md:py-3 md:text-base ${field.id === "phone" ? "rounded-l-none" : ""}`}
                   />
                 </div>
                 {fieldError && (

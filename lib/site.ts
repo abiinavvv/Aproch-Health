@@ -2,9 +2,12 @@ export const SITE_NAME = "Aproch Health";
 export const SITE_TAGLINE = "Mental wellness support for young India";
 export const SITE_DESCRIPTION =
   "Book a session with a verified clinical psychologist. Online. Affordable. Confidential.";
-export const SITE_EMAIL = "hello@aprochhealth.com";
+export const SITE_EMAIL = "support@aprochhere.com";
 
 export const DEFAULT_WHATSAPP_NUMBER = "918921849028";
+export const DEFAULT_INSTAGRAM_URL = "https://www.instagram.com/aprochhere";
+export const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/company/aprochhere/";
+export const DEFAULT_FACEBOOK_URL = "https://www.facebook.com/share/1Ef38bBwd6/";
 
 export function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -41,14 +44,16 @@ export function getRciNumber(): string {
   return process.env.NEXT_PUBLIC_RCI_NUMBER?.trim() || "";
 }
 
-export function getInstagramUrl(): string | null {
-  const url = process.env.NEXT_PUBLIC_INSTAGRAM_URL?.trim();
-  return url || null;
+export function getInstagramUrl(): string {
+  return process.env.NEXT_PUBLIC_INSTAGRAM_URL?.trim() || DEFAULT_INSTAGRAM_URL;
 }
 
-export function getLinkedInUrl(): string | null {
-  const url = process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim();
-  return url || null;
+export function getLinkedInUrl(): string {
+  return process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || DEFAULT_LINKEDIN_URL;
+}
+
+export function getFacebookUrl(): string {
+  return process.env.NEXT_PUBLIC_FACEBOOK_URL?.trim() || DEFAULT_FACEBOOK_URL;
 }
 
 /** Agency footer credit — set NEXT_PUBLIC_SHOW_AGENCY_CREDIT=false to hide */

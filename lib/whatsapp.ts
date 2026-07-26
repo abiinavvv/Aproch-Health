@@ -39,7 +39,7 @@ export function buildBookingWhatsAppMessage(booking: BookingState): string {
     "Hi, I'd like to book a session with Aproch Health.",
     "",
     `*Name:* ${booking.name}`,
-    `*Phone:* +91 ${booking.phone}`,
+    `*Phone:* ${booking.phoneCountryCode} ${booking.phone}`,
     `*Email:* ${booking.email}`,
     `*Age:* ${booking.age}`,
     "",
