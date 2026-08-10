@@ -3,8 +3,8 @@ import type { CSSProperties } from "react";
 /** Matches --hero-fade-duration in globals.css */
 export const HERO_LAYER_FADE_MS = 1400;
 
-/** Desktop hero video crossfade (slightly faster than imagery layers) */
-export const HERO_VIDEO_FADE_MS = 1000;
+/** Keep desktop hero video in sync with fallback/imagery crossfade */
+export const HERO_VIDEO_FADE_MS = HERO_LAYER_FADE_MS;
 
 export function heroThemeLayerStyle(
   visible: boolean,

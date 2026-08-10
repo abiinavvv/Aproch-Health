@@ -243,15 +243,18 @@ h3 {
   min-height: 100%;
   width: auto;
   height: auto;
-  transform: translate(-50%, -50%) scale(1.08);
+  /* Pan right so the bottom-right watermark is cropped by overflow:hidden */
+  transform: translate(calc(-50% + 6%), -50%) scale(1.12);
   object-fit: cover;
-  object-position: 56% 32%;
+  object-position: 50% 32%;
 }
 
 .hero-video-fallback {
   background-size: cover;
-  background-position: 56% 32%;
-  transform: scale(1.08);
+  background-position: 50% 32%;
+  /* Same pan direction/amount as .hero-video-cover (scale then shift right) */
+  transform: translateX(6%) scale(1.12);
+  transform-origin: center center;
 }
 
 /* Video crossfade wrappers */

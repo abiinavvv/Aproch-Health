@@ -62,7 +62,7 @@ export default function HeroVideo() {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Fallback images — crossfade tied to data-theme */}
+      {/* Fallback images temporarily disabled
       <div
         className={`hero-video-fallback hero-theme-day absolute inset-0 md:block ${fadeClass}`}
         style={{
@@ -83,6 +83,7 @@ export default function HeroVideo() {
         }}
         aria-hidden
       />
+      */}
 
       {!reducedMotion && (
         <>
