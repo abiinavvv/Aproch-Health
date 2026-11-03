@@ -9,8 +9,25 @@ import type { Psychologist } from "@/types";
 import { getDefaultPsychologist, formatSessionFee } from "@/lib/psychologists";
 import { Calendar, Clock, Heart, IndianRupee, User, UserRound } from "lucide-react";
 
+export type ProfessionalPreview = {
+  name: string;
+  photo: string;
+  photoWebp?: string;
+  designation: string;
+  credentials: string;
+  hoursValue: string;
+  hoursLabel: string;
+  feeDisplay: string;
+  feeNote: string;
+  tagline: string;
+  bookHref: string;
+  profileHref: string;
+  bookLabel?: string;
+};
+
 export type GlassmorphismProfileCardProps = {
   psychologist?: Psychologist;
+  professional?: ProfessionalPreview;
   statusText?: string;
   bookHref?: string;
   profileHref?: string;
@@ -38,8 +55,31 @@ function StatIcon({ children }: { children: ReactNode }) {
   );
 }
 
+function toPreviewFromPsychologist(
+  psychologist: Psychologist,
+  bookHref?: string,
+  profileHref?: string
+): ProfessionalPreview {
+  return {
+    name: psychologist.name,
+    photo: psychologist.photo,
+    photoWebp: psychologist.photoWebp,
+    designation: psychologist.designation,
+    credentials: psychologist.credentials,
+    hoursValue: psychologist.sessionHours,
+    hoursLabel: "hours of therapy experience",
+    feeDisplay: formatSessionFee(psychologist.sessionFee),
+    feeNote: "per session · video or audio",
+    tagline: psychologist.tagline,
+    bookHref: bookHref ?? `/book?psychologist=${psychologist.slug}`,
+    profileHref: profileHref ?? `/our-psychologist/${psychologist.slug}`,
+    bookLabel: "Book a Session",
+  };
+}
+
 export default function GlassmorphismProfileCard({
-  psychologist = getDefaultPsychologist(),
+  psychologist,
+  professional,
   statusText = "Available for online sessions",
   bookHref,
   profileHref,
@@ -47,9 +87,13 @@ export default function GlassmorphismProfileCard({
 }: GlassmorphismProfileCardProps) {
   const [timeText, setTimeText] = useState("");
 
-  const resolvedBookHref = bookHref ?? `/book?psychologist=${psychologist.slug}`;
-  const resolvedProfileHref =
-    profileHref ?? `/our-psychologist/${psychologist.slug}`;
+  const preview =
+    professional ??
+    toPreviewFromPsychologist(
+      psychologist ?? getDefaultPsychologist(),
+      bookHref,
+      profileHref
+    );
 
   useEffect(() => {
     const updateClock = () => {
@@ -92,9 +136,9 @@ export default function GlassmorphismProfileCard({
         <div className="flex flex-col items-center">
           <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl border border-border/80 md:h-40 md:w-40 lg:h-44 lg:w-44">
             <PsychologistPhoto
-              photo={psychologist.photo}
-              photoWebp={psychologist.photoWebp}
-              alt={psychologist.name}
+              photo={preview.photo}
+              photoWebp={preview.photoWebp}
+              alt={preview.name}
               fill
               className="psychologist-photo psychologist-profile-photo"
             />
@@ -102,16 +146,16 @@ export default function GlassmorphismProfileCard({
 
           <div className="mt-3 w-full text-center md:mt-4">
             <h3 className="font-display text-base font-bold leading-tight text-dark-text md:text-lg lg:text-xl">
-              {psychologist.name}
+              {preview.name}
             </h3>
             <div className="mt-1 flex justify-center">
               <LotusMark />
             </div>
             <p className="mt-1.5 text-[9px] font-medium uppercase leading-snug tracking-wide text-body-text md:text-[10px]">
-              {psychologist.designation}
+              {preview.designation}
             </p>
             <p className="mt-0.5 text-[9px] font-medium uppercase tracking-wide text-muted md:text-[10px]">
-              {psychologist.credentials}
+              {preview.credentials}
             </p>
           </div>
         </div>
@@ -123,10 +167,10 @@ export default function GlassmorphismProfileCard({
             </StatIcon>
             <div className="min-w-0 text-left leading-tight">
               <p className="text-xs font-bold text-dark-text md:text-sm">
-                {psychologist.sessionHours}
+                {preview.hoursValue}
               </p>
               <p className="text-[9px] leading-tight text-muted md:text-[10px]">
-                hours of therapy experience
+                {preview.hoursLabel}
               </p>
             </div>
           </div>
@@ -136,10 +180,10 @@ export default function GlassmorphismProfileCard({
             </StatIcon>
             <div className="min-w-0 text-left leading-tight">
               <p className="text-xs font-bold text-dark-text md:text-sm">
-                {formatSessionFee(psychologist.sessionFee)}
+                {preview.feeDisplay}
               </p>
               <p className="text-[9px] leading-tight text-muted md:text-[10px]">
-                per session · video or audio
+                {preview.feeNote}
               </p>
             </div>
           </div>
@@ -150,23 +194,23 @@ export default function GlassmorphismProfileCard({
             <Heart className="h-2.5 w-2.5 fill-dark-text text-dark-text md:h-3 md:w-3" aria-hidden />
           </div>
           <p className="rounded-full border border-border/80 px-3 py-2 text-center font-display text-xs italic text-dark-text md:px-4 md:py-2.5 md:text-sm">
-            — {psychologist.tagline} —
+            — {preview.tagline} —
           </p>
         </div>
 
         <div className="mt-4 md:mt-4">
           <Link
-            href={resolvedBookHref}
+            href={preview.bookHref}
             className="psychologist-profile-cta inline-flex h-10 w-full items-center justify-center gap-2 rounded-2xl text-xs font-semibold transition-colors md:h-9 md:rounded-xl md:text-xs"
           >
             <Calendar className="h-3.5 w-3.5 shrink-0" aria-hidden />
-            Book a Session
+            {preview.bookLabel ?? "Book a Session"}
           </Link>
         </div>
 
         <div className="mt-2 md:mt-2">
           <Link
-            href={resolvedProfileHref}
+            href={preview.profileHref}
             className="inline-flex h-9 w-full items-center justify-center gap-2 text-xs font-semibold text-dark-text transition-colors hover:text-primary md:h-8 md:text-xs"
           >
             <UserRound className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />

@@ -10,13 +10,19 @@ import {
 import type {
   BookingState,
   BookingStep,
+  NutritionOfferId,
+  ServiceId,
   SessionMode,
   SessionTypeId,
 } from "@/types";
+import { getDefaultNutritionist } from "@/lib/nutritionists";
 
 export const defaultBookingState: BookingState = {
+  service: null,
   psychologistSlug: null,
-  sessionType: "introductory",
+  nutritionistSlug: null,
+  sessionType: null,
+  nutritionOfferId: null,
   date: null,
   timeSlot: null,
   sessionMode: null,
@@ -29,9 +35,22 @@ export const defaultBookingState: BookingState = {
   currentStep: 1,
 };
 
+/** Last step number on the /book page (before /confirmation). */
+export function getBookingMaxBookStep(service: ServiceId): BookingStep {
+  return service === "nutrition" ? 5 : 4;
+}
+
+/** Confirmation / Done step number. */
+export function getBookingDoneStep(service: ServiceId): BookingStep {
+  return service === "nutrition" ? 6 : 5;
+}
+
 interface BookingContextValue extends BookingState {
+  setService: (service: ServiceId) => void;
   setPsychologistSlug: (slug: string) => void;
+  setNutritionistSlug: (slug: string) => void;
   setSessionType: (type: SessionTypeId) => void;
+  setNutritionOfferId: (id: NutritionOfferId) => void;
   setDateTime: (date: string, timeSlot: string) => void;
   setSessionMode: (mode: SessionMode) => void;
   setUserDetails: (details: Partial<BookingState>) => void;
@@ -39,9 +58,12 @@ interface BookingContextValue extends BookingState {
   goToStep: (step: BookingStep) => void;
   nextStep: () => void;
   prevStep: () => void;
+  clearService: () => void;
   resetBooking: () => void;
   hydrateBooking: (state: BookingState) => void;
   isBookingComplete: boolean;
+  maxBookStep: BookingStep;
+  doneStep: BookingStep;
 }
 
 const BookingContext = createContext<BookingContextValue | null>(null);
@@ -56,12 +78,57 @@ export function BookingProvider({
   const [state, setState] = useState<BookingState>(initial ?? defaultBookingState);
   const [isBookingComplete, setIsBookingComplete] = useState(false);
 
+  const setService = useCallback((service: ServiceId) => {
+    setState((s) => ({
+      ...s,
+      service,
+      psychologistSlug: null,
+      nutritionistSlug:
+        service === "nutrition" ? getDefaultNutritionist().slug : null,
+      nutritionOfferId: null,
+      sessionType: service === "therapy" ? "introductory" : null,
+      date: null,
+      timeSlot: null,
+      sessionMode: null,
+      currentStep: 1,
+    }));
+  }, []);
+
+  const clearService = useCallback(() => {
+    setState((s) => ({
+      ...defaultBookingState,
+      name: s.name,
+      email: s.email,
+      phone: s.phone,
+      phoneCountryCode: s.phoneCountryCode,
+      age: s.age,
+      intakeMessage: s.intakeMessage,
+    }));
+  }, []);
+
   const setPsychologistSlug = useCallback((slug: string) => {
-    setState((s) => ({ ...s, psychologistSlug: slug, sessionType: "introductory" }));
+    setState((s) => ({
+      ...s,
+      service: "therapy",
+      psychologistSlug: slug,
+      sessionType: "introductory",
+    }));
+  }, []);
+
+  const setNutritionistSlug = useCallback((slug: string) => {
+    setState((s) => ({
+      ...s,
+      service: "nutrition",
+      nutritionistSlug: slug,
+    }));
   }, []);
 
   const setSessionType = useCallback((type: SessionTypeId) => {
     setState((s) => ({ ...s, sessionType: type }));
+  }, []);
+
+  const setNutritionOfferId = useCallback((id: NutritionOfferId) => {
+    setState((s) => ({ ...s, nutritionOfferId: id, service: "nutrition" }));
   }, []);
 
   const setDateTime = useCallback((date: string, timeSlot: string) => {
@@ -85,17 +152,35 @@ export function BookingProvider({
   }, []);
 
   const nextStep = useCallback(() => {
-    setState((s) => ({
-      ...s,
-      currentStep: Math.min(5, s.currentStep + 1) as BookingStep,
-    }));
+    setState((s) => {
+      if (!s.service) return s;
+      const max = getBookingDoneStep(s.service);
+      return {
+        ...s,
+        currentStep: Math.min(max, s.currentStep + 1) as BookingStep,
+      };
+    });
   }, []);
 
   const prevStep = useCallback(() => {
-    setState((s) => ({
-      ...s,
-      currentStep: Math.max(1, s.currentStep - 1) as BookingStep,
-    }));
+    setState((s) => {
+      if (s.currentStep <= 1 && s.service) {
+        // Back from first service step → return to service picker
+        return {
+          ...defaultBookingState,
+          name: s.name,
+          email: s.email,
+          phone: s.phone,
+          phoneCountryCode: s.phoneCountryCode,
+          age: s.age,
+          intakeMessage: s.intakeMessage,
+        };
+      }
+      return {
+        ...s,
+        currentStep: Math.max(1, s.currentStep - 1) as BookingStep,
+      };
+    });
   }, []);
 
   const resetBooking = useCallback(() => {
@@ -104,15 +189,28 @@ export function BookingProvider({
   }, []);
 
   const hydrateBooking = useCallback((saved: BookingState) => {
-    setState({ ...saved, currentStep: 5 });
+    const service = saved.service ?? "therapy";
+    setState({
+      ...defaultBookingState,
+      ...saved,
+      service,
+      currentStep: getBookingDoneStep(service),
+    });
   }, []);
+
+  const activeService = state.service ?? "therapy";
+  const maxBookStep = getBookingMaxBookStep(activeService);
+  const doneStep = getBookingDoneStep(activeService);
 
   return (
     <BookingContext.Provider
       value={{
         ...state,
+        setService,
         setPsychologistSlug,
+        setNutritionistSlug,
         setSessionType,
+        setNutritionOfferId,
         setDateTime,
         setSessionMode,
         setUserDetails,
@@ -120,9 +218,12 @@ export function BookingProvider({
         goToStep,
         nextStep,
         prevStep,
+        clearService,
         resetBooking,
         hydrateBooking,
         isBookingComplete,
+        maxBookStep,
+        doneStep,
       }}
     >
       {children}
@@ -149,35 +250,24 @@ export function isBookingMarkedComplete(): boolean {
 
 export function saveBookingToSession(state: BookingState) {
   if (typeof window !== "undefined") {
-    const {
-      psychologistSlug,
-      sessionType,
-      date,
-      timeSlot,
-      sessionMode,
-      name,
-      email,
-      phone,
-      phoneCountryCode,
-      age,
-      intakeMessage,
-      currentStep,
-    } = state;
     sessionStorage.setItem(
       "bookingState",
       JSON.stringify({
-        psychologistSlug,
-        sessionType,
-        date,
-        timeSlot,
-        sessionMode,
-        name,
-        email,
-        phone,
-        phoneCountryCode,
-        age,
-        intakeMessage,
-        currentStep,
+        service: state.service,
+        psychologistSlug: state.psychologistSlug,
+        nutritionistSlug: state.nutritionistSlug,
+        sessionType: state.sessionType,
+        nutritionOfferId: state.nutritionOfferId,
+        date: state.date,
+        timeSlot: state.timeSlot,
+        sessionMode: state.sessionMode,
+        name: state.name,
+        email: state.email,
+        phone: state.phone,
+        phoneCountryCode: state.phoneCountryCode,
+        age: state.age,
+        intakeMessage: state.intakeMessage,
+        currentStep: state.currentStep,
       })
     );
   }
@@ -188,7 +278,7 @@ export function loadBookingFromSession(): BookingState | null {
   const raw = sessionStorage.getItem("bookingState");
   if (!raw) return null;
   try {
-    const parsed = JSON.parse(raw) as BookingState;
+    const parsed = JSON.parse(raw) as Partial<BookingState>;
     return { ...defaultBookingState, ...parsed };
   } catch {
     return null;

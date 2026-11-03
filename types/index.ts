@@ -1,12 +1,21 @@
+export type ServiceId = "therapy" | "nutrition";
+
 export type SessionTypeId = "introductory";
+
+export type NutritionOfferId = "nutrition-consult" | "nutrition-package";
 
 export type SessionMode = "video" | "audio";
 
-export type BookingStep = 1 | 2 | 3 | 4 | 5;
+/** Therapy book steps 1–4 + done=5; nutrition book steps 1–5 + done=6 */
+export type BookingStep = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface BookingState {
+  /** null until the user picks Therapy or Nutrition on /book */
+  service: ServiceId | null;
   psychologistSlug: string | null;
+  nutritionistSlug: string | null;
   sessionType: SessionTypeId | null;
+  nutritionOfferId: NutritionOfferId | null;
   date: string | null;
   timeSlot: string | null;
   sessionMode: SessionMode | null;
@@ -28,6 +37,15 @@ export interface SessionType {
   description: string;
 }
 
+export interface NutritionOffer {
+  id: NutritionOfferId;
+  label: string;
+  duration: number;
+  price: number;
+  tagline: string;
+  description: string;
+}
+
 export interface Psychologist {
   name: string;
   slug: string;
@@ -40,6 +58,28 @@ export interface Psychologist {
   experience: string;
   sessionHours: string;
   sessionFee: number;
+  specialties: string[];
+  bio: string;
+  philosophy: string;
+  tagline: string;
+  sessionFormat: string;
+  whatsappNumber: string;
+  email: string;
+}
+
+export interface Nutritionist {
+  name: string;
+  slug: string;
+  designation: string;
+  credentials: string;
+  photo: string;
+  photoWebp?: string;
+  languages: string[];
+  experience: string;
+  sessionHours: string;
+  /** Listing / consultation fee */
+  sessionFee: number;
+  packageFee: number;
   specialties: string[];
   bio: string;
   philosophy: string;

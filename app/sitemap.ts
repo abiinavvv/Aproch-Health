@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site";
 import { getAllPsychologists } from "@/lib/psychologists";
+import { getAllNutritionists } from "@/lib/nutritionists";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getSiteUrl();
@@ -10,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/how-it-works",
     "/our-psychologist",
+    "/therapy",
+    "/nutrition",
     "/book",
     "/contact",
     "/crisis-help",
@@ -34,5 +37,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [...staticEntries, ...profileEntries];
+  const nutritionEntries: MetadataRoute.Sitemap = getAllNutritionists().map(
+    (n) => ({
+      url: `${baseUrl}/nutrition/${n.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })
+  );
+
+  return [...staticEntries, ...profileEntries, ...nutritionEntries];
 }

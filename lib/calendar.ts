@@ -11,6 +11,7 @@ export function formatDisplayDate(isoDate: string): string {
 
 export function buildGoogleCalendarUrl(params: {
   psychologistName: string;
+  title?: string;
   date: string;
   timeSlot: string;
   durationMinutes: number;
@@ -24,7 +25,7 @@ export function buildGoogleCalendarUrl(params: {
     d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
   const text = encodeURIComponent(
-    `Therapy Session with ${params.psychologistName}`
+    params.title ?? `Therapy Session with ${params.psychologistName}`
   );
   const dates = `${formatISO(start)}/${formatISO(end)}`;
   const details = encodeURIComponent(

@@ -26,16 +26,19 @@ const steps = [
     icon: CalendarCheck,
     number: "Step 1",
     title: "Choose your psychologist",
+    description: "Browse available professionals and select the right fit.",
   },
   {
     icon: Clock,
     number: "Step 2",
     title: "Pick a date & time",
+    description: "Select a slot that works for you.",
   },
   {
     icon: MessageCircle,
     number: "Step 3",
     title: "Confirm on WhatsApp",
+    description: "Send your booking request and we’ll confirm your slot.",
   },
 ];
 
@@ -114,6 +117,9 @@ function StepCard({
 
       <span className="mt-2 text-center text-xs font-semibold leading-tight text-dark-text md:mt-1.5 md:text-base lg:text-lg">
         {step.title}
+      </span>
+      <span className="mt-1.5 max-w-[11rem] text-center text-[11px] leading-snug text-body-text md:mt-2 md:max-w-[14rem] md:text-sm">
+        {step.description}
       </span>
     </motion.div>
   );
@@ -201,14 +207,18 @@ export default function HowItWorksSteps() {
       ref={sectionRef}
       className="theme-surface min-h-0 bg-white px-4 py-10 md:min-h-[520px] md:py-16 lg:px-6 lg:py-28"
     >
-      <div className="mx-auto max-w-[1200px]">
-        <p className="mb-3 text-center text-xs font-medium uppercase tracking-widest text-primary">
+      <div className="mx-auto w-full max-w-[1200px]">
+        <p className="mb-3 text-left text-xs font-medium uppercase tracking-widest text-primary md:text-center">
           Simple process
         </p>
 
-        <h2 className="mb-8 text-center font-display text-2xl font-semibold text-dark-text md:mb-12 md:text-3xl lg:mb-20 lg:text-4xl">
+        <h2 className="mb-3 text-left font-display text-2xl font-semibold text-dark-text md:mb-4 md:text-center md:text-3xl lg:text-4xl">
           Book your first session in 3 steps
         </h2>
+        <p className="mb-8 max-w-xl text-left text-sm leading-relaxed text-body-text md:mx-auto md:mb-12 md:text-center md:text-base lg:mb-20">
+          From choosing a professional to confirming on WhatsApp — clear steps,
+          no guesswork.
+        </p>
 
         {/* Horizontal row — all breakpoints */}
         <div className="flex w-full items-start justify-center">

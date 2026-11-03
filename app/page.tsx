@@ -22,9 +22,9 @@ export default function Home() {
       <Navbar />
       <HomeMain>
         <Hero />
+        <WhatWeDo />
         <PsychologistPreviewCard />
         <MissionStats />
-        <WhatWeDo />
         <HowItWorksSteps />
         <TestimonialsCarousel />
         <FAQAccordion items={homeFAQ} />

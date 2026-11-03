@@ -6,6 +6,8 @@ import { AGENCY_NAME, getAgencyUrl, showAgencyCredit } from "@/lib/site";
 const footerLinks = [
   { href: "/how-it-works", label: "How It Works" },
   { href: "/our-psychologist", label: "Our Psychologists" },
+  { href: "/therapy", label: "Therapy" },
+  { href: "/nutrition", label: "Food & Nutrition" },
   { href: "/book", label: "Book a Session" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },

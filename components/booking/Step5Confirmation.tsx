@@ -3,42 +3,88 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { useBooking } from "@/context/BookingContext";
-import { getPsychologistBySlug, getDefaultPsychologist, formatSessionFee } from "@/lib/psychologists";
+import {
+  getPsychologistBySlug,
+  getDefaultPsychologist,
+  formatSessionFee,
+} from "@/lib/psychologists";
+import {
+  getNutritionistBySlug,
+  getDefaultNutritionist,
+} from "@/lib/nutritionists";
+import {
+  formatNutritionFee,
+  getNutritionOfferById,
+} from "@/lib/nutrition";
 import { introductorySession, formatSessionEndTime } from "@/lib/sessions";
 import { formatDisplayDate, buildGoogleCalendarUrl } from "@/lib/calendar";
 
 export default function Step5Confirmation() {
-  const { psychologistSlug, sessionType, date, timeSlot, sessionMode } = useBooking();
+  const {
+    service,
+    psychologistSlug,
+    nutritionistSlug,
+    nutritionOfferId,
+    date,
+    timeSlot,
+    sessionMode,
+  } = useBooking();
   const shouldReduceMotion = useReducedMotion();
+  const isNutrition = service === "nutrition";
 
   const psychologist =
     (psychologistSlug && getPsychologistBySlug(psychologistSlug)) ||
     getDefaultPsychologist();
+  const nutritionist =
+    (nutritionistSlug && getNutritionistBySlug(nutritionistSlug)) ||
+    getDefaultNutritionist();
 
+  const offer = isNutrition ? getNutritionOfferById(nutritionOfferId) : null;
   const session = introductorySession;
   if (!date || !timeSlot) return null;
+  if (isNutrition && !offer) return null;
 
-  const endTime = formatSessionEndTime(timeSlot, session.duration);
+  const duration = isNutrition ? offer!.duration : session.duration;
+  const professionalName = isNutrition ? nutritionist.name : psychologist.name;
+  const endTime = formatSessionEndTime(timeSlot, duration);
   const modeLabel =
     sessionMode === "video"
       ? "Video call (Google Meet)"
       : "Audio call (Google Meet)";
 
   const calendarUrl = buildGoogleCalendarUrl({
-    psychologistName: psychologist.name,
+    psychologistName: professionalName,
+    title: isNutrition
+      ? `Nutrition — ${offer!.label} with ${professionalName}`
+      : undefined,
     date,
     timeSlot,
-    durationMinutes: session.duration,
+    durationMinutes: duration,
   });
 
-  const details = [
-    { label: "Psychologist", value: psychologist.name },
-    { label: "Date", value: formatDisplayDate(date) },
-    { label: "Time", value: `${timeSlot} – ${endTime}` },
-    { label: "Session", value: `${session.label} (${session.duration} min)` },
-    { label: "Session fee", value: formatSessionFee(psychologist.sessionFee) },
-    { label: "Mode", value: modeLabel },
-  ];
+  const details = isNutrition
+    ? [
+        { label: "Dietitian", value: nutritionist.name },
+        { label: "Offer", value: offer!.label },
+        { label: "Date", value: formatDisplayDate(date) },
+        { label: "Time", value: `${timeSlot} – ${endTime}` },
+        { label: "Fee", value: formatNutritionFee(offer!.price) },
+        { label: "Mode", value: modeLabel },
+      ]
+    : [
+        { label: "Psychologist", value: psychologist.name },
+        { label: "Date", value: formatDisplayDate(date) },
+        { label: "Time", value: `${timeSlot} – ${endTime}` },
+        {
+          label: "Session",
+          value: `${session.label} (${session.duration} min)`,
+        },
+        {
+          label: "Session fee",
+          value: formatSessionFee(psychologist.sessionFee),
+        },
+        { label: "Mode", value: modeLabel },
+      ];
 
   return (
     <div className="mx-auto max-w-[520px] text-center">
@@ -48,8 +94,18 @@ export default function Step5Confirmation() {
         transition={{ type: "spring", duration: 0.5 }}
         className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 md:h-20 md:w-20"
       >
-        <svg className="h-8 w-8 text-primary md:h-10 md:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        <svg
+          className="h-8 w-8 text-primary md:h-10 md:w-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
         </svg>
       </motion.div>
 
@@ -68,7 +124,9 @@ export default function Step5Confirmation() {
               key={label}
               className="flex flex-col gap-0.5 border-b border-border pb-2.5 last:border-0 last:pb-0 md:flex-row md:justify-between md:gap-4 md:border-0 md:pb-0"
             >
-              <dt className="text-xs font-medium text-muted md:text-sm md:font-normal">{label}</dt>
+              <dt className="text-xs font-medium text-muted md:text-sm md:font-normal">
+                {label}
+              </dt>
               <dd className="text-sm text-dark-text md:text-right">{value}</dd>
             </div>
           ))}
@@ -89,7 +147,11 @@ export default function Step5Confirmation() {
         >
           Add to Google Calendar
         </Button>
-        <Button href="/" variant="primary" className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
+        <Button
+          href="/"
+          variant="primary"
+          className="!px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm"
+        >
           Back to Home
         </Button>
       </div>

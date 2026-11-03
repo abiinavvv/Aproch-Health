@@ -15,8 +15,16 @@ function getSavedBooking(): BookingState | null {
   const complete = sessionStorage.getItem("bookingComplete") === "true";
   if (!complete) return null;
   const saved = loadBookingFromSession();
-  if (!saved?.sessionType || !saved.date || !saved.timeSlot) return null;
-  return { ...saved, currentStep: 5 };
+  if (!saved?.date || !saved.timeSlot) return null;
+
+  const service = saved.service ?? "therapy";
+  if (service === "nutrition") {
+    if (!saved.nutritionOfferId) return null;
+    return { ...saved, service, currentStep: 6 };
+  }
+
+  if (!saved.sessionType) return null;
+  return { ...saved, service: "therapy", currentStep: 5 };
 }
 
 function ConfirmationInner() {

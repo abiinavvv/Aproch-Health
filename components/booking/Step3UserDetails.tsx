@@ -86,6 +86,7 @@ function normalizePhoneInput(raw: string, dialCode: string): string {
 
 export default function Step3UserDetails() {
   const {
+    service,
     sessionMode,
     name,
     email,
@@ -97,6 +98,9 @@ export default function Step3UserDetails() {
     setUserDetails,
     nextStep,
   } = useBooking();
+
+  const professionalLabel =
+    service === "nutrition" ? "dietitian" : "psychologist";
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -156,7 +160,7 @@ export default function Step3UserDetails() {
         Tell us a little about yourself
       </h2>
       <p className="mt-2 text-sm text-body-text md:text-base">
-        This stays between you and your psychologist.
+        This stays between you and your {professionalLabel}.
       </p>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:mt-8 md:gap-8 lg:grid-cols-3">
@@ -294,11 +298,12 @@ export default function Step3UserDetails() {
             htmlFor="booking-intakeMessage"
             className="mb-1 block text-sm font-medium text-dark-text md:text-base"
           >
-            Send a confidential message to your psychologist before the session
+            Send a confidential message to your {professionalLabel} before the
+            session
           </label>
           <p className="mb-3 text-[11px] italic leading-relaxed text-muted md:mb-4 md:text-xs">
-            Your psychologist will read this before meeting you, so you don&apos;t
-            have to start from scratch.
+            Your {professionalLabel} will read this before meeting you, so you
+            don&apos;t have to start from scratch.
           </p>
           <textarea
             id="booking-intakeMessage"

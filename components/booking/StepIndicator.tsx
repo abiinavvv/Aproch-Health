@@ -3,7 +3,7 @@
 import { Check } from "lucide-react";
 import { useBooking } from "@/context/BookingContext";
 
-const steps = [
+const therapySteps = [
   { num: 1, label: "Psychologist" },
   { num: 2, label: "Date & Time" },
   { num: 3, label: "Your Details" },
@@ -11,20 +11,33 @@ const steps = [
   { num: 5, label: "Done" },
 ];
 
+const nutritionSteps = [
+  { num: 1, label: "Offer" },
+  { num: 2, label: "Dietitian" },
+  { num: 3, label: "Date & Time" },
+  { num: 4, label: "Your Details" },
+  { num: 5, label: "Review" },
+  { num: 6, label: "Done" },
+];
+
 export default function StepIndicator() {
-  const { currentStep } = useBooking();
-  const progress = ((currentStep - 1) / 4) * 100;
+  const { currentStep, service, doneStep } = useBooking();
+  if (!service) return null;
+
+  const steps = service === "nutrition" ? nutritionSteps : therapySteps;
+  const total = doneStep;
+  const progress = ((currentStep - 1) / (total - 1)) * 100;
 
   return (
     <div className="border-b border-border bg-white px-4 py-4 md:py-6">
       <div className="mx-auto max-w-[800px]">
         <p className="mb-2 text-center text-xs font-medium text-body-text md:mb-3 md:text-sm lg:hidden">
-          Step {currentStep} of 5
+          Step {Math.min(currentStep, total)} of {total}
         </p>
         <div className="mb-3 h-1 rounded-full bg-border md:mb-4 lg:hidden">
           <div
             className="h-full rounded-full bg-primary transition-all duration-300"
-            style={{ width: `${progress}%` }}
+            style={{ width: `${Math.min(100, progress)}%` }}
           />
         </div>
 

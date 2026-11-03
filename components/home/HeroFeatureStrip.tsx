@@ -5,22 +5,22 @@ const features = [
   {
     icon: Heart,
     title: "Compassionate Care",
-    description: "We listen with empathy and understand your unique journey.",
+    description: "Here to listen.",
   },
   {
     icon: Leaf,
     title: "Personalized Support",
-    description: "Care tailored to your needs, goals, and pace.",
+    description: "Care at your pace.",
   },
   {
     icon: Users,
     title: "Evidence-Based",
-    description: "Our services are rooted in proven methods.",
+    description: "Grounded in research.",
   },
   {
     icon: Shield,
     title: "Safe & Confidential",
-    description: "Your privacy is our priority. Always.",
+    description: "Your privacy matters.",
   },
 ];
 
@@ -77,7 +77,7 @@ export default function HeroFeatureStrip() {
         aria-hidden
       />
 
-      <div className="relative z-20 mx-auto -mb-20 max-w-[1400px] -mt-10 px-5 md:-mb-16 md:mt-0 md:px-0 lg:-mb-12">
+      <div className="relative z-20 mx-auto -mb-16 max-w-[1400px] -mt-10 px-5 md:-mb-12 md:mt-0 md:px-0 lg:-mb-10">
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-4">
           {features.map((feature) => (
             <GlowCard
