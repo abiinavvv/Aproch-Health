@@ -51,7 +51,7 @@ export default function ContactPage() {
       <main className="flex-1">
         <section className="hero-gradient px-4 pt-24 pb-6 md:pb-8 lg:px-6 lg:pt-24 lg:pb-10">
           <div className="mx-auto max-w-[800px] text-center">
-            <h1 className="font-display text-2xl font-bold leading-snug text-dark-text md:text-[clamp(2rem,4vw,3rem)]">
+            <h1 className="font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-tight tracking-tight text-dark-text">
               We&apos;re here to help
             </h1>
           </div>
@@ -59,7 +59,7 @@ export default function ContactPage() {
 
         <section className="-mt-2 px-4 pb-8 pt-0 md:-mt-4 md:pb-12 lg:px-6 lg:pb-20">
           <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-white p-4 shadow-sm md:p-6">
+            <div className="rounded-3xl border border-border/80 bg-white p-4 shadow-[0_12px_40px_rgba(26,26,26,0.05)] md:p-6">
               <div className="space-y-3 md:space-y-4">
                 <div>
                   <label

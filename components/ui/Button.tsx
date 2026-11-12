@@ -25,20 +25,16 @@ interface ButtonProps {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    "bg-primary text-white hover:bg-primary-dark border-2 border-primary hover:border-primary-dark",
-  secondary:
-    "bg-hero-accent/15 text-hero-brown hover:bg-hero-accent/25 border-2 border-hero-accent/25 hover:border-hero-accent/40",
+  primary: "btn-coral",
+  secondary: "bg-primary/10 text-primary hover:bg-primary/15 border-0 rounded-2xl",
   outline:
-    "bg-transparent text-dark-text border-2 border-border hover:border-primary hover:text-primary",
-  yellow:
-    "bg-primary text-white hover:bg-primary-dark border-2 border-primary hover:border-primary-dark",
-  white:
-    "bg-white text-primary hover:bg-white/90 border-2 border-white hover:border-white/90",
+    "bg-transparent text-dark-text border border-border hover:border-primary hover:text-primary rounded-2xl",
+  yellow: "btn-coral",
+  white: "bg-white text-primary hover:bg-white/90 border-0 shadow-sm rounded-2xl",
   outlineLight:
-    "bg-transparent text-white border-2 border-white hover:bg-white/10 hover:text-white",
-  glass: "glass-btn glass-btn-primary",
-  glassOutline: "glass-btn glass-btn-outline",
+    "bg-transparent text-white border border-white/70 hover:bg-white/10 hover:text-white rounded-2xl",
+  glass: "glass-btn glass-btn-primary rounded-2xl",
+  glassOutline: "glass-btn glass-btn-outline rounded-2xl",
 };
 
 export default function Button({
@@ -50,7 +46,7 @@ export default function Button({
   className = "",
   fullWidth = false,
 }: ButtonProps) {
-  const base = `inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 ${variants[variant]} ${fullWidth ? "w-full" : ""} ${disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "cursor-pointer"} ${className}`;
+  const base = `inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold tracking-tight ${variants[variant]} ${fullWidth ? "w-full" : ""} ${disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "cursor-pointer"} ${className}`;
 
   if (href && !disabled) {
     const isExternal = href.startsWith("http");

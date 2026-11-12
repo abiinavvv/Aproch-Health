@@ -37,7 +37,7 @@ export default function StepPsychologistPicker({
               type="button"
               onClick={() => onSelect(p.slug)}
               className={cn(
-                "flex gap-3 rounded-2xl border p-3 text-left transition-colors md:gap-4 md:p-4",
+                "flex gap-3 rounded-3xl border border-border/80 p-3 text-left transition-colors md:gap-4 md:p-4",
                 selected
                   ? "border-primary bg-primary/5 ring-2 ring-primary/30"
                   : "border-border bg-white hover:border-primary/40"
@@ -76,7 +76,7 @@ export default function StepPsychologistPicker({
           type="button"
           onClick={onContinue}
           disabled={!selectedSlug}
-          className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-50 md:px-6 md:py-3 md:text-sm"
+          className="btn-coral inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-50 md:px-6 md:text-sm"
         >
           NEXT →
         </button>

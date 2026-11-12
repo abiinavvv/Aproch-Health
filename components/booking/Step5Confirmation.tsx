@@ -117,7 +117,7 @@ export default function Step5Confirmation() {
         shortly.
       </p>
 
-      <div className="mt-5 rounded-2xl border border-border bg-white p-4 text-left text-xs md:mt-8 md:p-6 md:text-sm">
+      <div className="mt-5 rounded-3xl border border-border/80 bg-white p-4 text-left text-xs shadow-[0_12px_40px_rgba(26,26,26,0.05)] md:mt-8 md:p-6 md:text-sm">
         <dl className="space-y-2.5 md:space-y-3">
           {details.map(({ label, value }) => (
             <div

@@ -118,7 +118,7 @@ export default function Step4Review() {
         Review your booking
       </h2>
 
-      <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+      <div className="overflow-hidden rounded-3xl border border-border/80 bg-white shadow-[0_12px_40px_rgba(26,26,26,0.05)]">
         <div className="flex items-start justify-between border-b border-border p-4 md:p-5">
           <div className="flex gap-3 md:gap-4">
             <div className="psychologist-photo-avatar relative h-12 w-12 shrink-0 overflow-hidden rounded-xl md:h-14 md:w-14">

@@ -13,7 +13,7 @@ export default function OurPsychologistPage() {
       <main className="flex-1">
         <section className="hero-gradient px-4 pt-24 pb-8 md:pb-12 lg:px-6 lg:py-20">
           <div className="mx-auto max-w-[800px] text-center">
-            <h1 className="font-display text-3xl font-bold leading-snug text-dark-text md:text-[clamp(3rem,5vw,5rem)]">
+            <h1 className="font-display text-[clamp(2.25rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text md:text-[clamp(3rem,5vw,5rem)]">
               Our Psychologists
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-4 md:text-lg">

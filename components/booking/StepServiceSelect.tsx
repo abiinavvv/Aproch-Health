@@ -1,6 +1,6 @@
 "use client";
 
-import { Leaf, MessageCircle } from "lucide-react";
+import Image from "next/image";
 import Card from "@/components/ui/Card";
 import { useBooking } from "@/context/BookingContext";
 import type { ServiceId } from "@/types";
@@ -9,21 +9,24 @@ const options: {
   id: ServiceId;
   title: string;
   description: string;
-  icon: typeof MessageCircle;
+  image: string;
+  imageAlt: string;
 }[] = [
   {
     id: "therapy",
     title: "Therapy",
     description:
       "Book an online session with a psychologist — introductory conversation, video or audio.",
-    icon: MessageCircle,
+    image: "/images/service-therapy.jpg",
+    imageAlt: "Therapy session illustration",
   },
   {
     id: "nutrition",
     title: "Food & Nutrition",
     description:
       "Choose a consultation or 1-month package with a clinical dietitian.",
-    icon: Leaf,
+    image: "/images/service-nutrition.jpg",
+    imageAlt: "Nutrition bowl illustration",
   },
 ];
 
@@ -45,31 +48,34 @@ export default function StepServiceSelect() {
       </p>
 
       <div className="mt-5 flex flex-col gap-3 md:mt-8 md:gap-4">
-        {options.map((option) => {
-          const Icon = option.icon;
-          return (
-            <Card
-              key={option.id}
-              onClick={() => handleSelect(option.id)}
-              hover
-              className="p-4 text-left md:p-5"
-            >
-              <div className="flex items-start gap-3 md:gap-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Icon size={20} aria-hidden />
-                </span>
-                <div className="min-w-0">
-                  <p className="font-semibold text-dark-text md:text-lg">
-                    {option.title}
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-body-text">
-                    {option.description}
-                  </p>
-                </div>
+        {options.map((option) => (
+          <Card
+            key={option.id}
+            onClick={() => handleSelect(option.id)}
+            hover
+            className="p-4 text-left md:p-5"
+          >
+            <div className="flex items-start gap-3 md:gap-4">
+              <span className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[#f7f5f2] ring-1 ring-border/60 md:h-14 md:w-14">
+                <Image
+                  src={option.image}
+                  alt={option.imageAlt}
+                  width={56}
+                  height={56}
+                  className="h-full w-full object-contain p-1"
+                />
+              </span>
+              <div className="min-w-0">
+                <p className="font-semibold text-dark-text md:text-lg">
+                  {option.title}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-body-text">
+                  {option.description}
+                </p>
               </div>
-            </Card>
-          );
-        })}
+            </div>
+          </Card>
+        ))}
       </div>
     </div>
   );

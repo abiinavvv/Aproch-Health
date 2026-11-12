@@ -29,12 +29,12 @@ export default function StepIndicator() {
   const progress = ((currentStep - 1) / (total - 1)) * 100;
 
   return (
-    <div className="border-b border-border bg-white px-4 py-4 md:py-6">
+    <div className="border-b border-border bg-white/90 px-4 py-4 backdrop-blur-sm md:py-6">
       <div className="mx-auto max-w-[800px]">
-        <p className="mb-2 text-center text-xs font-medium text-body-text md:mb-3 md:text-sm lg:hidden">
+        <p className="mb-2 text-center text-xs font-semibold text-body-text md:mb-3 md:text-sm lg:hidden">
           Step {Math.min(currentStep, total)} of {total}
         </p>
-        <div className="mb-3 h-1 rounded-full bg-border md:mb-4 lg:hidden">
+        <div className="mb-3 h-1.5 rounded-full bg-border md:mb-4 lg:hidden">
           <div
             className="h-full rounded-full bg-primary transition-all duration-300"
             style={{ width: `${Math.min(100, progress)}%` }}
@@ -49,12 +49,12 @@ export default function StepIndicator() {
               <div key={step.num} className="flex flex-1 items-center">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold shadow-sm ${
                       isComplete
-                        ? "bg-primary text-white"
+                        ? "bg-primary text-white shadow-[0_6px_16px_rgba(255,107,53,0.3)]"
                         : isActive
-                          ? "bg-primary text-white"
-                          : "bg-border text-muted"
+                          ? "bg-primary text-white shadow-[0_6px_16px_rgba(255,107,53,0.3)]"
+                          : "bg-hero-cream text-muted"
                     }`}
                   >
                     {isComplete ? <Check size={18} /> : step.num}

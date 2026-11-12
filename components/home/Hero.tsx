@@ -1,37 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import HeroVideo from "@/components/home/HeroVideo";
-import HeroFeatureStrip from "./HeroFeatureStrip";
-import { useTheme } from "@/context/ThemeContext";
-import { heroThemeLayerStyle } from "@/lib/hero-theme-fade";
+import { useReducedMotion } from "framer-motion";
+import HeroRotatingHeadline from "./HeroRotatingHeadline";
+// import { ArrowRight } from "lucide-react";
+// import HeroVideo from "@/components/home/HeroVideo";
+// import { useTheme } from "@/context/ThemeContext";
+// import { heroThemeLayerStyle } from "@/lib/hero-theme-fade";
 
-const MOBILE_HERO_DAY = "/videos/boy2.png";
-const MOBILE_HERO_NIGHT = "/videos/boy1.png";
+// const MOBILE_HERO_DAY = "/videos/boy2.png";
+// const MOBILE_HERO_NIGHT = "/videos/boy1.png";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
-  const { isNightMode } = useTheme();
   const reducedMotion = shouldReduceMotion ?? false;
-
-  useEffect(() => {
-    [MOBILE_HERO_DAY, MOBILE_HERO_NIGHT].forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
   const themeFadeClass = reducedMotion ? "" : "hero-theme-fade";
-  const dayLayerStyle = heroThemeLayerStyle(!isNightMode, reducedMotion);
-  const nightLayerStyle = heroThemeLayerStyle(isNightMode, reducedMotion);
 
   return (
-    <section className="hero-theme-sync relative flex min-h-0 flex-col md:min-h-screen">
-      {/* Synced solid background — same crossfade as video gradient */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+    <section className="hero-theme-sync relative flex min-h-0 flex-col bg-hero-fade-peach">
+      {/* Soft peach day surface — continues into feature strip fade */}
+      <div className="pointer-events-none absolute inset-0 bg-hero-fade-peach" aria-hidden>
         <div
           className={`hero-bg-day hero-theme-day absolute inset-0 ${themeFadeClass}`}
         />
@@ -40,121 +28,56 @@ export default function Hero() {
         />
       </div>
 
-      {/* Mobile boy illustration — background overlay */}
+      {/* Mobile boy illustration — commented for Headspace white hero
       <div className="pointer-events-none absolute inset-0 z-[1] md:hidden" aria-hidden>
         <div
           className="hero-mobile-bg absolute inset-0 bg-cover bg-bottom bg-no-repeat"
           style={{
-            ...dayLayerStyle,
+            ...heroThemeLayerStyle(!isNightMode, reducedMotion),
             backgroundImage: `url("${MOBILE_HERO_DAY}")`,
           }}
         />
         <div
           className="hero-mobile-bg absolute inset-0 bg-cover bg-bottom bg-no-repeat"
           style={{
-            ...nightLayerStyle,
+            ...heroThemeLayerStyle(isNightMode, reducedMotion),
             backgroundImage: `url("${MOBILE_HERO_NIGHT}")`,
           }}
         />
         <div
-          className="absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-hero-cream/80 via-hero-cream/30 to-transparent"
-          style={dayLayerStyle}
+          className="absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-white/85 via-white/35 to-transparent"
+          style={heroThemeLayerStyle(!isNightMode, reducedMotion)}
         />
         <div
           className="absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-[#121815]/80 via-[#121815]/30 to-transparent"
-          style={nightLayerStyle}
+          style={heroThemeLayerStyle(isNightMode, reducedMotion)}
         />
       </div>
+      */}
 
-      <div className="relative flex min-h-0 flex-1 flex-col md:flex-row">
-        {/* Mobile hero */}
-        <div className="relative z-10 flex min-h-[min(88vh,720px)] flex-col items-start px-6 pb-32 pt-24 text-left md:hidden">
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex w-full max-w-[420px] flex-col items-start"
-          >
-            <h1 className="font-display text-[40px] font-extrabold leading-[1.08] text-hero-brown">
-              It only needs
-              <br />
-              <span className="text-hero-accent">a single touch</span>
-            </h1>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
-              Book your first conversation, let us handle the rest
-            </p>
-          </motion.div>
+      <div className="relative mx-auto flex w-full max-w-[900px] flex-col items-center px-6 pb-4 pt-24 text-center md:pb-6 md:pt-32">
+        <HeroRotatingHeadline className="text-center" />
 
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.12 }}
-            className="absolute bottom-[24%] right-3 z-30 w-[148px] max-w-[38vw]"
-          >
-            <Link
-              href="/book"
-              className="hero-book-image-btn inline-block w-full rounded-2xl"
-            >
-              <img
-                src="/images/hero-book-cat.png"
-                alt="Book Appointment"
-                width={640}
-                height={200}
-                className="h-auto w-full select-none"
-                draggable={false}
-              />
-            </Link>
-          </motion.div>
-        </div>
+        <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
+          Book your first conversation, let us handle the rest
+        </p>
 
-        {/* Desktop left content zone — 40% */}
-        <div className="relative z-10 hidden w-full flex-col justify-center px-6 pb-8 pt-24 md:flex md:w-[40%] md:max-w-[520px] md:px-12 md:pb-0 md:pt-28 lg:pl-16 lg:pr-8">
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <h1 className="font-display text-[40px] font-extrabold leading-[1.08] text-hero-brown md:text-[60px] lg:text-[64px]">
-              It only needs
-              <br />
-              <span className="text-hero-accent">a single touch</span>
-            </h1>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-hero-subtext md:mt-5 md:text-lg">
-              Book your first conversation, let us handle the rest
-            </p>
-
-            <div className="relative mt-9 inline-block w-full md:mt-10 md:w-auto">
-              <Link
-                href="/book"
-                className="hero-book-image-btn inline-block w-full max-w-[260px] rounded-2xl md:max-w-[320px]"
-              >
-                <img
-                  src="/images/hero-book-cat.png"
-                  alt="Book Appointment"
-                  width={640}
-                  height={200}
-                  className="h-auto w-full select-none"
-                  draggable={false}
-                />
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Right video zone — 60% */}
-        <div className="relative z-0 hidden flex-1 overflow-hidden md:block">
-          <HeroVideo />
+        <div className="mt-6 w-[148px] max-w-[42vw] md:mt-8 md:w-[200px] md:max-w-none lg:w-[220px]">
           <Link
-            href="/how-it-works"
-            className="glass-btn-warm absolute bottom-[8%] right-[4%] z-20 inline-flex items-center justify-center gap-2 rounded-2xl px-10 py-5 text-xl font-semibold"
+            href="/book"
+            className="hero-book-image-btn inline-block w-full rounded-2xl"
           >
-            How it works
-            <ArrowRight size={22} aria-hidden />
+            <img
+              src="/images/hero-book-cat.png"
+              alt="Book Appointment"
+              width={640}
+              height={200}
+              className="h-auto w-full select-none"
+              draggable={false}
+            />
           </Link>
         </div>
       </div>
-
-      <HeroFeatureStrip />
     </section>
   );
 }

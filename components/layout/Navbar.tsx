@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
 import SiteLogo from "@/components/brand/SiteLogo";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import ThemeToggle from "@/components/theme/ThemeToggle";
+// Dark mode toggle commented out
+// import ThemeToggle from "@/components/theme/ThemeToggle";
 import NavbarClock from "@/components/layout/NavbarClock";
 
 const navLinks = [
@@ -95,9 +96,9 @@ export default function Navbar() {
   }`;
 
   const headerBackgroundClass = menuOpen
-    ? "bg-hero-cream/95 shadow-sm"
+    ? "bg-white/95 shadow-sm"
     : scrolled
-      ? "bg-hero-cream/95 shadow-sm backdrop-blur-sm"
+      ? "bg-white/90 shadow-sm backdrop-blur-md"
       : "bg-transparent";
 
   const renderDesktopLink = (link: (typeof navLinks)[number]) => (
@@ -142,7 +143,7 @@ export default function Navbar() {
                     exit={{ opacity: 0, y: 6 }}
                     transition={{ duration: 0.15 }}
                     role="menu"
-                    className="absolute left-1/2 top-full z-50 mt-3 w-[220px] -translate-x-1/2 rounded-2xl border border-border bg-white p-2 shadow-lg"
+                    className="absolute left-1/2 top-full z-50 mt-3 w-[220px] -translate-x-1/2 rounded-3xl border border-border bg-white p-2 shadow-[0_16px_40px_rgba(26,26,26,0.12)]"
                   >
                     {serviceLinks.map((link) => (
                       <Link
@@ -172,10 +173,10 @@ export default function Navbar() {
               Crisis Help
             </Link>
             <NavbarClock />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <Link
               href="/book"
-              className="glass-btn-warm inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium xl:px-5"
+              className="btn-coral inline-flex items-center gap-2 whitespace-nowrap px-5 py-2.5 text-sm font-semibold"
             >
               <CalendarCheck size={16} aria-hidden />
               Book a Session
@@ -186,7 +187,7 @@ export default function Navbar() {
             <Link href="/crisis-help" className={crisisHelpMobileClassName}>
               Crisis Help
             </Link>
-            <ThemeToggle className="h-8 w-8 sm:h-10 sm:w-10" />
+            {/* <ThemeToggle className="h-8 w-8 sm:h-10 sm:w-10" /> */}
             <button
               type="button"
               className="inline-flex h-8 w-8 shrink-0 items-center justify-center text-hero-nav sm:h-10 sm:w-10"
@@ -296,7 +297,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/book"
-                className="glass-btn-warm mt-6 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium"
+                className="btn-coral mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold"
                 onClick={() => setMenuOpen(false)}
               >
                 <CalendarCheck size={16} aria-hidden />

@@ -29,10 +29,10 @@ export default function Step1Nutritionist() {
               type="button"
               onClick={() => setNutritionistSlug(n.slug)}
               className={cn(
-                "flex gap-3 rounded-2xl border p-3 text-left transition-colors md:gap-4 md:p-4",
+                "flex gap-3 rounded-3xl border p-3 text-left transition-colors md:gap-4 md:p-4",
                 selected
-                  ? "border-primary bg-primary/5 ring-2 ring-primary/30"
-                  : "border-border bg-white hover:border-primary/40"
+                  ? "border-primary bg-primary/5 shadow-[0_8px_24px_rgba(255,107,53,0.15)] ring-2 ring-primary/25"
+                  : "border-border/80 bg-white hover:border-primary/40"
               )}
             >
               <div className="psychologist-photo-avatar relative h-12 w-12 shrink-0 overflow-hidden rounded-xl md:h-16 md:w-16">
@@ -68,7 +68,7 @@ export default function Step1Nutritionist() {
           type="button"
           onClick={nextStep}
           disabled={!nutritionistSlug}
-          className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-50 md:px-6 md:py-3 md:text-sm"
+          className="btn-coral inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-50 md:px-6 md:text-sm"
         >
           NEXT →
         </button>

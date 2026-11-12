@@ -20,10 +20,10 @@ export default function FAQAccordion({
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="theme-surface bg-white px-4 py-8 md:py-12 lg:px-6 lg:py-20">
+    <section className="theme-surface bg-white px-4 py-14 md:py-16 lg:px-6 lg:py-24">
       <div className="mx-auto max-w-[800px]">
         <ScrollReveal>
-          <h2 className="mb-8 text-center font-display text-2xl font-semibold text-dark-text md:mb-12 md:text-[2.25rem]">
+          <h2 className="mb-10 text-center font-display text-[clamp(1.85rem,4vw,2.75rem)] font-bold leading-tight tracking-tight text-dark-text md:mb-12">
             {heading}
           </h2>
         </ScrollReveal>
@@ -35,7 +35,7 @@ export default function FAQAccordion({
             return (
               <div
                 key={item.question}
-                className="rounded-2xl border border-border bg-white overflow-hidden"
+                className="overflow-hidden rounded-3xl border border-border/80 bg-white"
               >
                 <button
                   type="button"

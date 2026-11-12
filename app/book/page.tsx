@@ -33,9 +33,9 @@ function BookingContent() {
     return (
       <>
         <MinimalHeader />
-        <div className="min-h-screen bg-hero-cream/25">
-          <div className="border-b border-border bg-white px-4 py-4 md:py-5">
-            <p className="mx-auto max-w-[800px] text-center text-sm font-medium text-body-text">
+        <div className="min-h-screen bg-hero-cream">
+          <div className="border-b border-border bg-white/90 px-4 py-5 backdrop-blur-sm md:py-6">
+            <p className="mx-auto max-w-[800px] text-center text-sm font-semibold text-dark-text">
               Choose a service to get started
             </p>
           </div>
@@ -67,7 +67,7 @@ function BookingContent() {
   return (
     <>
       <MinimalHeader />
-      <div className="min-h-screen bg-hero-cream/25">
+      <div className="min-h-screen bg-hero-cream">
         <StepIndicator />
         <div className="mx-auto max-w-[800px] px-4 py-6 md:py-8 lg:px-6 lg:py-12">
           {currentStep >= 1 && currentStep <= maxBookStep && (

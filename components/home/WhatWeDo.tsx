@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Check, Leaf, MessageCircle } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import Image from "next/image";
+import { ArrowRight, Check } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import {
   homeBookingWorksLink,
@@ -11,76 +10,77 @@ import {
   homeServicesIntro,
 } from "@/lib/home-services";
 
-const serviceIcons = {
-  therapy: MessageCircle,
-  nutrition: Leaf,
+const serviceImages = {
+  therapy: {
+    src: "/images/service-therapy.jpg",
+    alt: "Therapy session illustration",
+  },
+  nutrition: {
+    src: "/images/service-nutrition.jpg",
+    alt: "Nutrition bowl illustration",
+  },
 } as const;
 
 export default function WhatWeDo() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <section
-      ref={ref}
-      className="relative bg-hero-start px-4 pb-12 pt-28 md:px-6 md:pb-16 md:pt-24 lg:pb-20 lg:pt-28"
-    >
-      <div className="relative mx-auto w-full max-w-[900px]">
+    <section className="relative bg-white px-4 pb-16 pt-10 md:px-6 md:pb-20 md:pt-16 lg:pb-24 lg:pt-20">
+      <div className="relative mx-auto w-full max-w-[980px]">
         <ScrollReveal>
-          <h2 className="text-center font-display text-[clamp(1.85rem,4.5vw,3rem)] font-bold leading-tight tracking-tight text-dark-text">
+          <h2 className="text-center font-display text-[clamp(2rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-tight text-dark-text">
             {homeServicesIntro.title}
           </h2>
         </ScrollReveal>
         <ScrollReveal delay={0.06}>
-          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-body-text md:mt-4 md:text-base md:leading-relaxed">
+          <p className="mx-auto mt-4 max-w-xl text-center text-base leading-relaxed text-body-text md:text-lg">
             {homeServicesIntro.subtitle}
           </p>
         </ScrollReveal>
 
-        {/* Mobile only — pill entry to booking guide */}
         <ScrollReveal delay={0.1}>
           <Link
             href={homeBookingWorksLink.href}
-            className="mt-5 flex items-center justify-between rounded-full border border-border bg-surface px-4 py-3.5 shadow-sm transition-colors active:bg-hero-cream/80 md:hidden"
+            className="mx-auto mt-6 flex max-w-md items-center justify-between rounded-full border border-border bg-white px-5 py-3.5 shadow-sm transition-colors hover:border-primary/30 md:hidden"
           >
             <span className="text-sm font-semibold text-dark-text">
               {homeBookingWorksLink.title}
             </span>
-            <ArrowRight size={18} className="shrink-0 text-muted" aria-hidden />
+            <ArrowRight size={18} className="shrink-0 text-primary" aria-hidden />
           </Link>
         </ScrollReveal>
 
-        <div className="mt-5 grid grid-cols-1 gap-4 md:mt-8 md:grid-cols-2 md:gap-5">
-          {homeServiceCards.map((card, i) => {
-            const Icon = serviceIcons[card.id as keyof typeof serviceIcons];
+        <div className="mt-8 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-2 md:gap-6">
+          {homeServiceCards.map((card) => {
+            const image = serviceImages[card.id as keyof typeof serviceImages];
             return (
-              <motion.article
+              <article
                 key={card.id}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.12 + i * 0.08 }}
-                className="flex flex-col rounded-2xl border border-border bg-white p-4 shadow-sm md:p-5"
+                className="flex flex-col rounded-[28px] border border-border/80 bg-white p-5 shadow-[0_12px_40px_rgba(26,26,26,0.04)] md:p-7"
               >
-                <div className="flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon size={18} strokeWidth={2} aria-hidden />
+                <div className="flex items-center gap-3">
+                  <span className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[#f7f5f2] ring-1 ring-border/60 md:h-16 md:w-16">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={64}
+                      height={64}
+                      className="h-full w-full object-contain p-1"
+                    />
                   </span>
-                  <h3 className="font-display text-lg font-semibold text-dark-text md:text-xl">
+                  <h3 className="font-display text-xl font-bold text-dark-text md:text-2xl">
                     {card.title}
                   </h3>
                 </div>
 
-                <p className="mt-3 text-sm leading-relaxed text-body-text">
+                <p className="mt-4 text-sm leading-relaxed text-body-text md:text-base">
                   {card.tagline}
                 </p>
 
                 {card.pricing && (
-                  <div className="mt-4 rounded-xl bg-hero-cream/60 px-3 py-3">
+                  <div className="mt-5 rounded-2xl bg-white px-4 py-3.5">
                     <p className="text-[11px] font-semibold uppercase tracking-wider text-muted">
                       {card.pricing.label}
                     </p>
-                    <ul className="mt-1.5 space-y-1 text-sm font-medium text-dark-text">
+                    <ul className="mt-2 space-y-1.5 text-sm font-semibold text-dark-text">
                       {card.pricing.lines.map((line) => (
                         <li key={line}>{line}</li>
                       ))}
@@ -88,14 +88,14 @@ export default function WhatWeDo() {
                   </div>
                 )}
 
-                <ul className="mt-4 flex flex-1 flex-col gap-2">
+                <ul className="mt-5 flex flex-1 flex-col gap-2.5">
                   {card.features.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-start gap-2.5 rounded-xl bg-hero-cream/70 px-3 py-2.5 text-[13px] leading-relaxed text-body-text md:text-sm"
+                      className="flex items-start gap-2.5 rounded-2xl bg-white px-3.5 py-3 text-[13px] leading-relaxed text-body-text md:text-sm"
                     >
                       <Check
-                        size={15}
+                        size={16}
                         className="mt-0.5 shrink-0 text-primary"
                         aria-hidden
                       />
@@ -106,12 +106,12 @@ export default function WhatWeDo() {
 
                 <Link
                   href={card.learnMoreHref}
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary"
+                  className="btn-coral mt-5 inline-flex items-center gap-1.5 self-start px-6 py-3 text-sm font-semibold"
                 >
                   Learn more
                   <ArrowRight size={14} aria-hidden />
                 </Link>
-              </motion.article>
+              </article>
             );
           })}
         </div>

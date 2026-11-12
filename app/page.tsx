@@ -7,6 +7,7 @@ import { homeFAQ } from "@/lib/faq";
 
 const MissionStats = dynamic(() => import("@/components/home/MissionStats"));
 const WhatWeDo = dynamic(() => import("@/components/home/WhatWeDo"));
+const HeroFeatureStrip = dynamic(() => import("@/components/home/HeroFeatureStrip"));
 const HowItWorksSteps = dynamic(() => import("@/components/home/HowItWorksSteps"));
 const PsychologistPreviewCard = dynamic(
   () => import("@/components/home/PsychologistPreviewCard")
@@ -22,6 +23,7 @@ export default function Home() {
       <Navbar />
       <HomeMain>
         <Hero />
+        <HeroFeatureStrip />
         <WhatWeDo />
         <PsychologistPreviewCard />
         <MissionStats />

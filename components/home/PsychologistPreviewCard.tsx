@@ -64,25 +64,25 @@ export default function PsychologistPreviewCard() {
   ];
 
   return (
-    <section className="relative z-10 bg-hero-cream/30 px-4 py-10 md:py-12 lg:px-6 lg:py-20">
+    <section className="relative z-10 bg-white px-4 py-14 md:py-16 lg:px-6 lg:py-24">
       <div className="mx-auto max-w-[1400px]">
         <ScrollReveal>
-          <h2 className="relative z-20 mb-2 text-left font-display text-3xl font-semibold text-dark-text md:mb-3 md:text-center md:text-[clamp(2.5rem,5vw,4.5rem)]">
+          <h2 className="relative z-20 mb-3 text-center font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text">
             Meet our professionals
           </h2>
-          <p className="mb-8 text-left text-sm text-body-text md:mb-10 md:text-center md:text-base">
+          <p className="mb-10 text-center text-base text-body-text md:mb-12 md:text-lg">
             Available for online sessions
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-4">
+        <div className="grid grid-cols-1 items-stretch justify-items-center gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-4">
           {professionals.map((professional, index) => {
             const colStartClass = getColStartClass(index, professionals.length);
             return (
               <ScrollReveal
                 key={`${professional.name}-${index}`}
                 delay={0.05 * index}
-                className={cn("w-full", colStartClass)}
+                className={cn("flex h-full w-full", colStartClass)}
               >
                 <GlassmorphismProfileCard
                   professional={professional}

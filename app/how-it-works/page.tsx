@@ -42,7 +42,7 @@ export default function HowItWorksPage() {
       <main className="flex-1">
         <section className="hero-gradient flex min-h-0 items-center px-4 pt-24 pb-8 md:min-h-[50vh] md:py-12 lg:px-6 lg:pb-16">
           <div className="mx-auto max-w-[800px] text-center">
-            <h1 className="font-display text-2xl font-bold leading-snug text-dark-text md:text-[clamp(2.25rem,5vw,3.5rem)] md:leading-tight">
+            <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text">
               Here&apos;s exactly how it works
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-6 md:text-lg md:leading-[1.7]">
@@ -67,7 +67,7 @@ export default function HowItWorksPage() {
                 </p>
               </div>
               <div className={`w-full max-w-[200px] flex-1 md:max-w-none ${i % 2 === 1 ? "md:order-1" : ""}`}>
-                <div className="rounded-2xl bg-light-green/50 p-6 text-center md:p-12">
+                <div className="rounded-3xl bg-light-green/50 p-6 text-center md:p-12">
                   <span className="font-display text-4xl font-bold text-primary opacity-30 md:text-6xl">
                     {i + 1}
                   </span>

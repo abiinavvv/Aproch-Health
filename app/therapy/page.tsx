@@ -42,7 +42,7 @@ export default function TherapyPage() {
               Back to services
             </Link>
 
-            <h1 className="mt-6 font-display text-3xl font-bold leading-snug text-dark-text md:mt-8 md:text-[clamp(2.25rem,4vw,3.25rem)]">
+            <h1 className="mt-6 font-display text-[clamp(2.25rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text md:mt-8">
               Therapy
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-4 md:text-base md:leading-relaxed">
@@ -54,7 +54,7 @@ export default function TherapyPage() {
               {therapyValueProps.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-border bg-white p-4 md:p-5"
+                  className="rounded-3xl border border-border bg-white p-4 md:p-5"
                 >
                   <h2 className="font-display text-base font-semibold text-dark-text md:text-lg">
                     {item.title}
@@ -77,7 +77,7 @@ export default function TherapyPage() {
                 {psychologists.map((psychologist) => (
                   <div
                     key={psychologist.slug}
-                    className="rounded-2xl border border-border bg-white p-4 shadow-sm md:p-5"
+                    className="rounded-3xl border border-border bg-white p-4 shadow-sm md:p-5"
                   >
                     <div className="flex gap-3.5 md:gap-4">
                       <div className="psychologist-photo-avatar relative h-20 w-20 shrink-0 overflow-hidden rounded-xl md:h-24 md:w-24">
@@ -143,7 +143,7 @@ export default function TherapyPage() {
                 {therapyUnderstanding.map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-2xl border border-border bg-white p-4 md:p-5"
+                    className="rounded-3xl border border-border bg-white p-4 md:p-5"
                   >
                     <h3 className="font-semibold text-dark-text md:text-lg">
                       {item.title}
@@ -167,7 +167,7 @@ export default function TherapyPage() {
                 {therapyBookingSteps.map((step, i) => (
                   <div
                     key={step.title}
-                    className="rounded-2xl border border-border bg-white p-4 md:p-5"
+                    className="rounded-3xl border border-border bg-white p-4 md:p-5"
                   >
                     <h3 className="font-semibold text-dark-text md:text-base">
                       {i + 1}. {step.title}
@@ -181,7 +181,7 @@ export default function TherapyPage() {
             </section>
 
             <section className="mt-8 md:mt-10">
-              <div className="rounded-2xl border border-border bg-hero-cream/80 p-5 md:p-6">
+              <div className="rounded-3xl border border-border bg-hero-cream/80 p-5 md:p-6">
                 <h2 className="font-display text-xl font-semibold text-dark-text md:text-2xl">
                   {therapyCta.title}
                 </h2>

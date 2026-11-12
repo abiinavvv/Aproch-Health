@@ -111,7 +111,7 @@ export default function Step2DateTime() {
       </h2>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:mt-8 md:gap-8 lg:grid-cols-2">
-        <div className="rounded-2xl border border-border bg-white p-4 md:p-6">
+        <div className="rounded-3xl border border-border/80 bg-white p-4 shadow-[0_12px_40px_rgba(26,26,26,0.04)] md:p-6">
           <div className="mb-3 flex items-center justify-between md:mb-4">
             <button type="button" onClick={prevMonth} aria-label="Previous month">
               <ChevronLeft size={18} className="text-body-text md:h-5 md:w-5" />

@@ -116,9 +116,9 @@ export default function GlassmorphismProfileCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className={cn("relative mx-auto w-full max-w-[380px]", className)}
+      className={cn("relative mx-auto flex h-full w-full max-w-[380px]", className)}
     >
-      <article className="psychologist-profile-card theme-surface relative w-full overflow-visible rounded-[20px] border border-border/80 p-4 md:p-5 lg:p-6">
+      <article className="psychologist-profile-card theme-surface relative flex h-full w-full flex-col overflow-visible rounded-[28px] border border-border/70 bg-white p-4 shadow-[0_12px_40px_rgba(26,26,26,0.05)] md:p-5 lg:p-6">
         <div className="mb-3 flex items-center justify-between gap-2 rounded-full border border-border/80 px-2.5 py-1.5 text-[10px] text-body-text md:mb-4 md:px-3 md:py-2 md:text-xs">
           <div className="flex min-w-0 items-center gap-1.5">
             <span
@@ -144,23 +144,23 @@ export default function GlassmorphismProfileCard({
             />
           </div>
 
-          <div className="mt-3 w-full text-center md:mt-4">
+          <div className="mt-3 flex min-h-[5.75rem] w-full flex-col items-center text-center md:mt-4 md:min-h-[6.5rem]">
             <h3 className="font-display text-base font-bold leading-tight text-dark-text md:text-lg lg:text-xl">
               {preview.name}
             </h3>
             <div className="mt-1 flex justify-center">
               <LotusMark />
             </div>
-            <p className="mt-1.5 text-[9px] font-medium uppercase leading-snug tracking-wide text-body-text md:text-[10px]">
+            <p className="mt-1.5 line-clamp-2 text-[9px] font-medium uppercase leading-snug tracking-wide text-body-text md:text-[10px]">
               {preview.designation}
             </p>
-            <p className="mt-0.5 text-[9px] font-medium uppercase tracking-wide text-muted md:text-[10px]">
+            <p className="mt-0.5 line-clamp-1 text-[9px] font-medium uppercase tracking-wide text-muted md:text-[10px]">
               {preview.credentials}
             </p>
           </div>
         </div>
 
-        <div className="mt-3 grid grid-cols-2 overflow-hidden rounded-xl border border-border/80 md:mt-4">
+        <div className="mt-3 grid min-h-[4.25rem] grid-cols-2 overflow-hidden rounded-xl border border-border/80 md:mt-4 md:min-h-[4.5rem]">
           <div className="flex items-center gap-2 border-r border-border/80 p-2 md:p-2.5">
             <StatIcon>
               <User className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={1.75} aria-hidden />
@@ -169,7 +169,7 @@ export default function GlassmorphismProfileCard({
               <p className="text-xs font-bold text-dark-text md:text-sm">
                 {preview.hoursValue}
               </p>
-              <p className="text-[9px] leading-tight text-muted md:text-[10px]">
+              <p className="line-clamp-2 text-[9px] leading-tight text-muted md:text-[10px]">
                 {preview.hoursLabel}
               </p>
             </div>
@@ -182,26 +182,26 @@ export default function GlassmorphismProfileCard({
               <p className="text-xs font-bold text-dark-text md:text-sm">
                 {preview.feeDisplay}
               </p>
-              <p className="text-[9px] leading-tight text-muted md:text-[10px]">
+              <p className="line-clamp-2 text-[9px] leading-tight text-muted md:text-[10px]">
                 {preview.feeNote}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="relative mt-4 px-1 md:mt-5">
+        <div className="relative mt-4 flex min-h-[3.25rem] items-center px-1 md:mt-5 md:min-h-[3.5rem]">
           <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border/80 bg-surface p-0.5">
             <Heart className="h-2.5 w-2.5 fill-dark-text text-dark-text md:h-3 md:w-3" aria-hidden />
           </div>
-          <p className="rounded-full border border-border/80 px-3 py-2 text-center font-display text-xs italic text-dark-text md:px-4 md:py-2.5 md:text-sm">
+          <p className="line-clamp-2 w-full rounded-full border border-border/80 px-3 py-2 text-center font-display text-xs italic leading-snug text-dark-text md:px-4 md:py-2.5 md:text-sm">
             — {preview.tagline} —
           </p>
         </div>
 
-        <div className="mt-4 md:mt-4">
+        <div className="mt-auto pt-4">
           <Link
             href={preview.bookHref}
-            className="psychologist-profile-cta inline-flex h-10 w-full items-center justify-center gap-2 rounded-2xl text-xs font-semibold transition-colors md:h-9 md:rounded-xl md:text-xs"
+            className="psychologist-profile-cta inline-flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold md:h-11"
           >
             <Calendar className="h-3.5 w-3.5 shrink-0" aria-hidden />
             {preview.bookLabel ?? "Book a Session"}

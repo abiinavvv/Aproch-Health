@@ -17,32 +17,34 @@
 }
 
 :root {
+  /* Headspace-inspired wellness palette: soft coral on calm white */
   --background: #ffffff;
-  --foreground: #1c1008;
-  --primary: #c4622d;
-  --primary-dark: #a85324;
-  --light-green: #f0e0d0;
-  --hero-start: #f8f1e8;
+  --foreground: #1a1a1a;
+  --primary: #ff6b35;
+  --primary-dark: #e85a28;
+  --light-green: #fff1ea;
+  --hero-start: #fff7f2;
   --hero-end: #ffffff;
-  --dark-text: #1c1008;
-  --body-text: #4a3728;
-  --muted: #8a7262;
-  --border: #e8ddd0;
-  --yellow: #e8b88a;
-  --yellow-hover: #d9a574;
-  --error: #c0392b;
-  --success: #5a8f5a;
-  --hero-cream: #f8f1e8;
-  --hero-brown: #1c1008;
-  --hero-accent: #c4622d;
-  --hero-subtext: #4a3728;
-  --hero-nav: #2c1810;
+  --hero-fade-peach: #fff7f2;
+  --dark-text: #1a1a1a;
+  --body-text: #5c5c5c;
+  --muted: #8a8a8a;
+  --border: #efe8e3;
+  --yellow: #ffb347;
+  --yellow-hover: #f5a623;
+  --error: #e5484d;
+  --success: #30a46c;
+  --hero-cream: #fff7f2;
+  --hero-brown: #1a1a1a;
+  --hero-accent: #ff6b35;
+  --hero-subtext: #5c5c5c;
+  --hero-nav: #2a2a2a;
   --surface: #ffffff;
   --surface-elevated: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.42);
-  --glass-bg-hover: rgba(255, 255, 255, 0.58);
-  --shadow-soft: rgba(28, 16, 8, 0.06);
-  --shadow-medium: rgba(28, 16, 8, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-hover: rgba(255, 255, 255, 0.72);
+  --shadow-soft: rgba(26, 26, 26, 0.05);
+  --shadow-medium: rgba(26, 26, 26, 0.09);
   --theme-duration: 400ms;
   --theme-color-duration: 250ms;
   --theme-surface-duration: 400ms;
@@ -57,30 +59,31 @@
 
 [data-theme="night"] {
   color-scheme: dark;
-  --background: #0e1210;
-  --foreground: #f0e8dc;
-  --primary: #e07840;
-  --primary-dark: #c4622d;
-  --light-green: #1a2420;
-  --hero-start: #121815;
-  --hero-end: #0e1210;
-  --dark-text: #f5efe6;
-  --body-text: #c4b8a8;
-  --muted: #7a7268;
-  --border: #2a3530;
-  --yellow: #c49260;
-  --yellow-hover: #b08050;
-  --hero-cream: #121815;
-  --hero-brown: #f5efe6;
-  --hero-accent: #e8854a;
-  --hero-subtext: #b8aa98;
-  --hero-nav: #e8ddd0;
-  --surface: #121815;
-  --surface-elevated: #1a221c;
+  --background: #121212;
+  --foreground: #f5f5f5;
+  --primary: #ff7a45;
+  --primary-dark: #ff6b35;
+  --light-green: #2a1f1a;
+  --hero-start: #1a1a1a;
+  --hero-end: #121212;
+  --hero-fade-peach: #1a1a1a;
+  --dark-text: #f5f5f5;
+  --body-text: #b8b8b8;
+  --muted: #888888;
+  --border: #2e2e2e;
+  --yellow: #ffb347;
+  --yellow-hover: #f5a623;
+  --hero-cream: #1a1a1a;
+  --hero-brown: #f5f5f5;
+  --hero-accent: #ff7a45;
+  --hero-subtext: #b8b8b8;
+  --hero-nav: #ececec;
+  --surface: #1a1a1a;
+  --surface-elevated: #242424;
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-bg-hover: rgba(255, 255, 255, 0.14);
-  --shadow-soft: rgba(0, 0, 0, 0.25);
-  --shadow-medium: rgba(0, 0, 0, 0.35);
+  --shadow-soft: rgba(0, 0, 0, 0.28);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
   --glow-backdrop: color-mix(in srgb, var(--surface-elevated) 72%, transparent);
   --glow-backup-border: color-mix(in srgb, var(--border) 90%, transparent);
   --bg-spot-opacity: 0.18;
@@ -96,6 +99,7 @@
   --color-light-green: var(--light-green);
   --color-hero-start: var(--hero-start);
   --color-hero-end: var(--hero-end);
+  --color-hero-fade-peach: var(--hero-fade-peach);
   --color-dark-text: var(--dark-text);
   --color-body-text: var(--body-text);
   --color-muted: var(--muted);
@@ -279,11 +283,20 @@ h3 {
 }
 
 .hero-bg-day {
-  background-color: #f8f1e8;
+  background-color: var(--hero-fade-peach);
+}
+
+.hero-feature-fade {
+  background: linear-gradient(
+    to bottom,
+    var(--hero-fade-peach) 0%,
+    var(--background) 55%,
+    var(--background) 100%
+  );
 }
 
 .hero-bg-night {
-  background-color: #121815;
+  background-color: #1a1a1a;
 }
 
 [data-theme="night"] .hero-theme-day {
@@ -333,13 +346,13 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 9999px;
   background-color: var(--hero-accent);
   padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
-  box-shadow: 0 6px 20px rgba(196, 98, 45, 0.28);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.28);
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
@@ -349,12 +362,12 @@ h3 {
 .hero-mobile-cta:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(196, 98, 45, 0.34);
+  box-shadow: 0 10px 28px rgba(255, 107, 53, 0.34);
 }
 
 .hero-mobile-cta:active {
   transform: translateY(1px);
-  box-shadow: 0 4px 14px rgba(196, 98, 45, 0.22);
+  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.22);
 }
 
 .hero-mobile-cta:focus-visible {
@@ -392,30 +405,30 @@ h3 {
 }
 
 .glass-btn-primary {
-  background: rgba(196, 98, 45, 0.35);
-  border: 2px solid rgba(196, 98, 45, 0.55);
+  background: rgba(255, 107, 53, 0.92);
+  border: 2px solid rgba(255, 107, 53, 0.95);
   color: #fff;
-  box-shadow: 0 4px 22px rgba(196, 98, 45, 0.18);
+  box-shadow: 0 4px 22px rgba(255, 107, 53, 0.22);
 }
 
 .glass-btn-primary:hover {
-  background: rgba(196, 98, 45, 0.48);
-  border-color: rgba(168, 83, 36, 0.65);
-  box-shadow: 0 6px 26px rgba(196, 98, 45, 0.24);
+  background: rgba(232, 90, 40, 0.95);
+  border-color: rgba(232, 90, 40, 1);
+  box-shadow: 0 6px 26px rgba(255, 107, 53, 0.28);
 }
 
 .glass-btn-outline {
-  background: rgba(255, 255, 255, 0.58);
-  border: 2px solid rgba(196, 98, 45, 0.22);
+  background: rgba(255, 255, 255, 0.72);
+  border: 2px solid rgba(255, 107, 53, 0.2);
   color: var(--dark-text);
-  box-shadow: 0 4px 18px rgba(28, 16, 8, 0.06);
+  box-shadow: 0 4px 18px rgba(26, 26, 26, 0.05);
 }
 
 .glass-btn-outline:hover {
-  background: rgba(255, 255, 255, 0.78);
-  border-color: rgba(196, 98, 45, 0.4);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 107, 53, 0.4);
   color: var(--primary-dark);
-  box-shadow: 0 6px 22px rgba(196, 98, 45, 0.1);
+  box-shadow: 0 6px 22px rgba(255, 107, 53, 0.12);
 }
 
 .glass-btn-warm {
@@ -437,15 +450,15 @@ h3 {
 .btn-3d-warm {
   background: linear-gradient(
     180deg,
-    #d97842 0%,
+    #ff8a55 0%,
     var(--hero-accent) 42%,
-    #a85324 100%
+    #e85a28 100%
   );
   color: #fff;
   border: none;
   box-shadow:
-    0 6px 0 #7a3d1c,
-    0 10px 24px rgba(28, 16, 8, 0.22);
+    0 6px 0 #c44a20,
+    0 10px 24px rgba(26, 26, 26, 0.18);
   transform: translateY(0);
   transition:
     transform 0.15s ease,
@@ -582,18 +595,75 @@ h3 {
   object-position: center 12%;
 }
 
+/* Fresh coral CTA — dimensional rounded block (not soft stadium pill) */
+.btn-coral {
+  background: linear-gradient(180deg, #ff814f 0%, var(--primary) 48%, #f05a28 100%);
+  color: #ffffff;
+  border: 0;
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 3px 0 #d94e22,
+    0 10px 22px rgba(255, 107, 53, 0.28);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
+}
+
+.btn-coral:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 4px 0 #d94e22,
+    0 14px 28px rgba(255, 107, 53, 0.34);
+}
+
+.btn-coral:active {
+  filter: brightness(0.98);
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 0 #d94e22,
+    0 4px 12px rgba(255, 107, 53, 0.22);
+}
+
 .psychologist-profile-cta {
-  background: var(--dark-text);
-  color: var(--surface);
+  background: linear-gradient(180deg, #ff814f 0%, var(--primary) 48%, #f05a28 100%);
+  color: #ffffff;
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 3px 0 #d94e22,
+    0 10px 22px rgba(255, 107, 53, 0.28);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
 }
 
 .psychologist-profile-cta:hover {
-  opacity: 0.92;
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 4px 0 #d94e22,
+    0 14px 28px rgba(255, 107, 53, 0.34);
 }
 
-[data-theme="night"] .psychologist-profile-cta {
-  background: var(--foreground);
-  color: var(--background);
+.psychologist-profile-cta:active {
+  filter: brightness(0.98);
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 0 #d94e22,
+    0 4px 12px rgba(255, 107, 53, 0.22);
+}
+
+[data-theme="night"] .psychologist-profile-cta,
+[data-theme="night"] .btn-coral {
+  color: #ffffff;
 }
 
 .psychologist-photo-avatar .psychologist-photo,
