@@ -148,6 +148,128 @@ export const psychologists: Psychologist[] = [
     whatsappNumber: sharedWhatsApp,
     email: sharedEmail,
   },
+  {
+    name: "Sagar M",
+    slug: "sagar-m",
+    designation: "Psychologist",
+    credentials: "M.Sc. Clinical Psychology",
+    rciNumber: "",
+    photo: "/images/psychologists/sagar-m.jpg",
+    languages: ["English", "Kannada", "Hindi", "Telugu", "Tamil"],
+    experience: "School-based & clinical",
+    sessionHours: "200+",
+    sessionFee: 799,
+    specialties: [
+      "Anxiety & Stress Management",
+      "Emotional Regulation",
+      "Overthinking & Negative Thought Patterns",
+      "Self-Esteem & Confidence",
+      "Academic & Performance Stress",
+      "Behavioural Concerns",
+      "Adjustment Difficulties",
+      "Interpersonal & Relationship Concerns",
+      "Adolescent Mental Health",
+      "Emotional & Social Difficulties",
+    ],
+    bio: `Sagar M is a Psychologist with a Master's degree in Clinical Psychology and experience in school-based mental health support, individual counselling and short-term therapeutic interventions, along with clinical exposure in psychiatric and rehabilitation settings.
+
+He believes in creating a safe, empathetic and non-judgmental space where individuals feel comfortable expressing their thoughts and emotions. His approach focuses on understanding each individual's unique experiences, identifying emotional and behavioural patterns, and helping them develop healthier coping strategies.
+
+With an emphasis on Cognitive Behavioural Therapy (CBT), Rational Emotive Behaviour Therapy (REBT), supportive counselling and trauma-informed approaches, he aims to help individuals improve emotional well-being, build self-awareness and navigate life's challenges with greater confidence. He works with children, adolescents, young adults and adults.`,
+    philosophy:
+      "A safe, empathetic space to understand your patterns and grow with confidence.",
+    tagline: "A safe space to understand and grow",
+    sessionFormat: "Online via Google Meet (video or audio call)",
+    whatsappNumber: sharedWhatsApp,
+    email: sharedEmail,
+  },
+  {
+    name: "Madhav Chaturvedi",
+    slug: "madhav-chaturvedi",
+    designation: "Consultant Psychologist",
+    credentials: "MSc Counselling Psychology",
+    rciNumber: "",
+    photo: "/images/psychologists/madhav-chaturvedi.jpg",
+    languages: ["English", "Hindi"],
+    experience: "Consultant",
+    sessionHours: "150+",
+    sessionFee: 749,
+    specialties: [
+      "Anger Management",
+      "Relationship Difficulties",
+      "Burnout",
+      "Anxiety",
+      "Depression",
+      "Grief",
+    ],
+    bio: `Madhav welcomes you to a safe, warm space where your lived experience is truly honored and you are respected as the expert of your own life. Madhav integrates a collaborative, feminist lens with person centered empathy, narrative storytelling, and practical cognitive tools to help you navigate life's challenges. Together, we will look beyond labels to untangle societal pressures, uncover your natural resilience, and re-author your story on your own terms.`,
+    philosophy: "A warm space to re-author your story on your own terms.",
+    tagline: "A warm space to re-author your story",
+    sessionFormat: "Online via Google Meet (video or audio call)",
+    whatsappNumber: sharedWhatsApp,
+    email: sharedEmail,
+  },
+  {
+    name: "Ranjeeta Shantappa R. Patil",
+    slug: "ranjeeta-patil",
+    designation: "Consultant Psychologist",
+    credentials: "M.Sc. Clinical Psychology",
+    rciNumber: "",
+    photo: "/images/psychologists/ranjeeta-patil.jpg",
+    languages: ["English"],
+    experience: "College & clinical",
+    sessionHours: "200+",
+    sessionFee: 799,
+    specialties: [
+      "Anxiety and Stress Management",
+      "Depression and Emotional Wellbeing",
+      "Women's Mental Health",
+      "Relationship and Interpersonal Concerns",
+      "Self-Esteem and Identity",
+      "Emotional Regulation",
+      "Adolescent and Young Adult Mental Health",
+    ],
+    bio: `I am a Consultant Psychologist with a postgraduate background in Clinical Psychology and experience across educational and clinical settings. My work and interests centre around understanding human behaviour, emotional experiences and the factors that influence psychological wellbeing.
+
+I have worked as a College Psychologist and completed clinical internships at KR Hospital, Mind and Brain Hospital, Spandana Nursing Home and Maarga Mindcare Hospital, with experience in student counselling, mental health awareness and psychological wellbeing initiatives.
+
+I am particularly interested in women's mental health, relationship dynamics, self-esteem and the emotional challenges individuals experience at different stages of life. I value an individualised approach to counselling, with an emphasis on understanding each person's concerns, background and perspectives.
+
+My aim is to help individuals make sense of their experiences, identify patterns that may be affecting their wellbeing and develop practical ways of navigating their concerns.`,
+    philosophy:
+      "An individualised space to make sense of your experiences and move forward.",
+    tagline: "Make sense of your experiences",
+    sessionFormat: "Online via Google Meet (video or audio call)",
+    whatsappNumber: sharedWhatsApp,
+    email: sharedEmail,
+  },
+  {
+    name: "Theertha",
+    slug: "theertha",
+    designation: "Psychologist",
+    credentials: "M.Sc. Clinical & Counselling Psychology",
+    rciNumber: "",
+    photo: "/images/psychologists/theertha.jpg",
+    languages: ["English", "Malayalam"],
+    experience: "Clinical & research",
+    sessionHours: "200+",
+    sessionFee: 799,
+    specialties: [
+      "Psychological Assessment",
+      "CBT-based Interventions",
+      "Individual Therapy",
+      "Mental Health Care",
+    ],
+    bio: `Theertha is a Psychologist with an M.Sc. in Clinical & Counselling Psychology from Kannur University and a B.Sc. in Psychology from the University of Kerala.
+
+She has clinical experience in psychological assessment, CBT-based interventions, individual therapy, and mental health care, with additional research experience at Amrita Hospital.`,
+    philosophy:
+      "Evidence-informed care grounded in assessment, CBT, and individual therapy.",
+    tagline: "Assessment, CBT, and individual care",
+    sessionFormat: "Online via Google Meet (video or audio call)",
+    whatsappNumber: sharedWhatsApp,
+    email: sharedEmail,
+  },
 ];
 
 export function getAllPsychologists(): Psychologist[] {

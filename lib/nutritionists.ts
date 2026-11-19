@@ -9,7 +9,7 @@ export const nutritionists: Nutritionist[] = [
     name: "Prathyusha K. V.",
     slug: "prathyusha-k-v",
     designation: "Clinical Dietitian",
-    credentials: "Clinical Dietitian",
+    credentials: "MSc. Dietetics & Food Service Management",
     photo: "/images/nutritionists/prathyusha-k-v.png",
     photoWebp: "/images/nutritionists/prathyusha-k-v.webp",
     languages: ["Malayalam", "English", "Hindi"],

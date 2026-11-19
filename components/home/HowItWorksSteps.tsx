@@ -4,8 +4,8 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 
-const WARM_ACCENT = "#FF6B35";
-const WARM_ACCENT_SOFT = "rgba(255,107,53,0.1)";
+const WARM_ACCENT = "#2563EB";
+const WARM_ACCENT_SOFT = "rgba(37,99,235,0.1)";
 
 const steps = [
   {

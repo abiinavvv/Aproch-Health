@@ -11,7 +11,9 @@ const features = [
       "A warm, judgment-free space where you’re heard with care — so opening up feels a little easier.",
     href: "/therapy",
     cta: "Explore therapy",
-    fill: "bg-[#FFB4D9]",
+    fill: "bg-[#FF8EC8]",
+    ctaClass:
+      "bg-[#DB2777] shadow-[0_8px_20px_rgba(219,39,119,0.28)] hover:bg-[#BE185D]",
     icon: "/images/feature-compassionate-care.jpg",
     iconAlt: "Smiling heart icon",
   },
@@ -21,7 +23,9 @@ const features = [
       "Plans and sessions shaped around your goals, pace, and daily life — not a one-size-fits-all script.",
     href: "/book",
     cta: "Book a session",
-    fill: "bg-[#FFE566]",
+    fill: "bg-[#FFE14A]",
+    ctaClass:
+      "bg-[#D97706] shadow-[0_8px_20px_rgba(217,119,6,0.28)] hover:bg-[#B45309]",
     icon: "/images/feature-personalized-support.jpg",
     iconAlt: "Smiling plant icon",
   },
@@ -31,7 +35,9 @@ const features = [
       "Guidance grounded in proven approaches, delivered by trained professionals who stay with you.",
     href: "/how-it-works",
     cta: "How it works",
-    fill: "bg-[#9EE8C4]",
+    fill: "bg-[#6FE3B0]",
+    ctaClass:
+      "bg-[#0D9488] shadow-[0_8px_20px_rgba(13,148,136,0.28)] hover:bg-[#0F766E]",
     icon: "/images/feature-evidence-based.jpg",
     iconAlt: "Smiling book with checkmark icon",
   },
@@ -41,7 +47,9 @@ const features = [
       "Your conversations stay private. We protect your information so you can focus on feeling better.",
     href: "/book",
     cta: "Get started",
-    fill: "bg-[#A8D4F5]",
+    fill: "bg-[#7EC8FF]",
+    ctaClass:
+      "bg-[#2563EB] shadow-[0_8px_20px_rgba(37,99,235,0.28)] hover:bg-[#1D4ED8]",
     icon: "/images/feature-safe-confidential.jpg",
     iconAlt: "Smiling shield with lock icon",
   },
@@ -134,7 +142,7 @@ export default function HeroFeatureStrip() {
             </p>
             <Link
               href={feature.href}
-              className="mt-8 inline-flex items-center justify-center rounded-2xl bg-[#1a1a1a] px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(26,26,26,0.18)] transition-colors hover:bg-black md:mt-10 md:px-8 md:py-3.5 md:text-base"
+              className={`mt-8 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white transition-colors md:mt-10 md:px-8 md:py-3.5 md:text-base ${feature.ctaClass}`}
             >
               {feature.cta}
             </Link>

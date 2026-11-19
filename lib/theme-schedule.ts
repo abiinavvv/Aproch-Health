@@ -70,4 +70,9 @@ export function resolveNightMode(date: Date = new Date()): boolean {
 }
 
 /** Inline script source for beforeInteractive theme init (must mirror resolveNightMode). */
+// Dark mode disabled — always force day theme
+export const themeInitScript = `(function(){try{document.documentElement.setAttribute("data-theme","day");document.documentElement.style.colorScheme="light";try{sessionStorage.setItem("theme-session-override","day");}catch(_){}}catch(e){}})();`;
+
+/* Original schedule-based theme init (commented — dark mode feature off):
 export const themeInitScript = `(function(){try{var k="theme-session-override";var o=sessionStorage.getItem(k);var isNight;if(o==="day"){isNight=false;}else if(o==="night"){isNight=true;}else{var p=new Intl.DateTimeFormat("en-IN",{timeZone:"Asia/Kolkata",hour:"numeric",hour12:false}).formatToParts(new Date());var h=parseInt((p.find(function(x){return x.type==="hour";})||{}).value||"0",10);isNight=h>=19||h<6;}document.documentElement.setAttribute("data-theme",isNight?"night":"day");document.documentElement.style.colorScheme=isNight?"dark":"light";}catch(e){}})();`;
+*/

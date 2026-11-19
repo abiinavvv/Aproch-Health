@@ -23,6 +23,7 @@ export type ProfessionalPreview = {
   bookHref: string;
   profileHref: string;
   bookLabel?: string;
+  ctaTone?: "therapy" | "nutrition";
 };
 
 export type GlassmorphismProfileCardProps = {
@@ -74,6 +75,7 @@ function toPreviewFromPsychologist(
     bookHref: bookHref ?? `/book?psychologist=${psychologist.slug}`,
     profileHref: profileHref ?? `/our-psychologist/${psychologist.slug}`,
     bookLabel: "Book a Session",
+    ctaTone: "therapy",
   };
 }
 
@@ -201,7 +203,10 @@ export default function GlassmorphismProfileCard({
         <div className="mt-auto pt-4">
           <Link
             href={preview.bookHref}
-            className="psychologist-profile-cta inline-flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold md:h-11"
+            className={cn(
+              "psychologist-profile-cta inline-flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold md:h-11",
+              preview.ctaTone === "nutrition" && "psychologist-profile-cta--nutrition"
+            )}
           >
             <Calendar className="h-3.5 w-3.5 shrink-0" aria-hidden />
             {preview.bookLabel ?? "Book a Session"}

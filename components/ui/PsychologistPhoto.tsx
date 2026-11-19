@@ -22,11 +22,10 @@ export default function PsychologistPhoto({
   height,
 }: PsychologistPhotoProps) {
   const imgClassName = cn(fill && "h-full w-full object-cover", className);
-  const webpSrc = photoWebp ?? photo.replace(/\.png$/i, ".webp");
 
   return (
     <picture className={fill ? "absolute inset-0 block h-full w-full" : "block"}>
-      <source srcSet={webpSrc} type="image/webp" />
+      {photoWebp ? <source srcSet={photoWebp} type="image/webp" /> : null}
       <img
         src={photo}
         alt={alt}

@@ -4,48 +4,68 @@ import GlassmorphismProfileCard, {
   type ProfessionalPreview,
 } from "@/components/ui/glassmorphism-profile-card";
 import ScrollReveal from "./ScrollReveal";
-import { cn } from "@/lib/utils";
 import { getAllPsychologists, formatSessionFee } from "@/lib/psychologists";
 import { getDefaultNutritionist } from "@/lib/nutritionists";
 import { formatNutritionFee } from "@/lib/nutrition";
 
-const CARD_CLASS = "w-full max-w-none xl:max-w-[380px]";
+const CARD_CLASS = "w-full max-w-[380px]";
 
-function getColStartClass(index: number, total: number): string {
-  const remainder = total % 4;
-  if (remainder === 0 || remainder === 3 || index < total - remainder) {
-    return "";
+function ProfessionalGrid({ cards }: { cards: ProfessionalPreview[] }) {
+  // Single card (e.g. dietitian) — center under the heading
+  if (cards.length === 1) {
+    return (
+      <div className="flex w-full justify-center">
+        <ScrollReveal className="flex w-full max-w-[380px]">
+          <GlassmorphismProfileCard
+            professional={cards[0]}
+            className={CARD_CLASS}
+          />
+        </ScrollReveal>
+      </div>
+    );
   }
 
-  const lastRowIndex = index - (total - remainder);
-  if (remainder === 1) return "xl:col-start-2";
-  if (remainder === 2) {
-    return lastRowIndex === 0 ? "xl:col-start-2" : "xl:col-start-3";
-  }
-
-  return "";
+  // Multiple cards — fill left-to-right; leftover last-row cards stay left-aligned
+  return (
+    <div className="grid grid-cols-1 items-stretch justify-items-center gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-4">
+      {cards.map((professional, index) => (
+        <ScrollReveal
+          key={`${professional.name}-${index}`}
+          delay={0.05 * index}
+          className="flex h-full w-full justify-center"
+        >
+          <GlassmorphismProfileCard
+            professional={professional}
+            className={CARD_CLASS}
+          />
+        </ScrollReveal>
+      ))}
+    </div>
+  );
 }
 
 export default function PsychologistPreviewCard() {
   const psychologists = getAllPsychologists();
   const nutritionist = getDefaultNutritionist();
 
-  const professionals: ProfessionalPreview[] = [
-    ...psychologists.map((p) => ({
-      name: p.name,
-      photo: p.photo,
-      photoWebp: p.photoWebp,
-      designation: p.designation,
-      credentials: p.credentials,
-      hoursValue: p.sessionHours,
-      hoursLabel: "hours of therapy experience",
-      feeDisplay: formatSessionFee(p.sessionFee),
-      feeNote: "per session · video or audio",
-      tagline: p.tagline,
-      bookHref: `/book?psychologist=${p.slug}`,
-      profileHref: `/our-psychologist/${p.slug}`,
-      bookLabel: "Book a Session",
-    })),
+  const therapyCards: ProfessionalPreview[] = psychologists.map((p) => ({
+    name: p.name,
+    photo: p.photo,
+    photoWebp: p.photoWebp,
+    designation: p.designation,
+    credentials: p.credentials,
+    hoursValue: p.sessionHours,
+    hoursLabel: "hours of therapy experience",
+    feeDisplay: formatSessionFee(p.sessionFee),
+    feeNote: "per session · video or audio",
+    tagline: p.tagline,
+    bookHref: `/book?psychologist=${p.slug}`,
+    profileHref: `/our-psychologist/${p.slug}`,
+    bookLabel: "Book a Session",
+    ctaTone: "therapy",
+  }));
+
+  const nutritionCards: ProfessionalPreview[] = [
     {
       name: nutritionist.name,
       photo: nutritionist.photo,
@@ -60,37 +80,35 @@ export default function PsychologistPreviewCard() {
       bookHref: `/book?service=nutrition&nutritionist=${nutritionist.slug}`,
       profileHref: `/nutrition/${nutritionist.slug}`,
       bookLabel: "Book a consultation",
+      ctaTone: "nutrition",
     },
   ];
 
   return (
     <section className="relative z-10 bg-white px-4 py-14 md:py-16 lg:px-6 lg:py-24">
-      <div className="mx-auto max-w-[1400px]">
-        <ScrollReveal>
-          <h2 className="relative z-20 mb-3 text-center font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text">
-            Meet our professionals
-          </h2>
-          <p className="mb-10 text-center text-base text-body-text md:mb-12 md:text-lg">
-            Available for online sessions
-          </p>
-        </ScrollReveal>
+      <div className="mx-auto max-w-[1400px] space-y-16 md:space-y-20">
+        <div>
+          <ScrollReveal>
+            <h2 className="relative z-20 mb-3 text-center font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text">
+              Our Psychologists
+            </h2>
+            <p className="mb-10 text-center text-base text-body-text md:mb-12 md:text-lg">
+              Online therapy with trained psychologists
+            </p>
+          </ScrollReveal>
+          <ProfessionalGrid cards={therapyCards} />
+        </div>
 
-        <div className="grid grid-cols-1 items-stretch justify-items-center gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-4">
-          {professionals.map((professional, index) => {
-            const colStartClass = getColStartClass(index, professionals.length);
-            return (
-              <ScrollReveal
-                key={`${professional.name}-${index}`}
-                delay={0.05 * index}
-                className={cn("flex h-full w-full", colStartClass)}
-              >
-                <GlassmorphismProfileCard
-                  professional={professional}
-                  className={CARD_CLASS}
-                />
-              </ScrollReveal>
-            );
-          })}
+        <div>
+          <ScrollReveal>
+            <h2 className="relative z-20 mb-3 text-center font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight text-dark-text">
+              Food & Nutrition
+            </h2>
+            <p className="mb-10 text-center text-base text-body-text md:mb-12 md:text-lg">
+              Clinical dietitian support for lasting habits
+            </p>
+          </ScrollReveal>
+          <ProfessionalGrid cards={nutritionCards} />
         </div>
       </div>
     </section>

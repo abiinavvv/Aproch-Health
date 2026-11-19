@@ -9,12 +9,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  isNightBySchedule,
-  readSessionThemeOverride,
-  resolveNightMode,
-  writeSessionThemeOverride,
-} from "@/lib/theme-schedule";
+// Dark mode feature commented out — schedule/override helpers unused while forced to day
+// import {
+//   isNightBySchedule,
+//   readSessionThemeOverride,
+//   resolveNightMode,
+//   writeSessionThemeOverride,
+// } from "@/lib/theme-schedule";
 
 type ThemeContextValue = {
   isNightMode: boolean;
@@ -30,36 +31,39 @@ function applyThemeToDocument(isNight: boolean) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  // Dark mode disabled — always day
   const [isNightMode, setIsNightMode] = useState(false);
 
   useEffect(() => {
-    const initialNight = resolveNightMode();
-    setIsNightMode(initialNight);
-    applyThemeToDocument(initialNight);
+    setIsNightMode(false);
+    applyThemeToDocument(false);
+    try {
+      sessionStorage.setItem("theme-session-override", "day");
+    } catch {
+      /* ignore */
+    }
 
-    const intervalId = window.setInterval(() => {
-      if (readSessionThemeOverride()) return;
-      const nextNight = isNightBySchedule();
-      setIsNightMode(nextNight);
-      applyThemeToDocument(nextNight);
-    }, 60_000);
-
-    return () => window.clearInterval(intervalId);
+    // Original schedule polling (commented — dark mode feature off):
+    // const initialNight = resolveNightMode();
+    // setIsNightMode(initialNight);
+    // applyThemeToDocument(initialNight);
+    // const intervalId = window.setInterval(() => {
+    //   if (readSessionThemeOverride()) return;
+    //   const nextNight = isNightBySchedule();
+    //   setIsNightMode(nextNight);
+    //   applyThemeToDocument(nextNight);
+    // }, 60_000);
+    // return () => window.clearInterval(intervalId);
   }, []);
 
-  const setNightMode = useCallback((value: boolean) => {
-    writeSessionThemeOverride(value ? "night" : "day");
-    setIsNightMode(value);
-    applyThemeToDocument(value);
+  const setNightMode = useCallback((_value: boolean) => {
+    // Dark mode disabled — ignore night requests
+    setIsNightMode(false);
+    applyThemeToDocument(false);
   }, []);
 
   const toggleNightMode = useCallback(() => {
-    setIsNightMode((prev) => {
-      const next = !prev;
-      writeSessionThemeOverride(next ? "night" : "day");
-      applyThemeToDocument(next);
-      return next;
-    });
+    // Dark mode disabled — no-op
   }, []);
 
   const value = useMemo(

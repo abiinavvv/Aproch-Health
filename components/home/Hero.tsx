@@ -17,9 +17,9 @@ export default function Hero() {
   const themeFadeClass = reducedMotion ? "" : "hero-theme-fade";
 
   return (
-    <section className="hero-theme-sync relative flex min-h-0 flex-col bg-hero-fade-peach">
-      {/* Soft peach day surface — continues into feature strip fade */}
-      <div className="pointer-events-none absolute inset-0 bg-hero-fade-peach" aria-hidden>
+    <section className="hero-theme-sync relative flex min-h-0 flex-col bg-white">
+      {/* White Headspace canvas */}
+      <div className="pointer-events-none absolute inset-0 bg-white" aria-hidden>
         <div
           className={`hero-bg-day hero-theme-day absolute inset-0 ${themeFadeClass}`}
         />

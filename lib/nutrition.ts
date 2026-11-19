@@ -3,7 +3,7 @@ import type { NutritionOffer, NutritionOfferId } from "@/types";
 export const nutritionConsultOffer: NutritionOffer = {
   id: "nutrition-consult",
   label: "Initial consultation",
-  duration: 60,
+  duration: 20,
   price: 400,
   tagline: "A single consultation to discuss your goals and nutrition needs",
   description:

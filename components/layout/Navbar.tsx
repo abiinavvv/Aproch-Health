@@ -112,7 +112,7 @@ export default function Navbar() {
       <header
         className={`theme-surface fixed top-0 z-50 w-full transition-all duration-300 ${headerBackgroundClass}`}
       >
-        <nav className="mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-3 lg:gap-4 lg:px-6 lg:py-3.5 xl:gap-6 xl:px-8">
+        <nav className="mx-auto flex max-w-[1400px] items-center gap-3 py-3 pl-0 pr-4 lg:gap-4 lg:px-6 lg:py-3.5 xl:gap-6 xl:px-8">
           <Link href="/" className="group inline-flex shrink-0 items-center">
             <SiteLogo priority className="h-11 md:h-12 lg:h-13 xl:h-14" />
           </Link>

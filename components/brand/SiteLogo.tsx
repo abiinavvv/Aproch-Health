@@ -12,7 +12,7 @@ type SiteLogoProps = {
 
 export default function SiteLogo({ className, priority = false }: SiteLogoProps) {
   return (
-    <span className={cn("site-logo inline-flex shrink-0", className)}>
+    <span className={cn("site-logo inline-flex shrink-0 max-lg:-ml-1", className)}>
       <Image
         src={LOGO_SRC}
         alt="Aproch Health"

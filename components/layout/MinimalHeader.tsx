@@ -4,7 +4,7 @@ import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export default function MinimalHeader() {
   return (
-    <header className="theme-surface border-b border-border bg-hero-cream/80 px-4 py-3 backdrop-blur-sm md:py-4 lg:px-6">
+    <header className="theme-surface border-b border-border bg-hero-cream/80 py-3 pl-0 pr-4 backdrop-blur-sm md:py-4 lg:px-6">
       <div className="mx-auto flex max-w-[800px] items-center justify-between">
         <Link href="/" className="inline-flex">
           <SiteLogo className="h-12 md:h-14" />

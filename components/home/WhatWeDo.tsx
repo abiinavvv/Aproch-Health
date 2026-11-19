@@ -21,6 +21,18 @@ const serviceImages = {
   },
 } as const;
 
+const serviceCtaClass = {
+  therapy:
+    "bg-[#7C3AED] shadow-[0_8px_20px_rgba(124,58,237,0.28)] hover:bg-[#6D28D9]",
+  nutrition:
+    "bg-[#059669] shadow-[0_8px_20px_rgba(5,150,105,0.28)] hover:bg-[#047857]",
+} as const;
+
+const serviceAccentClass = {
+  therapy: "text-[#7C3AED]",
+  nutrition: "text-[#059669]",
+} as const;
+
 export default function WhatWeDo() {
   return (
     <section className="relative bg-white px-4 pb-16 pt-10 md:px-6 md:pb-20 md:pt-16 lg:pb-24 lg:pt-20">
@@ -51,6 +63,7 @@ export default function WhatWeDo() {
         <div className="mt-8 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-2 md:gap-6">
           {homeServiceCards.map((card) => {
             const image = serviceImages[card.id as keyof typeof serviceImages];
+            const tone = card.id as keyof typeof serviceCtaClass;
             return (
               <article
                 key={card.id}
@@ -96,7 +109,7 @@ export default function WhatWeDo() {
                     >
                       <Check
                         size={16}
-                        className="mt-0.5 shrink-0 text-primary"
+                        className={`mt-0.5 shrink-0 ${serviceAccentClass[tone]}`}
                         aria-hidden
                       />
                       <span>{feature}</span>
@@ -106,7 +119,7 @@ export default function WhatWeDo() {
 
                 <Link
                   href={card.learnMoreHref}
-                  className="btn-coral mt-5 inline-flex items-center gap-1.5 self-start px-6 py-3 text-sm font-semibold"
+                  className={`mt-5 inline-flex items-center gap-1.5 self-start rounded-full px-6 py-3 text-sm font-semibold text-white transition-colors ${serviceCtaClass[tone]}`}
                 >
                   Learn more
                   <ArrowRight size={14} aria-hidden />

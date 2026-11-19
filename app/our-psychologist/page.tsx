@@ -17,8 +17,8 @@ export default function OurPsychologistPage() {
               Our Psychologists
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-body-text md:mt-4 md:text-lg">
-              RCI-registered clinical psychologists who specialise in supporting students
-              and young adults across India — online, confidential, and at your pace.
+              Qualified mental health professionals providing evidence-based,
+              personalized, and adaptive care tailored to each client’s unique needs.
             </p>
           </div>
         </section>
