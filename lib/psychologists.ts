@@ -15,7 +15,7 @@ export const psychologists: Psychologist[] = [
     photoWebp: "/images/psychologists/safiyath-t-s.webp",
     languages: ["English", "Malayalam"],
     experience: "Consultant",
-    sessionHours: "250+",
+    sessionHours: "530+",
     sessionFee: 799,
     specialties: [
       "Anxiety Spectrum",
@@ -73,7 +73,7 @@ export const psychologists: Psychologist[] = [
     photoWebp: "/images/psychologists/parvathi-r.webp",
     languages: ["English", "Malayalam"],
     experience: "Consultant",
-    sessionHours: "250+",
+    sessionHours: "480+",
     sessionFee: 799,
     specialties: [
       "Anxiety",
@@ -102,7 +102,7 @@ export const psychologists: Psychologist[] = [
     photoWebp: "/images/psychologists/gopika-muraleedhran.webp?v=2",
     languages: ["English", "Malayalam"],
     experience: "Consultant",
-    sessionHours: "200+",
+    sessionHours: "520+",
     sessionFee: 799,
     specialties: [
       "Anxiety",
@@ -131,7 +131,7 @@ export const psychologists: Psychologist[] = [
     photoWebp: "/images/psychologists/nidhuna-narayanan.webp?v=2",
     languages: ["English", "Malayalam"],
     experience: "Consultant",
-    sessionHours: "250+",
+    sessionHours: "560+",
     sessionFee: 799,
     specialties: [
       "Relationship Difficulties",
@@ -157,7 +157,7 @@ export const psychologists: Psychologist[] = [
     photo: "/images/psychologists/sagar-m.jpg",
     languages: ["English", "Kannada", "Hindi", "Telugu", "Tamil"],
     experience: "School-based & clinical",
-    sessionHours: "200+",
+    sessionHours: "430+",
     sessionFee: 799,
     specialties: [
       "Anxiety & Stress Management",
@@ -192,7 +192,7 @@ With an emphasis on Cognitive Behavioural Therapy (CBT), Rational Emotive Behavi
     photo: "/images/psychologists/madhav-chaturvedi.jpg",
     languages: ["English", "Hindi"],
     experience: "Consultant",
-    sessionHours: "150+",
+    sessionHours: "450+",
     sessionFee: 749,
     specialties: [
       "Anger Management",
@@ -218,7 +218,7 @@ With an emphasis on Cognitive Behavioural Therapy (CBT), Rational Emotive Behavi
     photo: "/images/psychologists/ranjeeta-patil.jpg",
     languages: ["English"],
     experience: "College & clinical",
-    sessionHours: "200+",
+    sessionHours: "510+",
     sessionFee: 799,
     specialties: [
       "Anxiety and Stress Management",
@@ -252,7 +252,7 @@ My aim is to help individuals make sense of their experiences, identify patterns
     photo: "/images/psychologists/theertha.jpg",
     languages: ["English", "Malayalam"],
     experience: "Clinical & research",
-    sessionHours: "200+",
+    sessionHours: "490+",
     sessionFee: 799,
     specialties: [
       "Psychological Assessment",
